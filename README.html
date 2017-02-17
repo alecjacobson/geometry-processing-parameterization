@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<link type="text/css" rel="stylesheet" href="shared/css/style.css"/>
+<script type="text/javascript" src="shared/js/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+
+<div style="display:none">
+$$\newcommand{\mat}[1]{\mathbf{#1}}$$
+$$\newcommand{\vec}[1]{\mathbf{#1}}$$
+$$\newcommand{\A}{\mat{A}}$$
+$$\newcommand{\B}{\mat{B}}$$
+$$\newcommand{\C}{\mat{C}}$$
+$$\newcommand{\D}{\mat{D}}$$
+$$\newcommand{\I}{\mat{I}}$$
+$$\newcommand{\G}{\mat{G}}$$
+$$\newcommand{\N}{\mat{N}}$$
+$$\newcommand{\P}{\mat{P}}$$
+$$\newcommand{\Rot}{\mat{R}}$$
+$$\newcommand{\R}{\mathbb{R}}$$
+$$\newcommand{\One}{\mathbf{1}}$$
+$$\newcommand{\S}{\mathcal{S}}$$
+$$\newcommand{\M}{\mat{M}}$$
+$$\newcommand{\U}{\mat{U}}$$
+$$\newcommand{\L}{\mat{L}}$$
+$$\newcommand{\V}{\mat{V}}$$
+$$\newcommand{\W}{\mat{W}}$$ 
+$$\newcommand{\X}{\mat{X}}$$
+$$\newcommand{\Y}{\mat{Y}}$$
+$$\newcommand{\c}{\vec{c}}$$
+$$\newcommand{\f}{\vec{f}}$$
+$$\newcommand{\g}{\vec{g}}$$
+$$\newcommand{\n}{\vec{n}}$$
+$$\newcommand{\e}{\vec{e}}$$
+$$\newcommand{\p}{\vec{p}}$$
+$$\newcommand{\tr}[1]{\mathop{\text{tr}}{\left(#1\right)}}$$
+$$\newcommand{\t}{\vec{t}}$$
+$$\newcommand{\x}{\vec{x}}$$
+$$\newcommand{\y}{\vec{y}}$$
+$$\newcommand{\u}{\vec{u}}$$
+$$\newcommand{\z}{\vec{z}}$$
+$$\renewcommand{\v}{\vec{v}}$$
+$$\newcommand{\transpose}{{\mathsf T}}$$
+$$\newcommand{\argmin}{\mathop{\text{argmin}}}$$
+$$\newcommand{\argmax}{\mathop{\text{argmax}}}$$
+</div>
+
+<h1 id="geometryprocessing–parameterization">Geometry Processing – Parameterization</h1>
+
+<blockquote>
+<p><strong>To get started:</strong> Fork this repository then issue</p>
+
+<pre><code>git clone --recursive http://github.com/[username]/geometry-processing-parameterization.git
+</code></pre>
+</blockquote>
+
+<h2 id="installationlayoutandcompilation">Installation, Layout, and Compilation</h2>
+
+<p>See
+<a href="http://github.com/alecjacobson/geometry-processing-introduction">introduction</a>.</p>
+
+<h2 id="execution">Execution</h2>
+
+<p>Once built, you can execute the assignment from inside the <code>build/</code> by running
+on a given mesh:</p>
+
+<pre><code>./parameterization [path to mesh.obj]
+</code></pre>
+
+<h2 id="background">Background</h2>
+
+<p>In this assignment we will explore how to <em>flatten</em> a surface
+<a href="https://en.wikipedia.org/wiki/Embedding">embedded</a> (or even just
+<a href="https://en.wikipedia.org/wiki/Immersion">immersed</a>) in <span class="math">\(\R^3\)</span> to the flat
+plane (i.e. <span class="math">\(\R^2\)</span>).</p>
+
+<p>This process is often referred to as <a href="">parameterization</a> because the
+two-dimensional coordinate system of the flattened mesh can now be interpreted
+as a parameterization of the 3D surface.</p>
+
+<blockquote>
+<p>Surface in 3D &#8211;&gt; parameterization in 2D &#8211;&gt; parameterized surface in 3d</p>
+</blockquote>
+
+</body>
+</html>
