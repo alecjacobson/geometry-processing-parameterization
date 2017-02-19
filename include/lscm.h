@@ -1,5 +1,6 @@
 #ifndef LSCM_H
 #define LSCM_H
+#include <Eigen/Core>
 // Given a 3D mesh (`V`,`F`) with boundary compute a 2D parameterization that
 // minimizes the "least squares conformal" energy:
 //

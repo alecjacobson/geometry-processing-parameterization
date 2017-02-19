@@ -30,7 +30,18 @@ as a parameterization of the 3D surface.
 
 > Surface in 3D --> parameterization in 2D --> parameterized surface in 3d
 
+## Blacklist
+
+ - `igl::harmonic`
+ - `igl::lscm`
+ - `igl::vector_area_matrix`
 
 ### Whitelist
 
- - `igl::boundary_list.h`
+ - `igl::boundary_loop`
+ - `igl::boundary_loop`
+ - `igl::cotmatrix` (or your previous implementation)
+ - `igl::eigs`
+ - `igl::map_vertices_to_circle`
+ - `igl::massmatrix`(or your previous implementation)
+ - `igl::repdiag`
