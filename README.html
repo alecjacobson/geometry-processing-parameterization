@@ -8,43 +8,46 @@
 <body>
 
 <div style="display:none">
-$$\newcommand{\mat}[1]{\mathbf{#1}}$$
-$$\newcommand{\vec}[1]{\mathbf{#1}}$$
-$$\newcommand{\A}{\mat{A}}$$
-$$\newcommand{\B}{\mat{B}}$$
-$$\newcommand{\C}{\mat{C}}$$
-$$\newcommand{\D}{\mat{D}}$$
-$$\newcommand{\I}{\mat{I}}$$
-$$\newcommand{\G}{\mat{G}}$$
-$$\newcommand{\N}{\mat{N}}$$
-$$\newcommand{\P}{\mat{P}}$$
-$$\newcommand{\Rot}{\mat{R}}$$
-$$\newcommand{\R}{\mathbb{R}}$$
-$$\newcommand{\One}{\mathbf{1}}$$
-$$\newcommand{\S}{\mathcal{S}}$$
-$$\newcommand{\M}{\mat{M}}$$
-$$\newcommand{\U}{\mat{U}}$$
-$$\newcommand{\L}{\mat{L}}$$
-$$\newcommand{\V}{\mat{V}}$$
-$$\newcommand{\W}{\mat{W}}$$ 
-$$\newcommand{\X}{\mat{X}}$$
-$$\newcommand{\Y}{\mat{Y}}$$
-$$\newcommand{\c}{\vec{c}}$$
-$$\newcommand{\f}{\vec{f}}$$
-$$\newcommand{\g}{\vec{g}}$$
-$$\newcommand{\n}{\vec{n}}$$
-$$\newcommand{\e}{\vec{e}}$$
-$$\newcommand{\p}{\vec{p}}$$
-$$\newcommand{\tr}[1]{\mathop{\text{tr}}{\left(#1\right)}}$$
-$$\newcommand{\t}{\vec{t}}$$
-$$\newcommand{\x}{\vec{x}}$$
-$$\newcommand{\y}{\vec{y}}$$
-$$\newcommand{\u}{\vec{u}}$$
-$$\newcommand{\z}{\vec{z}}$$
-$$\renewcommand{\v}{\vec{v}}$$
-$$\newcommand{\transpose}{{\mathsf T}}$$
-$$\newcommand{\argmin}{\mathop{\text{argmin}}}$$
-$$\newcommand{\argmax}{\mathop{\text{argmax}}}$$
+<span class="math">\[\newcommand{\mat}[1]{\mathbf{#1}}\]</span>
+<span class="math">\[\newcommand{\vec}[1]{\mathbf{#1}}\]</span>
+<span class="math">\[\newcommand{\A}{\mat{A}}\]</span>
+<span class="math">\[\newcommand{\B}{\mat{B}}\]</span>
+<span class="math">\[\newcommand{\C}{\mat{C}}\]</span>
+<span class="math">\[\newcommand{\D}{\mat{D}}\]</span>
+<span class="math">\[\newcommand{\E}{\mat{E}}\]</span>
+<span class="math">\[\newcommand{\I}{\mat{I}}\]</span>
+<span class="math">\[\newcommand{\G}{\mat{G}}\]</span>
+<span class="math">\[\newcommand{\N}{\mat{N}}\]</span>
+<span class="math">\[\newcommand{\Q}{\mat{Q}}\]</span>
+<span class="math">\[\newcommand{\P}{\mat{P}}\]</span>
+<span class="math">\[\newcommand{\Rot}{\mat{R}}\]</span>
+<span class="math">\[\newcommand{\R}{\mathbb{R}}\]</span>
+<span class="math">\[\newcommand{\One}{\mathbf{1}}\]</span>
+<span class="math">\[\newcommand{\S}{\mathcal{S}}\]</span>
+<span class="math">\[\newcommand{\M}{\mat{M}}\]</span>
+<span class="math">\[\newcommand{\U}{\mat{U}}\]</span>
+<span class="math">\[\newcommand{\L}{\mat{L}}\]</span>
+<span class="math">\[\newcommand{\V}{\mat{V}}\]</span>
+<span class="math">\[\newcommand{\W}{\mat{W}}\]</span>
+<span class="math">\[\newcommand{\X}{\mat{X}}\]</span>
+<span class="math">\[\newcommand{\Y}{\mat{Y}}\]</span>
+<span class="math">\[\newcommand{\c}{\vec{c}}\]</span>
+<span class="math">\[\newcommand{\f}{\vec{f}}\]</span>
+<span class="math">\[\newcommand{\g}{\vec{g}}\]</span>
+<span class="math">\[\newcommand{\n}{\vec{n}}\]</span>
+<span class="math">\[\newcommand{\e}{\vec{e}}\]</span>
+<span class="math">\[\newcommand{\p}{\vec{p}}\]</span>
+<span class="math">\[\newcommand{\tr}[1]{\mathop{\text{tr}}{\left(#1\right)}}\]</span>
+<span class="math">\[\newcommand{\t}{\vec{t}}\]</span>
+<span class="math">\[\newcommand{\x}{\vec{x}}\]</span>
+<span class="math">\[\newcommand{\y}{\vec{y}}\]</span>
+<span class="math">\[\newcommand{\u}{\vec{u}}\]</span>
+<span class="math">\[\newcommand{\z}{\vec{z}}\]</span>
+<span class="math">\[\renewcommand{\v}{\vec{v}}\]</span>
+<span class="math">\[\newcommand{\transpose}{{\mathsf T}}\]</span>
+<span class="math">\[\newcommand{\min}{\mathop{\text{min}}}\]</span>
+<span class="math">\[\newcommand{\argmin}{\mathop{\text{argmin}}}\]</span>
+<span class="math">\[\newcommand{\argmax}{\mathop{\text{argmax}}}\]</span>
 </div>
 
 <h1 id="geometryprocessing–parameterization">Geometry Processing – Parameterization</h1>
@@ -66,23 +69,588 @@ $$\newcommand{\argmax}{\mathop{\text{argmax}}}$$
 <p>Once built, you can execute the assignment from inside the <code>build/</code> by running
 on a given mesh:</p>
 
-<pre><code>./parameterization [path to mesh.obj]
+<pre><code>./parameterization [path to mesh with boundary.obj]
 </code></pre>
+
+<figure>
+<img src="images/beetle-cycle-screenshots.gif" alt="When youre app is implemented correctly youll be able to cycle through
+viewing the mesh, viewing the parameterization, toggling the checkerboard
+pattern and switching between parameterization
+methods." />
+<figcaption>When you&#8217;re app is implemented correctly you&#8217;ll be able to cycle through
+viewing the mesh, viewing the parameterization, toggling the checkerboard
+pattern and switching between parameterization
+methods.</figcaption>
+</figure>
 
 <h2 id="background">Background</h2>
 
 <p>In this assignment we will explore how to <em>flatten</em> a surface
 <a href="https://en.wikipedia.org/wiki/Embedding">embedded</a> (or even just
-<a href="https://en.wikipedia.org/wiki/Immersion">immersed</a>) in <span class="math">\(\R^3\)</span> to the flat
-plane (i.e. <span class="math">\(\R^2\)</span>).</p>
+<a href="https://en.wikipedia.org/wiki/Immersion">immersed</a>) in <span class="math">\(ℝ^3\)</span> to the flat
+plane (i.e. <span class="math">\(ℝ^2\)</span>).</p>
 
-<p>This process is often referred to as <a href="">parameterization</a> because the
-two-dimensional coordinate system of the flattened mesh can now be interpreted
-as a parameterization of the 3D surface.</p>
+<p>This process is often referred to as
+<a href="https://en.wikipedia.org/wiki/Parametrization#Parametrization_techniques">parameterization</a>
+because the two-dimensional coordinate system of the flattened mesh can now be
+interpreted as a parameterization of the 3D surface.</p>
+
+<figure>
+<img src="images/beetle-uv-parameterization-low-res.png" alt="A triangle mesh of a VW
+Beetle is parameterized by
+flattening the mesh to the $uv$-plane. There the $u$- and $v$- coordinates
+(orange and white lines) can be directly interpreted as a parameterization of
+the surface. " />
+<figcaption>A triangle mesh of a <a href="https://en.wikipedia.org/wiki/Volkswagen_Beetle">VW
+Beetle</a> is <em>parameterized</em> by
+flattening the mesh to the <span class="math">\(uv\)</span>-plane. There the <span class="math">\(u\)</span>- and <span class="math">\(v\)</span>- coordinates
+(orange and white lines) can be directly interpreted as a parameterization of
+the surface. </figcaption>
+</figure>
+
+<p>In this assignment, we are given a representation of the surface in 3D as a
+<a href="https://en.wikipedia.org/wiki/Triangle_mesh">triangle mesh</a> with a list of
+<span class="math">\(n\)</span> vertex positions <span class="math">\(\V ∈ ℝ^{n × 3}\)</span>, so then the goal is to assign <span class="math">\(uv\)</span>
+coordinates to each vertex <span class="math">\(\U ∈ ℝ^{n × 2}\)</span>. </p>
+
+<p>In general, a 3D surface cannot be flattened onto the plane without
+<em><strong>distortion</strong></em>. Some parts of the surface will have to be stretched and other
+squished. Surfaces with <a href="https://en.wikipedia.org/wiki/Handle_decomposition">topological
+handles</a> or without <a href="https://en.wikipedia.org/wiki/Surface_(topology)#Closed_surfaces">a
+boundary</a> </p>
+
+<h2 id="mass-springmethods">Mass-spring methods</h2>
+
+<p>If we view our triangle mesh surface as a simple
+<a href="https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)">graph</a> then the
+surface flattening problem reduces to <a href="https://en.wikipedia.org/wiki/Graph_drawing">graph
+drawing</a>. Distortion can be
+measured in terms of the relative change in lengths between neighboring
+vertices.</p>
+
+<p>We can pose the graph drawing problem as an optimization over node locations so
+that the lengths between neighboring vertices are minimized:</p>
+
+<p><span class="math">\[
+\min_\U  ∑\limits_{\{i,j\} ∈ \E} ‖\u_i - \u_j‖²,
+\]</span>
+where <span class="math">\(\E∈[1,n]^{k × 2}\)</span> holds a list of edge indices into <span class="math">\(\V\)</span>. This energy
+has a physical interpretation as the <a href="https://en.wikipedia.org/wiki/Potential_energy">potential
+energy</a> of
+<a href="https://en.wikipedia.org/wiki/Simple_harmonic_motion#Mass_on_a_spring">mass-spring</a>
+system. Each edge represents a spring with zero rest length, all springs have
+uniform <a href="https://en.wikipedia.org/wiki/Hooke's_law#Spring_energy">stiffness</a>,
+and all vertices have equivalent (unit) mass.</p>
+
+<p>Without additional constraints, this minimization has a trivial solution: map
+all vertices to the same point, e.g., <span class="math">\(\u_i = (0\ 0),\ ∀ i\)</span>.</p>
+
+<p>We can avoid this by fixing the mapping of certain vertices. If we choose these
+fixed vertices arbitrarily we will in general get overlaps in the flattening.
+For graph drawing this means that edges cross each other; for surface
+parameterization this means that multiple triangles cover the same patch of the
+<span class="math">\(uv\)</span>-plane and some of those triangles are upside down. This problem is often
+referred to as <em>fold overs</em> or lack of
+<a href="https://en.wikipedia.org/wiki/Injective_function">injectivity</a>.</p>
+
+<figure>
+<img src="images/max-tutte-boundary.gif" alt="The face of Max Planck is
+parameterized using a mass-spring system. More and more vertices are fixed
+explicitly along the boundary. With only a few fixed vertices there are severe
+overlaps and degeneracies in the interior. When the entire boundary is fixed to
+the circle, there are no overlaps." />
+<figcaption>The face of <a href="https://en.wikipedia.org/wiki/Max_Planck">Max Planck</a> is
+parameterized using a mass-spring system. More and more vertices are fixed
+explicitly along the boundary. With only a few fixed vertices there are severe
+overlaps and degeneracies in the interior. When the entire boundary is fixed to
+the circle, there are no overlaps.</figcaption>
+</figure>
+
+<p>In 1963, <a href="https://en.wikipedia.org/wiki/Tutte_embedding">Tutte showed</a> that if
+the boundary of a disk-topology mesh is fixed to a <a href="https://en.wikipedia.org/wiki/Convex_polygon">convex
+polygon</a> (and all spring
+stiffness are positive) then minimizing the energy above will result in an
+injective (i.e., foldover-free) flattening.</p>
+
+<p>While avoiding foldovers is important, Tutte-style mappings suffer from a
+couple problems.</p>
+
+<p>If uniform spring stiffness are used, then the mapping in the <span class="math">\(uv\)</span> domain will
+try to make all edges the same length. Combined with the boundary constraints,
+the flattened mesh will have smoothly varying edge-lengths and near-equilateral
+triangles <em>regardless</em> of the triangles shapes and sizes on the surface mesh.</p>
+
+<figure>
+<img src="images/keenan-ogre-tutte.jpg" alt="The Tutte embedding of the 3D Ogre mesh leads to severe distortion.
+Overlaying a checkerboard pattern on the 2D domain and visualizing it on the 3D
+surface shows the wobbliness of the non-smooth mapping and
+stretching." />
+<figcaption>The Tutte embedding of the 3D Ogre mesh leads to severe distortion.
+Overlaying a checkerboard pattern on the 2D domain and visualizing it on the 3D
+surface shows the wobbliness of the non-smooth mapping and
+stretching.</figcaption>
+</figure>
+
+<p>We can try to remedy this by introducing a non-uniform weight or spring
+stiffness for each edge <span class="math">\(w_{ij}\)</span>:
+<span class="math">\[
+\min_\U  ∑\limits_{\{i,j\} ∈ \E} w_{ij} ‖\u_i - \u_j‖².
+\]</span></p>
+
+<p>For example, we could weigh the distortion of shorter edges (on the 3D mesh)
+more than longer ones: <span class="math">\(w_{ij} = 1/‖\v_i - \v_j‖\)</span>. See &#8220;Parametrization and
+smooth approximation of surface triangulations&#8221; [Floater 1996]. This will at
+best help tame <em><strong>length distortion</strong></em>. The &#8220;shapes&#8221; (i.e., aspect ratios) of
+triangles will only be indirectly preserved. We need a way to discourage <em>area
+distortion</em> and <em>angle distortion</em>.</p>
+
+<p>To do this, let&#8217;s write the energy minimization problem above in matrix form:</p>
+
+<p><span class="math">\[
+\min_\U = ½ \tr{\U^transpose \L \U},
+\]</span>
+where <span class="math">\(\L ∈ \R^{n × n}\)</span> is a sparse matrix with:
+<span class="math">\[
+L_{ij} = \begin{cases}
+w_{ij} & \text{ if $i≠j$ and $∃ \{ij\} ∈ \E$, }\\
+-∑\limits_{\ell≠i} L_{i\ell} & \text{ if $i = j$, or } \\
+0 & \text{ otherwise}
+\end{cases}.
+\]</span></p>
+
+<h3 id="dirichletenergy">Dirichlet energy</h3>
+
+<p>We should immediately recognize this sparsity structure from the discrete
+Laplacians considered in the previous assignments. If <span class="math">\(w_{ij} = 1\)</span>, then <span class="math">\(\L\)</span>
+is the <em>uniform Laplacian</em> (a.k.a., <a href="https://en.wikipedia.org/wiki/Laplacian_matrix">graph
+Laplacian</a>). If <span class="math">\(w_{ij}\)</span> is
+based on edge-lengths, then <span class="math">\(\L\)</span> corresponds to a physical spring system. </p>
+
+<p>But we have more information then edges, since we know that our graph is really
+a discrete representation of a surface. If we model distortion as <em>variation</em>
+then we can model the parametrization as an energy minimization of the
+variation in the <span class="math">\(u\)</span>- and <span class="math">\(v\)</span>-coordinate functions over the surface <span class="math">\(\S\)</span>:
+<span class="math">\[
+\min_{u,v} ∫_\S ‖∇u‖² + ‖∇v‖² \ dA.
+\]</span>
+This familiar energy is called the <a href="https://en.wikipedia.org/wiki/Dirichlet's_energy">Dirichelt
+energy</a>.</p>
+
+<p>We may discretize this problem immediately using <a href="https://en.wikipedia.org/wiki/Piecewise_linear_function">piecewise linear
+functions</a> spanned by
+<span class="math">\(u\)</span> and <span class="math">\(v\)</span> values at vertices. This corresponds to using the <em>cotangent
+Laplacian</em> as <span class="math">\(\L\)</span> in the discrete minimization problem above.</p>
 
 <blockquote>
-<p>Surface in 3D &#8211;&gt; parameterization in 2D &#8211;&gt; parameterized surface in 3d</p>
+<p>In the smooth setting, minimizing the variation of <span class="math">\(u\)</span> and <span class="math">\(v\)</span> will lead to
+an injective mapping if the boundary is constrained to a closed convex curve.
+In the discrete setting, poor triangle shapes in the original 3D mesh could
+lead to <em>negative</em> cotangent weights <span class="math">\(w_{ij}\)</span> so the positive stiffness
+weight of <a href="https://en.wikipedia.org/wiki/Tutte_embedding">Tutte&#8217;s theorem</a> is
+broken and foldovers <em>might</em> occur. Keep in mind that positive weights are a
+<em>sufficient</em> condition for injectivity, but this <a href="https://en.wikipedia.org/wiki/Denying_the_antecedent">does not
+imply</a> that having a
+few negative weights will necessarily cause a foldover. Even so, Floater
+proposes an alternative discrete Laplacian in &#8220;Mean value coordinates&#8221; 2003,
+that retains some nice shape-preserving properties without negative weights.</p>
 </blockquote>
+
+<p>Modeling distortion as an integral of variation over the given 3D surface is
+going in the right direction, but so far we are treating <span class="math">\(u\)</span> and <span class="math">\(v\)</span>
+<em>separately</em>. Intuitively <span class="math">\(u\)</span> and <span class="math">\(v\)</span> cannot &#8220;talk&#8221; to one-another during
+optimization. There&#8217;s no reason to expect that they will be able to minimize
+<em>area distortation</em> and <em>angle distortion</em> directly. For that we will need to
+consider <span class="math">\(u\)</span> and <span class="math">\(v\)</span> simultaneously.</p>
+
+<h2 id="leastsquaresconformalmappings">Least Squares Conformal Mappings</h2>
+
+<p>We can reason about distortion in terms of differential quantities of the
+mapping from <span class="math">\(\S\)</span> to <span class="math">\(\R²\)</span>. Now, ultimately we are trying to parametrize <span class="math">\(\S\)</span>
+using the <span class="math">\(u\)</span> and <span class="math">\(v\)</span> coordinate functions spanning <span class="math">\(\R^2\)</span>, but in order to
+describe energies over these unknown functions we will assume (without
+explicitly using) that we have a parameterization of <span class="math">\(\S\)</span> (e.g., with
+coordinates <span class="math">\(x\)</span> and <span class="math">\(y\)</span>). This way we can write about small changes in the
+mapping function <span class="math">\(u\)</span> with respect to moving a small amount on the surface of
+<span class="math">\(\S\)</span> (small changes in <span class="math">\(x\)</span> and <span class="math">\(y\)</span>).</p>
+
+<h3 id="areadistortion">Area distortion</h3>
+
+<p>We would like that regions on <span class="math">\(\S\)</span> have a proportionally similarly sized region
+under the <span class="math">\(u\)</span>, <span class="math">\(v\)</span> mapping to <span class="math">\(\R²\)</span>. On an infinitesimal scale, a small change
+in <span class="math">\(x\)</span> and <span class="math">\(y\)</span> on <span class="math">\(\S\)</span> should incur an equally small change in <span class="math">\(u\)</span> and <span class="math">\(v\)</span>. In
+other words, the <a href="https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant">determinant of the
+Jacobian</a> of the
+mapping should be one:</p>
+
+<p><span class="math">\[
+\left|
+\begin{array}{cc}
+\frac{∂u}{∂x} & \frac{∂u}{∂y} \\
+\frac{∂v}{∂x} & \frac{∂v}{∂y} 
+\end{array}
+\right|
+= 1.
+\]</span></p>
+
+<blockquote>
+<p>The determinant of the Jacobian of a mapping corresponds to the scale factor
+by which local area expands or shrinks. This quantity also appears during
+<a href="https://en.wikipedia.org/wiki/Integration_by_substitution">integration by
+substitution</a> when
+multivariate functions are involved.</p>
+</blockquote>
+
+<p>It is tempting to try to throw this equality into a least squares energy an
+minimize it. Unfortunately the determinant is already a quadratic function of
+<span class="math">\(u\)</span> and <span class="math">\(v\)</span> so a least-squares energy would be quartic and minimizing it would
+be non-trivial. We will reinvestigate this <em>later</em> when we look into surface
+deformation energies. But for now, let us put aside area distortion and focus
+instead on angle or aspect ratio distortion.</p>
+
+<h3 id="angledistortion">Angle distortion</h3>
+
+<p>We would also like that local regions on <span class="math">\(\S\)</span> are parameterized without
+<a href="https://en.wikipedia.org/wiki/Shear_mapping">shearing</a>. This ensures that two
+orthogonal directions on the surface <span class="math">\(\S\)</span> correspond to two orthogonal
+directions on the parameteric plane <span class="math">\(\R²\)</span>. We can capture this by requiring
+that a small change in the <span class="math">\(x\)</span> and <span class="math">\(y\)</span> directions on <span class="math">\(\S\)</span> corresponds to equal
+magnitude, small changes in <span class="math">\(u\)</span> and <span class="math">\(v\)</span> in perpendicular directions:</p>
+
+<p><span class="math">\[
+∇u = 
+\left( \begin{array}{r}
+\frac{∂u}{∂x} \\
+\frac{∂u}{∂y} \\
+\end{array} \right)
+=
+\left( \begin{array}{r}
+ \frac{∂v}{∂y} \\
+-\frac{∂v}{∂x} \\
+\end{array} \right)
+=
+\left( \begin{array}{r}
+ \frac{∂v}{∂x} \\
+ \frac{∂v}{∂y} \\
+\end{array} \right)^⊥
+=
+∇v^⊥,
+\]</span>
+where <span class="math">\(\x^⊥\)</span> indicates the vector <span class="math">\(\x\)</span> rotated by by 90°.</p>
+
+<blockquote>
+<p>If we consider for a moment that we are not trying to flatten a surface in 3D
+to 2D, but rather we&#8217;re simply trying to a region <span class="math">\(\S\)</span> of the 2D plane to
+itself: <span class="math">\(M : \R² → \R²\)</span>. Here we can reason about <em>area distortation</em> and
+<em>angle distortion</em> in terms of the differential properties of this mapping
+<span class="math">\(M\)</span>. </p>
+
+<p>By enlisting <a href="https://en.wikipedia.org/wiki/Complex_analysis">complex
+analysis</a>, we can reinterpret
+the mapping to the real plane <span class="math">\(\R²\)</span> as a mapping to the <a href="https://en.wikipedia.org/wiki/Complex_plane">complex
+plane</a> <span class="math">\(\mathbb{C}\)</span>. The angle
+preservation equality above corresponds to the <a href="https://en.wikipedia.org/wiki/Cauchy–Riemann_equations">Cauchy-Riemann
+equations</a>. Complex
+functions that satisfy these equations are called <em><strong>conformal functions</strong></em>.</p>
+</blockquote>
+
+<p>This equality is linear in <span class="math">\(u\)</span> and <span class="math">\(v\)</span>. We can immediately build a quadratic
+energy that minimizes deviation from satisfying this equation over the surface
+<span class="math">\(\S\)</span> in a <a href="https://en.wikipedia.org/wiki/Least_squares">least squares sense</a>:</p>
+
+<p><span class="math">\[
+\min_{u,v} ½ ∫_\S ‖∇u - ∇v^⊥‖² \ dA.
+\]</span></p>
+
+<p>This energy was employed for surface parameterization of triangle meshes as
+early as &#8220;Intrinsic parameterizations of surface meshes&#8221; [Desbrun et al. 2002]
+and &#8220;Least squares conformal maps for automatic texture atlas generation&#8221; [Lévy
+2002]. Written in this form, it&#8217;s perhaps not obvious how we can discretize
+this over a triangle mesh. Let us massage the equations a bit, starting by
+expanding the squared term:</p>
+
+<p><span class="math">\[
+½ ∫_\S ‖∇u - ∇v^⊥‖² \ dA = \\
+∫_\S \left(½ ‖∇u‖² + ½ ‖∇v‖² - ∇u ⋅ ∇v^⊥ \right)\ dA.
+\]</span></p>
+
+<p>We should recognize the first two terms as the <a href="https://en.wikipedia.org/wiki/Dirichlet's_energy">Dirichlet
+energy</a>. The third term is
+at first glance not familiar. Let&#8217;s massage it a bit by expanding the gradient
+and dot product:</p>
+
+<p><span class="math">\[
+\begin{align}
+∫_\S  ∇u ⋅ ∇v^⊥ \ dA &= \\
+∫_\S \left( \begin{array}{r}
+\frac{∂u}{∂x} \\
+\frac{∂u}{∂y} \\
+\end{array}\right)
+\left( \begin{array}{r}
+ \frac{∂v}{∂y} \\
+-\frac{∂v}{∂x} \\
+\end{array} \right) \ dA &= \\
+∫_\S \left|
+\begin{array}{cc}
+\frac{∂u}{∂x} & \frac{∂u}{∂y} \\
+\frac{∂v}{∂x} & \frac{∂v}{∂y} 
+\end{array}
+\right| \ dA &= 
+∫_{\left(\begin{array}{c}u(\S) \\ v(\S) \end{array}\right)} 1 \ dA
+,
+\end{align}
+\]</span>
+where we end up with the integrated <a href="https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant">determinant of the
+Jacobian</a> of the
+<span class="math">\(u\)</span> and <span class="math">\(v\)</span> mapping over <span class="math">\(\S\)</span>. By the rules of <a href="https://en.wikipedia.org/wiki/Integration_by_substitution">integration by
+substitution</a>, this
+is equivalent to integrating the unit density function over the image of the
+mapping, i.e., the <strong><em>signed</em></strong> area of the flattened surface. If we apply
+<a href="https://en.wikipedia.org/wiki/Stokes%27_theorem">Stoke&#8217;s theorem</a> we can
+convert this area integral into a boundary integral:</p>
+
+<p><span class="math">\[
+∫_{\left(\begin{array}{c}u(\S) \\ v(\S) \end{array}\right)} 1 \ dA
+= ∮_{∂\left(\begin{array}{c}u(\S) \\ v(\S) \end{array}\right)} \x⋅\n \ ds,
+\]</span>
+where <span class="math">\(\n\)</span> is the unit vector pointing in the outward direction along the
+boundary of the image of the mapping.</p>
+
+<p>If we discretize <span class="math">\(u\)</span> and <span class="math">\(v\)</span> using piecewise-linear functions then the boundary
+of the mapping will also be piecewise linear and the boundary integral for the
+<a href="https://en.wikipedia.org/wiki/Vector_area"><strong>vector area</strong></a> is given by the sum over all
+boundary edges of the integral of the position vector <span class="math">\(\u\)</span> dotted with that
+edge&#8217;s unit normal vector:</p>
+
+<p><span class="math">\[
+∮_{∂(\u(\S))} \u(s)⋅\n(s) \ ds = \\
+  ∑\limits_{\{i,j\} ∈ ∂\S} ∫_0^1 
+    (\u_i + t(\u_j - \u_i))⋅\frac{(\u_j-\u_i)^⊥}{‖\u_j - \u_i‖} \ dt = \\
+  ∑\limits_{\{i,j\} ∈ ∂\S} (\u_j-\u_i)⋅(\u_j-\u_i)^⊥ = \\
+  ∑\limits_{\{i,j\} ∈ ∂\S} | \u_i\  \u_j |,
+\]</span>
+where finally we have a simply quadratic expression: sum over all boundary
+edges the determinant of the matrix with vertex positions as columns. This
+quadratic form can be written as <span class="math">\(\U^\transpose \A \U\)</span> with the <em>vectorized</em>
+<span class="math">\(u\)</span>- and <span class="math">\(v\)</span>-coordinates of the mapping in <span class="math">\(\U ∈ \R^{2n}\)</span> and <span class="math">\(\A ∈ \R^{2n ×
+2n}\)</span> a sparse matrix involving only values for vertices on the boundary of
+<span class="math">\(\S\)</span>. </p>
+
+<p>Putting this together with the Dirichlet energy terms, we can write the
+discrete <em>least squares conformal mappings</em> minimization problem as:</p>
+
+<p><span class="math">\[
+\min_{\U ∈ \R^{2n}} 
+  \U^\transpose 
+  \underbrace{
+  \left(
+  \left(
+  \begin{array}{rr}
+    \L & 0 \\
+    0 & \L
+  \end{array}
+  \right)
+  + \A
+  \right)
+  }_{\Q}
+  \U,
+\]</span>
+where <span class="math">\(\L ∈ \R^{n × n}\)</span> is the Dirichlet energy quadratic form (a.k.a.
+cotangent Laplacian) and <span class="math">\(\Q ∈ \R^{2n × 2n}\)</span> is the resulting (sparse)
+quadratic form.</p>
+
+<h3 id="freeboundary">Free boundary</h3>
+
+<p>Similar to the mass-spring methods above, without constraints the least squares
+conformal mapping energy will also have a trivial solution: set <span class="math">\(\U\)</span> to a
+single point.</p>
+
+<p>To avoid this solution, we <em>could</em> &#8220;fix two vertices&#8221; (as originally suggested by
+both [Desbrun et al. 2002] and [Lévy et al. 2002]). However, this will
+introduce <em>bias</em>. Depending on the two vertices we choose we will get a different
+solution. If we&#8217;re really unlucky, then we might choose two vertices that the
+energy would rather like to place near each other and so placing them at
+arbitrary positions will introduce unnecessary distortion (i.e., high energy).</p>
+
+<p>Instead we would like <a href="https://en.wikipedia.org/wiki/Natural_boundary_condition">natural boundary
+conditions</a> (not to
+be confused with <a href="https://en.wikipedia.org/wiki/Neumann_boundary_condition">Neumann boundary
+conditions</a>). Natural
+boundary conditions minimize the given energy in the absence of explicit (or
+<em>essential</em>) boundary conditions. Natural boundary conditions are convenient if
+we discretize the energy <em>before</em> differentiating to find the minimum. If our
+discretization is &#8220;good&#8221;, then natural boundary conditions will fall out for
+free (<em>natural</em> indeed!).</p>
+
+<p>To obtain natural boundary conditions without bias by picking two arbitrary
+fixed vertices <em>and</em> avoid the trivial solution, we can require that the
+solution:</p>
+
+<ol>
+<li>minimizes the given energy,</li>
+<li>has non-zero norm,</li>
+<li>is <a href="https://en.wikipedia.org/wiki/Orthogonality">orthogonal</a> to trivial
+ solutions.</li>
+</ol>
+
+<p>Let&#8217;s break these down. The first requirement simply ensures that we&#8217;re still
+minimizing the given energy without <a href="https://en.wikipedia.org/wiki/Regularization_(mathematics)">monkeying around with
+it</a> in any way.</p>
+
+<p>The second requirement adds the constraint that the solution <span class="math">\(\U\)</span> has <em>unit
+norm</em>:</p>
+
+<p><span class="math">\[
+∫_\S ‖\u‖² \ dA = 1.
+\]</span></p>
+
+<p>In our discrete case this corresponds to:</p>
+
+<p><span class="math">\[
+\U^\transpose 
+  \underbrace{\left(\begin{array}{cc}\M & 0 \\ 0 & \M \end{array}\right)}_{\B} 
+  \U = 1,
+\]</span>
+where <span class="math">\(\M ∈ \R^{n × n}\)</span> is the <em>mass matrix</em> for a piecewise-linear triangle
+mesh and <span class="math">\(\B ∈ \R^{2n × 2n}\)</span> is the sparse, square constraint matrix</p>
+
+<p>This is a <em>quadratic constraint</em>. Normally that would be <a href="https://en.wikipedia.org/wiki/The_Bad_News_Bears">bad
+news</a>, but this type of
+constraint results in a well-studied <a href="https://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix#Generalized_eigenvalue_problem">generalized Eigen value
+problem</a>.</p>
+
+<blockquote>
+<h4 id="generalizedeigenvalueproblem">Generalized Eigenvalue problem</h4>
+
+<p>Consider a discrete quadratic minimization problem in <span class="math">\(\v ∈ \R^n\)</span>:</p>
+
+<p><span class="math">\[
+\min_{\v} ½ \v^\transpose \A \v \text{ subject to } \v^\transpose \B \v = 1,
+\]</span></p>
+
+<p>where <span class="math">\(\A,\B ∈ \R^{n × n}\)</span> are <a href="https://en.wikipedia.org/wiki/Positive-definite_matrix#Positive-semidefinite">positive
+semi-definite</a>
+matrices.</p>
+
+<p>We can enforce this constraint via the <a href="https://en.wikipedia.org/wiki/Lagrange_multiplier">Lagrange multiplier
+method</a> by introducing the
+scalar Lagrange multiplier <span class="math">\(λ\)</span> and looking for the saddle-point of the
+<em>Lagrangian</em>:</p>
+
+<p><span class="math">\[
+\mathcal{L}(\v,λ) = ½ \v^\transpose \A \v + λ (1 - \v^\transpose \B \v ).
+\]</span></p>
+
+<p>This occurs when <span class="math">\(∂\mathcal{L}/∂\v = 0\)</span> and <span class="math">\(∂\mathcal{L}/∂λ = 0\)</span>:</p>
+
+<p><span class="math">\[
+\begin{align}
+\A \v - λ \B \v  = 0 & → \A \v = λ \B \v,\\
+1 - \v^\transpose \B \v = 0 &→  \v^\transpose \B \v = 1.
+\end{align}
+\]</span></p>
+
+<p>This is the canonical form of the
+<a href="https://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix#Generalized_eigenvalue_problem">generalized Eigen value
+problem</a>
+for which there are available numerical algorithms.</p>
+</blockquote>
+
+<p>Finally, our third constraint is that the solution is orthogonal to the trivial
+solutions. There are <em>two</em> trivial solutions. They correspond to mapping all
+<span class="math">\(u\)</span> values to zero and all <span class="math">\(v\)</span> values to a constant-but-non-zero value and
+<a href="https://en.wikipedia.org/wiki/List_of_Latin_phrases_(V)#vice_versa"><em>vice-versa</em></a>.
+These solutions will have <em>zero</em> energy and thus their corresponding
+eigenvalues <span class="math">\(λ\)</span> will be zero. The <em>next</em> eigenmode (with next smallest
+eigenvalue) will satisfy all of our criteria. See &#8220;Spectral conformal
+parameterization&#8221; [Mullen et al. 2008].</p>
+
+<blockquote>
+<p>This eigenvector is sometimes called the <a href="https://en.wikipedia.org/wiki/Algebraic_connectivity#Fiedler_vector">Fiedler
+vector</a>.</p>
+</blockquote>
+
+<h3 id="canonicalrotation">Canonical rotation</h3>
+
+<p>The least squares conformal mapping energy is <em>invariant</em> to translation and
+rotation. The eigen decomposition process described above will naturally take
+care of &#8220;picking&#8221; a canonical translation by pulling the solution <span class="math">\(\U\)</span> toward
+the origin. The rotation it returns, however, will be arbitrary.</p>
+
+<p>We can try to find a canonical rotation by using <a href="https://en.wikipedia.org/wiki/Principal_component_analysis">principle component
+analysis</a> on the
+returned <span class="math">\(uv\)</span> coordinates in <span class="math">\(U ∈ \R^{n × 2}\)</span> (where now <span class="math">\(U\)</span> places all <span class="math">\(u\)</span>
+coordinates in the first column and <span class="math">\(v\)</span> coordinates in the second column). </p>
+
+<p>For mappings with strong reflectional symmetry then singular value
+decomposition on the <a href="https://en.wikipedia.org/wiki/Covariance">covariance
+matrix</a> <span class="math">\(\U^transpose \U ∈ \R^{2 ×
+2}\)</span> will produce a rotation that aligns the principle direction of <span class="math">\(\U\)</span> with
+the &#8220;<span class="math">\(x\)</span>&#8221;-axis of the parametric domain.</p>
+
+<figure>
+<img src="images/keenan-ogre-lscm.jpg" alt="The least squares conformal mapping of the 3D Ogre mesh with natural boundary
+conditions produces a more smooth, less distorted and canonically aligned
+parameterization than the Tutte embedding above." />
+<figcaption>The least squares conformal mapping of the 3D Ogre mesh with natural boundary
+conditions produces a more smooth, less distorted and canonically aligned
+parameterization than the Tutte embedding above.</figcaption>
+</figure>
+
+<h4 id="whyiseverythingsquishedupintheinterior">Why is everything squished up in the interior?</h4>
+
+<figure>
+<img src="images/camel-head-lscm.jpg" alt="The entire camel head is parameterized inside the neck boundary. The area
+distortion for the face is extreme: in the parametric domain the face is tiny;
+the checkerboard on 3D face has enormous
+stretching." />
+<figcaption>The entire camel head is parameterized <em>inside</em> the neck boundary. The area
+distortion for the face is extreme: in the parametric domain the face is tiny;
+the checkerboard on 3D face has enormous
+stretching.</figcaption>
+</figure>
+
+<p>If the surface has only a small boundary then <em>all</em> of the surface will have to
+be packed inside the interior. We&#8217;re not directly punishing <em>area</em> distortion
+so in order to satisfy the <em>angle</em> distortion. <em>Freeing</em> the boundary helps a
+little, but ultimately the only way to mitigate this is to: 1) trade area
+distortion for angle distortion or 2) <em>cut</em> (a.k.a. &#8220;interrupt&#8221;) the mapping
+with discontinuities (see, e.g., <a href="https://en.wikipedia.org/wiki/Goode_homolosine_projection">Goode homolosine projection used for maps of
+Earth</a>).</p>
+
+<p>Cutting new boundaries is <em>always</em> necessary for parameterizing <em>closed</em>
+surfaces. It is (still in 2017) difficult to choose the cuts in an automatic
+way. <em>Good opportunity for a final project ;-)</em>.</p>
+
+<figure>
+<img src="images/animal-lscm.jpg" alt="The animal model is a seemingly closed surface, but it has been cut so that
+its parameterization is possible and has relatively low area
+distortion." />
+<figcaption>The animal model is a seemingly closed surface, but it has been cut so that
+its parameterization is possible and has relatively low area
+distortion.</figcaption>
+</figure>
+
+<h2 id="tasks">Tasks</h2>
+
+<h3 id="blacklist">Blacklist</h3>
+
+<ul>
+<li><code>igl::harmonic</code></li>
+<li><code>igl::lscm</code></li>
+<li><code>igl::vector_area_matrix</code></li>
+</ul>
+
+<h3 id="whitelist">Whitelist</h3>
+
+<ul>
+<li><code>igl::boundary_loop</code></li>
+<li><code>igl::boundary_loop</code></li>
+<li><code>igl::cotmatrix</code> (or your previous implementation)</li>
+<li><code>igl::eigs</code></li>
+<li><code>igl::map_vertices_to_circle</code></li>
+<li><code>igl::massmatrix</code>(or your previous implementation)</li>
+<li><code>igl::repdiag</code></li>
+</ul>
 
 </body>
 </html>
