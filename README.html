@@ -134,8 +134,8 @@ that the lengths between neighboring vertices are minimized:</p>
 <p><span class="math">\[
 \min_\U  ∑\limits_{\{i,j\} ∈ \E} ‖\u_i - \u_j‖²,
 \]</span>
-where <span class="math">\(\E∈[1,n]^{k × 2}\)</span> holds a list of edge indices into <span class="math">\(\V\)</span>. This energy
-has a physical interpretation as the <a href="https://en.wikipedia.org/wiki/Potential_energy">potential
+where <span class="math">\(\E∈\{1,…,n\}^{k × 2}\)</span> holds a list of edge indices into <span class="math">\(\V\)</span>. This
+energy has a physical interpretation as the <a href="https://en.wikipedia.org/wiki/Potential_energy">potential
 energy</a> of
 <a href="https://en.wikipedia.org/wiki/Simple_harmonic_motion#Mass_on_a_spring">mass-spring</a>
 system. Each edge represents a spring with zero rest length, all springs have
@@ -170,9 +170,9 @@ the circle, there are no overlaps.</figcaption>
 the boundary of a disk-topology mesh is fixed to a <a href="https://en.wikipedia.org/wiki/Convex_polygon">convex
 polygon</a> (and all spring
 stiffness are positive) then minimizing the energy above will result in an
-injective (i.e., foldover-free) flattening.</p>
+injective (i.e., fold-over-free) flattening.</p>
 
-<p>While avoiding foldovers is important, Tutte-style mappings suffer from a
+<p>While avoiding fold-overs is important, Tutte-style mappings suffer from a
 couple problems.</p>
 
 <p>If uniform spring stiffness are used, then the mapping in the <span class="math">\(uv\)</span> domain will
@@ -192,7 +192,7 @@ stretching.</figcaption>
 </figure>
 
 <p>We can try to remedy this by introducing a non-uniform weight or spring
-stiffness for each edge <span class="math">\(w_{ij}\)</span>:
+stiffness <span class="math">\(w_{ij}\)</span> for each edge <span class="math">\(\{i,j\}\)</span>:
 <span class="math">\[
 \min_\U  ∑\limits_{\{i,j\} ∈ \E} w_{ij} ‖\u_i - \u_j‖².
 \]</span></p>
@@ -207,7 +207,7 @@ distortion</em> and <em>angle distortion</em>.</p>
 <p>To do this, let&#8217;s write the energy minimization problem above in matrix form:</p>
 
 <p><span class="math">\[
-\min_\U = ½ \tr{\U^transpose \L \U},
+\min_\U ½ \tr{\U^\transpose \L \U},
 \]</span>
 where <span class="math">\(\L ∈ \R^{n × n}\)</span> is a sparse matrix with:
 <span class="math">\[
@@ -224,17 +224,21 @@ w_{ij} & \text{ if $i≠j$ and $∃ \{ij\} ∈ \E$, }\\
 Laplacians considered in the previous assignments. If <span class="math">\(w_{ij} = 1\)</span>, then <span class="math">\(\L\)</span>
 is the <em>uniform Laplacian</em> (a.k.a., <a href="https://en.wikipedia.org/wiki/Laplacian_matrix">graph
 Laplacian</a>). If <span class="math">\(w_{ij}\)</span> is
-based on edge-lengths, then <span class="math">\(\L\)</span> corresponds to a physical spring system. </p>
+based on edge-lengths, then <span class="math">\(\L\)</span> corresponds to a physical static equilibrium
+problem for a linear spring system. </p>
 
-<p>But we have more information then edges, since we know that our graph is really
-a discrete representation of a surface. If we model distortion as <em>variation</em>
-then we can model the parametrization as an energy minimization of the
-variation in the <span class="math">\(u\)</span>- and <span class="math">\(v\)</span>-coordinate functions over the surface <span class="math">\(\S\)</span>:
+<p>But we have more information then edges: we know that our graph is really a
+discrete representation of a two-dimensional surface. Wobbliness distortions in
+the parameterization correspond to high <em>variation</em> in the <span class="math">\(u\)</span> and <span class="math">\(v\)</span>
+functions over the surface.</p>
+
+<p>We can model the problem of parametrization as an energy minimization of
+the variation in the <span class="math">\(u\)</span>- and <span class="math">\(v\)</span>-coordinate functions over the surface <span class="math">\(\S\)</span>:
 <span class="math">\[
 \min_{u,v} ∫_\S ‖∇u‖² + ‖∇v‖² \ dA.
 \]</span>
-This familiar energy is called the <a href="https://en.wikipedia.org/wiki/Dirichlet's_energy">Dirichelt
-energy</a>.</p>
+This familiar energy is called the
+<a href="https://en.wikipedia.org/wiki/Dirichlet's_energy">Dirichelt energy</a>.</p>
 
 <p>We may discretize this problem immediately using <a href="https://en.wikipedia.org/wiki/Piecewise_linear_function">piecewise linear
 functions</a> spanned by
@@ -246,13 +250,15 @@ Laplacian</em> as <span class="math">\(\L\)</span> in the discrete minimization 
 an injective mapping if the boundary is constrained to a closed convex curve.
 In the discrete setting, poor triangle shapes in the original 3D mesh could
 lead to <em>negative</em> cotangent weights <span class="math">\(w_{ij}\)</span> so the positive stiffness
-weight of <a href="https://en.wikipedia.org/wiki/Tutte_embedding">Tutte&#8217;s theorem</a> is
-broken and foldovers <em>might</em> occur. Keep in mind that positive weights are a
+weight assumption of <a href="https://en.wikipedia.org/wiki/Tutte_embedding">Tutte&#8217;s
+theorem</a> is broken and
+fold-overs <em>might</em> occur. Keep in mind that positive weights are a
 <em>sufficient</em> condition for injectivity, but this <a href="https://en.wikipedia.org/wiki/Denying_the_antecedent">does not
 imply</a> that having a
-few negative weights will necessarily cause a foldover. Even so, Floater
-proposes an alternative discrete Laplacian in &#8220;Mean value coordinates&#8221; 2003,
-that retains some nice shape-preserving properties without negative weights.</p>
+few negative weights will necessarily cause a fold-over. Even so, Floater
+proposes an alternative discrete Laplacian in &#8220;Mean value coordinates&#8221; in
+2003 that retains some nice shape-preserving properties without negative
+weights.</p>
 </blockquote>
 
 <p>Modeling distortion as an integral of variation over the given 3D surface is
@@ -303,9 +309,9 @@ multivariate functions are involved.</p>
 <p>It is tempting to try to throw this equality into a least squares energy an
 minimize it. Unfortunately the determinant is already a quadratic function of
 <span class="math">\(u\)</span> and <span class="math">\(v\)</span> so a least-squares energy would be quartic and minimizing it would
-be non-trivial. We will reinvestigate this <em>later</em> when we look into surface
-deformation energies. But for now, let us put aside area distortion and focus
-instead on angle or aspect ratio distortion.</p>
+be non-trivial. We will reinvestigate this in <em>later assignments</em> when we look
+into surface deformation energies. But for now, let us put aside area
+distortion and focus instead on angle or aspect-ratio distortion.</p>
 
 <h3 id="angledistortion">Angle distortion</h3>
 
@@ -317,40 +323,31 @@ that a small change in the <span class="math">\(x\)</span> and <span class="math
 magnitude, small changes in <span class="math">\(u\)</span> and <span class="math">\(v\)</span> in perpendicular directions:</p>
 
 <p><span class="math">\[
-∇u = 
+\begin{align}
+∇u &= ∇v^⊥ \\
+&↓ \\
 \left( \begin{array}{r}
 \frac{∂u}{∂x} \\
 \frac{∂u}{∂y} \\
 \end{array} \right)
-=
+ &=
 \left( \begin{array}{r}
  \frac{∂v}{∂y} \\
 -\frac{∂v}{∂x} \\
 \end{array} \right)
-=
-\left( \begin{array}{r}
- \frac{∂v}{∂x} \\
- \frac{∂v}{∂y} \\
-\end{array} \right)^⊥
-=
-∇v^⊥,
+\end{align}
 \]</span>
 where <span class="math">\(\x^⊥\)</span> indicates the vector <span class="math">\(\x\)</span> rotated by by 90°.</p>
 
 <blockquote>
-<p>If we consider for a moment that we are not trying to flatten a surface in 3D
-to 2D, but rather we&#8217;re simply trying to a region <span class="math">\(\S\)</span> of the 2D plane to
-itself: <span class="math">\(M : \R² → \R²\)</span>. Here we can reason about <em>area distortation</em> and
-<em>angle distortion</em> in terms of the differential properties of this mapping
-<span class="math">\(M\)</span>. </p>
-
 <p>By enlisting <a href="https://en.wikipedia.org/wiki/Complex_analysis">complex
 analysis</a>, we can reinterpret
 the mapping to the real plane <span class="math">\(\R²\)</span> as a mapping to the <a href="https://en.wikipedia.org/wiki/Complex_plane">complex
 plane</a> <span class="math">\(\mathbb{C}\)</span>. The angle
 preservation equality above corresponds to the <a href="https://en.wikipedia.org/wiki/Cauchy–Riemann_equations">Cauchy-Riemann
 equations</a>. Complex
-functions that satisfy these equations are called <em><strong>conformal functions</strong></em>.</p>
+functions that satisfy these equations are called <a href="https://en.wikipedia.org/wiki/Conformal_map"><em><strong>conformal
+maps</strong></em></a>.</p>
 </blockquote>
 
 <p>This equality is linear in <span class="math">\(u\)</span> and <span class="math">\(v\)</span>. We can immediately build a quadratic
@@ -369,12 +366,11 @@ this over a triangle mesh. Let us massage the equations a bit, starting by
 expanding the squared term:</p>
 
 <p><span class="math">\[
-½ ∫_\S ‖∇u - ∇v^⊥‖² \ dA = \\
 ∫_\S \left(½ ‖∇u‖² + ½ ‖∇v‖² - ∇u ⋅ ∇v^⊥ \right)\ dA.
 \]</span></p>
 
 <p>We should recognize the first two terms as the <a href="https://en.wikipedia.org/wiki/Dirichlet's_energy">Dirichlet
-energy</a>. The third term is
+energies</a> of <span class="math">\(u\)</span> and <span class="math">\(v\)</span>. The third term is
 at first glance not familiar. Let&#8217;s massage it a bit by expanding the gradient
 and dot product:</p>
 
@@ -410,7 +406,7 @@ convert this area integral into a boundary integral:</p>
 
 <p><span class="math">\[
 ∫_{\left(\begin{array}{c}u(\S) \\ v(\S) \end{array}\right)} 1 \ dA
-= ∮_{∂\left(\begin{array}{c}u(\S) \\ v(\S) \end{array}\right)} \x⋅\n \ ds,
+= ∮_{∂\left(\begin{array}{c}u(\S) \\ v(\S) \end{array}\right)} \u(s)⋅\n(s) \ ds,
 \]</span>
 where <span class="math">\(\n\)</span> is the unit vector pointing in the outward direction along the
 boundary of the image of the mapping.</p>
@@ -481,13 +477,12 @@ we discretize the energy <em>before</em> differentiating to find the minimum. If
 discretization is &#8220;good&#8221;, then natural boundary conditions will fall out for
 free (<em>natural</em> indeed!).</p>
 
-<p>To obtain natural boundary conditions without bias by picking two arbitrary
-fixed vertices <em>and</em> avoid the trivial solution, we can require that the
-solution:</p>
+<p>To obtain natural boundary conditions without bias <em>and</em> avoid the trivial
+solution, we can require that the solution:</p>
 
 <ol>
 <li>minimizes the given energy,</li>
-<li>has non-zero norm,</li>
+<li>has non-zero norm, and</li>
 <li>is <a href="https://en.wikipedia.org/wiki/Orthogonality">orthogonal</a> to trivial
  solutions.</li>
 </ol>
@@ -583,7 +578,7 @@ coordinates in the first column and <span class="math">\(v\)</span> coordinates 
 
 <p>For mappings with strong reflectional symmetry then singular value
 decomposition on the <a href="https://en.wikipedia.org/wiki/Covariance">covariance
-matrix</a> <span class="math">\(\U^transpose \U ∈ \R^{2 ×
+matrix</a> <span class="math">\(\U^\transpose \U ∈ \R^{2 ×
 2}\)</span> will produce a rotation that aligns the principle direction of <span class="math">\(\U\)</span> with
 the &#8220;<span class="math">\(x\)</span>&#8221;-axis of the parametric domain.</p>
 
@@ -644,11 +639,10 @@ distortion.</figcaption>
 
 <ul>
 <li><code>igl::boundary_loop</code></li>
-<li><code>igl::boundary_loop</code></li>
 <li><code>igl::cotmatrix</code> (or your previous implementation)</li>
-<li><code>igl::eigs</code></li>
+<li><code>igl::eigs</code> (Use the <code>igl::EIGS_TYPE_SM</code> type)</li>
 <li><code>igl::map_vertices_to_circle</code></li>
-<li><code>igl::massmatrix</code>(or your previous implementation)</li>
+<li><code>igl::massmatrix</code> (or your previous implementation)</li>
 <li><code>igl::repdiag</code></li>
 </ul>
 

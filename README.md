@@ -66,8 +66,8 @@ that the lengths between neighboring vertices are minimized:
 \\[
 \min_\U  ∑\limits_{\{i,j\} ∈ \E} ‖\u_i - \u_j‖²,
 \\]
-where $\E∈[1,n]^{k × 2}$ holds a list of edge indices into $\V$. This energy
-has a physical interpretation as the [potential
+where $\E∈\{1,…,n\}^{k × 2}$ holds a list of edge indices into $\V$. This
+energy has a physical interpretation as the [potential
 energy](https://en.wikipedia.org/wiki/Potential_energy) of
 [mass-spring](https://en.wikipedia.org/wiki/Simple_harmonic_motion#Mass_on_a_spring)
 system. Each edge represents a spring with zero rest length, all springs have
@@ -95,9 +95,9 @@ In 1963, [Tutte showed](https://en.wikipedia.org/wiki/Tutte_embedding) that if
 the boundary of a disk-topology mesh is fixed to a [convex
 polygon](https://en.wikipedia.org/wiki/Convex_polygon) (and all spring
 stiffness are positive) then minimizing the energy above will result in an
-injective (i.e., foldover-free) flattening.
+injective (i.e., fold-over-free) flattening.
 
-While avoiding foldovers is important, Tutte-style mappings suffer from a
+While avoiding fold-overs is important, Tutte-style mappings suffer from a
 couple problems.
 
 If uniform spring stiffness are used, then the mapping in the $uv$ domain will
@@ -111,7 +111,7 @@ surface shows the wobbliness of the non-smooth mapping and
 stretching.](images/keenan-ogre-tutte.jpg)
 
 We can try to remedy this by introducing a non-uniform weight or spring
-stiffness for each edge $w_{ij}$:
+stiffness  $w_{ij}$ for each edge $\{i,j\}$:
 \\[
 \min_\U  ∑\limits_{\{i,j\} ∈ \E} w_{ij} ‖\u_i - \u_j‖².
 \\]
@@ -126,7 +126,7 @@ distortion_ and _angle distortion_.
 To do this, let's write the energy minimization problem above in matrix form:
 
 \\[
-\min_\U = ½ \tr{\U^transpose \L \U},
+\min_\U ½ \tr{\U^\transpose \L \U},
 \\]
 where $\L ∈ \R^{n × n}$ is a sparse matrix with:
 \\[
@@ -143,17 +143,21 @@ We should immediately recognize this sparsity structure from the discrete
 Laplacians considered in the previous assignments. If $w_{ij} = 1$, then $\L$
 is the _uniform Laplacian_ (a.k.a., [graph
 Laplacian](https://en.wikipedia.org/wiki/Laplacian_matrix)). If $w_{ij}$ is
-based on edge-lengths, then $\L$ corresponds to a physical spring system. 
+based on edge-lengths, then $\L$ corresponds to a physical static equilibrium
+problem for a linear spring system. 
 
-But we have more information then edges, since we know that our graph is really
-a discrete representation of a surface. If we model distortion as _variation_
-then we can model the parametrization as an energy minimization of the
-variation in the $u$- and $v$-coordinate functions over the surface $\S$:
+But we have more information then edges: we know that our graph is really a
+discrete representation of a two-dimensional surface. Wobbliness distortions in
+the parameterization correspond to high _variation_ in the $u$ and $v$
+functions over the surface.
+
+We can model the problem of parametrization as an energy minimization of
+the variation in the $u$- and $v$-coordinate functions over the surface $\S$:
 \\[
 \min_{u,v} ∫_\S ‖∇u‖² + ‖∇v‖² \ dA.
-\\]
-This familiar energy is called the [Dirichelt
-energy](https://en.wikipedia.org/wiki/Dirichlet's_energy).
+\\] 
+This familiar energy is called the
+[Dirichelt energy](https://en.wikipedia.org/wiki/Dirichlet's_energy).
 
 We may discretize this problem immediately using [piecewise linear
 functions](https://en.wikipedia.org/wiki/Piecewise_linear_function) spanned by
@@ -164,13 +168,15 @@ Laplacian_ as $\L$ in the discrete minimization problem above.
 > an injective mapping if the boundary is constrained to a closed convex curve.
 > In the discrete setting, poor triangle shapes in the original 3D mesh could
 > lead to _negative_ cotangent weights $w_{ij}$ so the positive stiffness
-> weight of [Tutte's theorem](https://en.wikipedia.org/wiki/Tutte_embedding) is
-> broken and foldovers _might_ occur. Keep in mind that positive weights are a
+> weight assumption of [Tutte's
+> theorem](https://en.wikipedia.org/wiki/Tutte_embedding) is broken and
+> fold-overs _might_ occur. Keep in mind that positive weights are a
 > _sufficient_ condition for injectivity, but this [does not
 > imply](https://en.wikipedia.org/wiki/Denying_the_antecedent) that having a
-> few negative weights will necessarily cause a foldover. Even so, Floater
-> proposes an alternative discrete Laplacian in "Mean value coordinates" 2003,
-> that retains some nice shape-preserving properties without negative weights.
+> few negative weights will necessarily cause a fold-over. Even so, Floater
+> proposes an alternative discrete Laplacian in "Mean value coordinates" in
+> 2003 that retains some nice shape-preserving properties without negative
+> weights.
 
 Modeling distortion as an integral of variation over the given 3D surface is
 going in the right direction, but so far we are treating $u$ and $v$
@@ -218,9 +224,9 @@ mapping should be one:
 It is tempting to try to throw this equality into a least squares energy an
 minimize it. Unfortunately the determinant is already a quadratic function of
 $u$ and $v$ so a least-squares energy would be quartic and minimizing it would
-be non-trivial. We will reinvestigate this _later_ when we look into surface
-deformation energies. But for now, let us put aside area distortion and focus
-instead on angle or aspect ratio distortion.
+be non-trivial. We will reinvestigate this in _later assignments_ when we look
+into surface deformation energies. But for now, let us put aside area
+distortion and focus instead on angle or aspect-ratio distortion.
 
 ### Angle distortion
 
@@ -232,40 +238,31 @@ that a small change in the $x$ and $y$ directions on $\S$ corresponds to equal
 magnitude, small changes in $u$ and $v$ in perpendicular directions:
 
 \\[
-∇u = 
+\begin{align}
+∇u &= ∇v^⊥ \\
+&↓ \\
 \left( \begin{array}{r}
 \frac{∂u}{∂x} \\
 \frac{∂u}{∂y} \\
 \end{array} \right)
-=
+ &=
 \left( \begin{array}{r}
  \frac{∂v}{∂y} \\
 -\frac{∂v}{∂x} \\
 \end{array} \right)
-=
-\left( \begin{array}{r}
- \frac{∂v}{∂x} \\
- \frac{∂v}{∂y} \\
-\end{array} \right)^⊥
-=
-∇v^⊥,
+\end{align}
 \\]
 where $\x^⊥$ indicates the vector $\x$ rotated by by 90°.
 
 
-> If we consider for a moment that we are not trying to flatten a surface in 3D
-> to 2D, but rather we're simply trying to a region $\S$ of the 2D plane to
-> itself: $M : \R² → \R²$. Here we can reason about _area distortation_ and
-> _angle distortion_ in terms of the differential properties of this mapping
-> $M$. 
-> 
 > By enlisting [complex
 > analysis](https://en.wikipedia.org/wiki/Complex_analysis), we can reinterpret
 > the mapping to the real plane $\R²$ as a mapping to the [complex
 > plane](https://en.wikipedia.org/wiki/Complex_plane) $\mathbb{C}$. The angle
 > preservation equality above corresponds to the [Cauchy-Riemann
 > equations](https://en.wikipedia.org/wiki/Cauchy–Riemann_equations). Complex
-> functions that satisfy these equations are called _**conformal functions**_.
+> functions that satisfy these equations are called [_**conformal
+> maps**_](https://en.wikipedia.org/wiki/Conformal_map).
 
 This equality is linear in $u$ and $v$. We can immediately build a quadratic
 energy that minimizes deviation from satisfying this equation over the surface
@@ -284,12 +281,11 @@ expanding the squared term:
 
 
 \\[
-½ ∫_\S ‖∇u - ∇v^⊥‖² \ dA = \\
 ∫_\S \left(½ ‖∇u‖² + ½ ‖∇v‖² - ∇u ⋅ ∇v^⊥ \right)\ dA.
 \\]
 
 We should recognize the first two terms as the [Dirichlet
-energy](https://en.wikipedia.org/wiki/Dirichlet's_energy).  The third term is
+energies](https://en.wikipedia.org/wiki/Dirichlet's_energy) of $u$ and $v$.  The third term is
 at first glance not familiar. Let's massage it a bit by expanding the gradient
 and dot product:
 
@@ -325,7 +321,7 @@ convert this area integral into a boundary integral:
 
 \\[
 ∫_{\left(\begin{array}{c}u(\S) \\ v(\S) \end{array}\right)} 1 \ dA
-= ∮_{∂\left(\begin{array}{c}u(\S) \\ v(\S) \end{array}\right)} \x⋅\n \ ds,
+= ∮_{∂\left(\begin{array}{c}u(\S) \\ v(\S) \end{array}\right)} \u(s)⋅\n(s) \ ds,
 \\]
 where $\n$ is the unit vector pointing in the outward direction along the
 boundary of the image of the mapping.
@@ -396,12 +392,11 @@ we discretize the energy _before_ differentiating to find the minimum. If our
 discretization is "good", then natural boundary conditions will fall out for
 free (_natural_ indeed!).
 
-To obtain natural boundary conditions without bias by picking two arbitrary
-fixed vertices _and_ avoid the trivial solution, we can require that the
-solution:
+To obtain natural boundary conditions without bias _and_ avoid the trivial
+solution, we can require that the solution:
 
   1. minimizes the given energy,
-  2. has non-zero norm,
+  2. has non-zero norm, and
   3. is [orthogonal](https://en.wikipedia.org/wiki/Orthogonality) to trivial
   solutions.
 
@@ -492,7 +487,7 @@ coordinates in the first column and $v$ coordinates in the second column).
 
 For mappings with strong reflectional symmetry then singular value
 decomposition on the [covariance
-matrix](https://en.wikipedia.org/wiki/Covariance) $\U^transpose \U ∈ \R^{2 ×
+matrix](https://en.wikipedia.org/wiki/Covariance) $\U^\transpose \U ∈ \R^{2 ×
 2}$ will produce a rotation that aligns the principle direction of $\U$ with
 the "$x$"-axis of the parametric domain.
 
@@ -535,11 +530,10 @@ distortion.](images/animal-lscm.jpg)
 ### Whitelist
 
  - `igl::boundary_loop`
- - `igl::boundary_loop`
  - `igl::cotmatrix` (or your previous implementation)
  - `igl::eigs` (Use the `igl::EIGS_TYPE_SM` type)
  - `igl::map_vertices_to_circle`
- - `igl::massmatrix`(or your previous implementation)
+ - `igl::massmatrix` (or your previous implementation)
  - `igl::repdiag`
 
 ### `src/tutte.cpp`
