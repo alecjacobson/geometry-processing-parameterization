@@ -526,7 +526,6 @@ distortion.](images/animal-lscm.jpg)
 
 ## Tasks
 
-
 ### Blacklist
 
  - `igl::harmonic`
@@ -538,7 +537,35 @@ distortion.](images/animal-lscm.jpg)
  - `igl::boundary_loop`
  - `igl::boundary_loop`
  - `igl::cotmatrix` (or your previous implementation)
- - `igl::eigs`
+ - `igl::eigs` (Use the `igl::EIGS_TYPE_SM` type)
  - `igl::map_vertices_to_circle`
  - `igl::massmatrix`(or your previous implementation)
  - `igl::repdiag`
+
+### `src/tutte.cpp`
+
+Given a 3D mesh (`V`,`F`) with a disk topology (i.e., a manifold with single
+boundary), compute a 2D parameterization according to Tutte's mapping inside
+the unit disk. All boundary vertices should be mapped to the unit circle and
+interior vertices mapped inside the disk _without_ flips.
+
+### `src/vector_area_matrix.cpp`
+
+Constructs the symmetric area matrix `A`, s.t.  `[V.col(0)' V.col(1)'] * A *
+[V.col(0); V.col(1)]` is the **vector area** of the mesh (`V`,`F`).
+
+### `src/lscm.cpp`
+
+Given a 3D mesh (`V`,`F`) with boundary compute a 2D parameterization that
+minimizes the "least squares conformal" energy:
+
+\\[
+∫_\S ‖ ∇v - (∇u)^⊥ ‖² \ dA,
+\\]
+
+where $u$ and $v$ are the unknown (output) coordinates in the parametric domain
+`U`.
+
+Use eigen-decomposition to find an un-biased, non-trivial minimizer. Then use
+singular value decomposition to find a canonical rotation to line the principle
+axis of $\U$ with the $x$-axis of the parametric domain.

@@ -652,5 +652,33 @@ distortion.</figcaption>
 <li><code>igl::repdiag</code></li>
 </ul>
 
+<h3 id="srctutte.cpp"><code>src/tutte.cpp</code></h3>
+
+<p>Given a 3D mesh (<code>V</code>,<code>F</code>) with a disk topology (i.e., a manifold with single
+boundary), compute a 2D parameterization according to Tutte&#8217;s mapping inside
+the unit disk. All boundary vertices should be mapped to the unit circle and
+interior vertices mapped inside the disk <em>without</em> flips.</p>
+
+<h3 id="srcvector_area_matrix.cpp"><code>src/vector_area_matrix.cpp</code></h3>
+
+<p>Constructs the symmetric area matrix <code>A</code>, s.t. <code>[V.col(0)' V.col(1)'] * A *
+[V.col(0); V.col(1)]</code> is the <strong>vector area</strong> of the mesh (<code>V</code>,<code>F</code>).</p>
+
+<h3 id="srclscm.cpp"><code>src/lscm.cpp</code></h3>
+
+<p>Given a 3D mesh (<code>V</code>,<code>F</code>) with boundary compute a 2D parameterization that
+minimizes the &#8220;least squares conformal&#8221; energy:</p>
+
+<p><span class="math">\[
+∫_\S ‖ ∇v - (∇u)^⊥ ‖² \ dA,
+\]</span></p>
+
+<p>where <span class="math">\(u\)</span> and <span class="math">\(v\)</span> are the unknown (output) coordinates in the parametric domain
+<code>U</code>.</p>
+
+<p>Use eigen-decomposition to find an un-biased, non-trivial minimizer. Then use
+singular value decomposition to find a canonical rotation to line the principle
+axis of <span class="math">\(\U\)</span> with the <span class="math">\(x\)</span>-axis of the parametric domain.</p>
+
 </body>
 </html>
