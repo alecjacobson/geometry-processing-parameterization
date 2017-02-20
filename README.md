@@ -534,6 +534,8 @@ distortion.](images/animal-lscm.jpg)
  - `igl::eigs` (Use the `igl::EIGS_TYPE_SM` type)
  - `igl::map_vertices_to_circle`
  - `igl::massmatrix` (or your previous implementation)
+ - `igl::min_quad_with_fixed` (for minimizing a quadratic energy subject to
+     fixed value constraints)
  - `igl::repdiag`
 
 ### `src/tutte.cpp`
