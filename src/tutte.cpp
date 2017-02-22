@@ -1,16 +1,26 @@
 #include "tutte.h"
 #include <igl/boundary_loop.h>
 #include <igl/cotmatrix.h>
-#include <igl/massmatrix.h>
 #include <vector>
-#include <set>
-#include <iterator>
 #include <Eigen/IterativeLinearSolvers>
+#include <Eigen/SparseCholesky>
 #include <igl/map_vertices_to_circle.h>
 #include "active_set.h"
 
 
+/*
+#include <chrono>
+struct timer {
 
+    std::chrono::time_point<std::chrono::system_clock> 
+        start = std::chrono::system_clock::now();
+    ~timer() {
+      auto end = std::chrono::system_clock::now();
+      std::chrono::duration<double> diff = end-start;
+      std::cout << "duration: " << diff.count() << "s\n";
+  }
+};
+*/
 
 //#define USE_ALEC_SOLVER
 #ifdef USE_ALEC_SOLVER
@@ -44,15 +54,14 @@ void tutte(
 
 
 
-  Eigen::SparseMatrix<double> L,D;
+  Eigen::SparseMatrix<double> L;
   igl::cotmatrix(V,F,L);
-  igl::massmatrix(V,F,igl::MASSMATRIX_TYPE_DEFAULT,D);
 
   Eigen::SparseMatrix<double> A;
+
+
 #ifdef USE_ALEC_SOLVER
-  L.setIdentity();
-
-
+  igl::cotmatrix(V,F,L);
 
   A = -L ;
 
@@ -73,10 +82,12 @@ void tutte(
 #endif
 #ifndef USE_ALEC_SOLVER
 
+   
   ActiveSet coords(U.rows());
 
   coords.setVariableType<ActiveSet::VariableType::Dirichlet>(bnd_loop);
   coords.updateActive();
+
 
 
 
@@ -91,14 +102,17 @@ void tutte(
 
 
 
-  Eigen::MatrixXd rhs = coords.reduce<ActiveSet::VariableType::Free>(-L*U);
+  Eigen::MatrixXd rhs;
+  
+  rhs = coords.reduce<ActiveSet::VariableType::Free>((-L*U).eval());
 
 
   UV.resize(active_size,2);
   A = coords.reduce<ActiveSet::VariableType::Free>(L);
 
 
-  Eigen::ConjugateGradient<Eigen::SparseMatrix<double> > solver;
+  Eigen::SimplicialLDLT<Eigen::SparseMatrix<double> > solver;
+
   solver.compute(A);
   for(int i = 0 ; i < 2; ++i) {
       UV.col(i) = solver.solve(rhs.col(i));
