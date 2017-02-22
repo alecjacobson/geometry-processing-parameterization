@@ -137,6 +137,44 @@ w_{ij} & \text{ if $i≠j$ and $∃ \{ij\} ∈ \E$, }\\
 \end{cases}.
 \\]
 
+> #### What's up with the $\tr{}$ in the energy?
+>
+> The degrees of freedom in our optimization are a collected in the _matrix_
+> $\U ∈ \R^{n×2}$ with two columns. The energy is written as the
+> [trace](https://en.wikipedia.org/wiki/Trace_(linear_algebra)) of the
+> quadratic form (a.k.a. matrix) $\Q ∈ \R^{n×n}$ applied to $\U$. In effect,
+> this is really applying $\Q$ to each column of $\U$ independently and summing
+> the result:
+>
+> \\[
+> \begin{align}
+> \tr{\U^\transpose \Q \U} &= \\
+>                          &= \tr{\U^\transpose \Q \U} \\
+>                          &= \tr{
+>                                  \left[\begin{array}{c}
+>                                  \U_1^\transpose\\
+>                                  \U_2^\transpose 
+>                                  \end{array}\right] \Q [\U_1 \U_2] } \\
+>                          &= \tr{\left[\begin{array}{c}
+>                                  \U_1^\transpose \Q \U_1 & 
+>                                  \U_1^\transpose \Q \U_2 \\
+>                                  \U_2^\transpose \Q \U_1 & 
+>                                  \U_2^\transpose \Q \U_2 \end{array}\right]}
+>                                  \\
+>                         &= \U_1^\transpose \Q \U_1 + \U_2^\transpose \Q \U_2.
+> \end{align}
+> \\]
+>
+> The upshots of energies written as the trace of a quadratic form applied to a
+> matrix are that: 1) each column can be optimized _independently_ (assuming
+> constraints are also separable by column), and this is often the case when
+> columns correspond to coordinates (u, v, etc.); and 2) the quadratic form for
+> each columns is the same (the same $\Q$). For quadratic energy minimization,
+> this means that we can precompute work (e.g., [Cholesky
+> facotorization](https://en.wikipedia.org/wiki/Cholesky_decomposition)) on
+> $\Q$ and take advantage of it for solving with $\U_1$ and $\U_2$ and we might
+> even solve [in parallel](https://en.wikipedia.org/wiki/SIMD).
+
 ### Dirichlet energy
 
 We should immediately recognize this sparsity structure from the discrete
@@ -212,8 +250,9 @@ mapping should be one:
 \frac{∂v}{∂x} & \frac{∂v}{∂y} 
 \end{array}
 \right|
-= 1.
+= 1,
 \\]
+where $| \X | = \det{\X}$ for a square matrix $\X$.
 
 > The determinant of the Jacobian of a mapping corresponds to the scale factor
 > by which local area expands or shrinks. This quantity also appears during
@@ -335,9 +374,9 @@ edge's unit normal vector:
 \\[
 ∮_{∂(\u(\S))} \u(s)⋅\n(s) \ ds = \\
   ∑\limits_{\{i,j\} ∈ ∂\S} ∫_0^1 
-    (\u_i + t(\u_j - \u_i))⋅\frac{(\u_j-\u_i)^⊥}{‖\u_j - \u_i‖} \ dt = \\
-  ∑\limits_{\{i,j\} ∈ ∂\S} (\u_j-\u_i)⋅(\u_j-\u_i)^⊥ = \\
-  ∑\limits_{\{i,j\} ∈ ∂\S} | \u_i\  \u_j |,
+    ½ (\u_i + t(\u_j - \u_i))⋅\frac{(\u_j-\u_i)^⊥}{‖\u_j - \u_i‖} \ dt = \\
+  ½ ∑\limits_{\{i,j\} ∈ ∂\S} (\u_j-\u_i)⋅(\u_j-\u_i)^⊥ = \\
+  ½ ∑\limits_{\{i,j\} ∈ ∂\S} | \u_i\  \u_j |,
 \\]
 where finally we have a simply quadratic expression: sum over all boundary
 edges the determinant of the matrix with vertex positions as columns. This
@@ -345,6 +384,31 @@ quadratic form can be written as $\U^\transpose \A \U$ with the _vectorized_
 $u$- and $v$-coordinates of the mapping in $\U ∈ \R^{2n}$ and $\A ∈ \R^{2n ×
 2n}$ a sparse matrix involving only values for vertices on the boundary of
 $\S$. 
+
+
+**_Achtung!_** A naive implementation of $½ ∑\limits_{\{i,j\} ∈ ∂\S} | \u_i\
+\u_j |$ into matrix form $\U^\transpose \A \U$ will likely produce an
+_asymmetric_ matrix $\A$. From a theoretical point of view, this is fine.
+$\A$ just needs to compute the signed area of the flattened mesh. However, from
+a numerical methods point of view we will almost always need out quadratic
+coefficients matrix to be
+[_symmetric_](https://en.wikipedia.org/wiki/Symmetric_matrix). Fortunately,
+when a matrix is acting as a [quadratic
+form](https://en.wikipedia.org/wiki/Quadratic_form) it is trivial to
+_symmetrize_. Consider we have some asymmetric matrix $\bar{\A}$ defining a
+quadratic form: $\x^\transpose \bar{\A} \x$. The output of a quadratic form is
+just a scalar, so it's equal to its transpose: 
+\\[
+\x^\transpose \bar{\A} \x = \x^\transpose \bar{\A}^\transpose \x.
+\\]
+These are also equal to their average:
+\\[
+\x^\transpose \bar{\A} \x = 
+\x^\transpose 
+\underbrace{½ (\bar{\A} + \bar{\A}^\transpose)}_{\A}
+\x = 
+\x^\transpose \A \x
+\\]
 
 Putting this together with the Dirichlet energy terms, we can write the
 discrete _least squares conformal mappings_ minimization problem as:
@@ -360,7 +424,7 @@ discrete _least squares conformal mappings_ minimization problem as:
     0 & \L
   \end{array}
   \right)
-  + \A
+  - \A
   \right)
   }_{\Q}
   \U,
