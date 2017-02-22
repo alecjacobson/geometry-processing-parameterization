@@ -4,7 +4,6 @@
 #include <vector>
 #include <Eigen/Dense>
 #include <Eigen/Sparse>
-#include <iostream>
 
 
 class ActiveSet {
@@ -88,6 +87,7 @@ template <ActiveSet::VariableType VarType, typename Derived, typename RetType>
 RetType ActiveSet::expand(const Eigen::MatrixBase<Derived>& M) const {
     RetType R = RetType::Zero(m_total_size,M.cols());
 
+    assert(M.rows() == m_reduced_size);
     auto&& pair = getIndexPair<VarType>();
     for(int i = 0; i < pair.size(); ++i) {
 
@@ -100,6 +100,8 @@ RetType ActiveSet::expand(const Eigen::MatrixBase<Derived>& M) const {
 template <ActiveSet::VariableType VarType, typename Derived, typename RetType>
 RetType ActiveSet::reduce(const Eigen::MatrixBase<Derived>& M) const {
     RetType R = RetType::Zero(active_size(),M.cols());
+
+    assert(M.rows() == m_total_size);
 
     auto&& pair = getIndexPair<VarType>();
     for(int i = 0; i < pair.size(); ++i) {
@@ -124,6 +126,11 @@ template <ActiveSet::VariableType VarType, ActiveSet::VariableType VarType2, typ
 Eigen::SparseMatrix<T> ActiveSet::reduceMatrix(const Eigen::SparseMatrix<T>& M) const {
     auto&& pair = getIndexPair<VarType>();
     auto&& pair2 = getIndexPair<VarType2>();
+
+
+    assert(M.rows() == m_total_size);
+    assert(M.cols() == m_total_size);
+
     Eigen::SparseMatrix<T> A(pair.size(), pair2.size());
     std::vector<Eigen::Triplet<T>> trips;
     for(int i = 0; i < pair2.size(); ++i) {

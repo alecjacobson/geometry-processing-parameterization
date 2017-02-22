@@ -5,10 +5,17 @@
 #include <vector>
 #include <set>
 #include <iterator>
-#include <Eigen/SparseQR>
 #include <Eigen/IterativeLinearSolvers>
 #include <igl/map_vertices_to_circle.h>
 #include "active_set.h"
+
+
+
+
+//#define USE_ALEC_SOLVER
+#ifdef USE_ALEC_SOLVER
+#include <igl/min_quad_with_fixed.h>
+#endif
 
 
 void tutte(
@@ -29,8 +36,42 @@ void tutte(
   std::copy(bnd_loop.begin(),bnd_loop.end(),bl.data());
   Eigen::MatrixXd UV;
 
+
+
+
   igl::map_vertices_to_circle(V,bl,UV);
 
+
+
+
+  Eigen::SparseMatrix<double> L,D;
+  igl::cotmatrix(V,F,L);
+  igl::massmatrix(V,F,igl::MASSMATRIX_TYPE_DEFAULT,D);
+
+  Eigen::SparseMatrix<double> A;
+#ifdef USE_ALEC_SOLVER
+  L.setIdentity();
+
+
+
+  A = -L ;
+
+
+  igl::min_quad_with_fixed_data<double> data;
+  min_quad_with_fixed_precompute(A,bl,Eigen::SparseMatrix<double>(),true,data);
+
+  Eigen::VectorXd B = Eigen::VectorXd::Zero(U.rows(),1);
+  for(int i = 0 ; i < 2; ++i) {
+    const Eigen::VectorXd c = UV.col(i);
+    Eigen::VectorXd u;
+    min_quad_with_fixed_solve(data,B,c,Eigen::VectorXd(),u);
+    U.col(i) = u;
+  }
+
+
+
+#endif
+#ifndef USE_ALEC_SOLVER
 
   ActiveSet coords(U.rows());
 
@@ -40,15 +81,6 @@ void tutte(
 
 
 
-
-
-
-  Eigen::SparseMatrix<double> L,A,D;
-  igl::cotmatrix(V,F,L);
-
-  igl::massmatrix(V,F,igl::MASSMATRIX_TYPE_DEFAULT,D);
-
-
   int active_size = coords.active_size();
 
 
@@ -56,13 +88,13 @@ void tutte(
 
   U = coords.expand<ActiveSet::VariableType::Dirichlet>(UV);
 
-  Eigen::MatrixXd pu = L * U;
 
 
 
-  Eigen::MatrixXd rhs = coords.reduce<ActiveSet::VariableType::Free>(pu);
+  Eigen::MatrixXd rhs = coords.reduce<ActiveSet::VariableType::Free>(-L*U);
 
 
+  UV.resize(active_size,2);
   A = coords.reduce<ActiveSet::VariableType::Free>(L);
 
 
@@ -70,10 +102,6 @@ void tutte(
   solver.compute(A);
   for(int i = 0 ; i < 2; ++i) {
       UV.col(i) = solver.solve(rhs.col(i));
-      std::cout << "RHS("<<i<<"): ";
-      std::cout << rhs.col(i).transpose() << std::endl;
-      std::cout << "SLN_rhs("<<i<<"): ";
-      std::cout << (A * UV.col(i) - rhs.col(i)) << std::endl;
 
   }
 
@@ -82,6 +110,7 @@ void tutte(
 
 
 
+#endif
 }
 
 
