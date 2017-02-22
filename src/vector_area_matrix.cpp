@@ -1,8 +1,7 @@
 #include "vector_area_matrix.h"
 #include <vector>
 #include <iostream>
-#include <igl/boundary_loop.h>
-#include <igl/vector_area_matrix.h>
+#include <igl/boundary_facets.h>
 
 
 // [a c] A [b d]^* = ad - bc
@@ -18,6 +17,7 @@ void vector_area_matrix(
   const Eigen::MatrixXi & F,
   Eigen::SparseMatrix<double>& A)
 {
+    //symmetrization done to make SPD, as well as mimic the igl vector_area_matrix
 
 
   int dim = F.maxCoeff()+1;
@@ -27,11 +27,12 @@ void vector_area_matrix(
 
   using Index = Eigen::MatrixXi::Scalar;
   std::vector<Index> bnd_loop;
-  igl::boundary_loop(F,bnd_loop);
+  Eigen::MatrixXi E;
+  igl::boundary_facets(F,E);
 
-  for(int i = 0; i < bnd_loop.size(); ++i) {
-      int a = bnd_loop[i];
-      int b = bnd_loop[(i+1)%bnd_loop.size()];
+  for(int i = 0; i < E.rows(); ++i) {
+      int a = E(i,0);
+      int b = E(i,1);
 
       trips.emplace_back(a,b+dim,1);
       trips.emplace_back(a+dim,b,-1);
@@ -41,11 +42,9 @@ void vector_area_matrix(
   }
 
   A.setFromTriplets(trips.begin(),trips.end());
-  A = .5 * A;
+  A = .25 * A;//.5 for symmetrization, .5 for factorial term in triangle area (missing in assignment sheet)
+  
 
 
-  igl::vector_area_matrix(F,A);
-  //std::cout << "real: " << std::endl;
-  //std::cout << 4*A << std::endl;
 }
 

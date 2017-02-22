@@ -30,7 +30,7 @@ void lscm(
   Eigen::SparseMatrix<double> LD(2*dim,2*dim);
   igl::repdiag(L,2,LD);
 
-  Eigen::SparseMatrix<double> A = LD + VA;
+  Eigen::SparseMatrix<double> A = LD + 2 * VA;
 
   Eigen::SparseMatrix<double> B(2*dim,2*dim);
   igl::repdiag(M,2,B);
@@ -38,15 +38,7 @@ void lscm(
   Eigen::MatrixXd EVec;
   Eigen::VectorXd EVal;
 
-  /*
-  std::cout <<A << std::endl;
-  std::cout <<B << std::endl;
-  */
-
-  std::cout << "Eigs?" << std::endl;
   igl::eigs(A,B,3,igl::EIGS_TYPE_SM,EVec,EVal);
-  std::cout << EVal.transpose() << std::endl;
-  std::cout << "LSCM end" << std::endl;
   U.col(0) = EVec.col(2).head(dim);
   U.col(1) = EVec.col(2).tail(dim);
 
