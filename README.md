@@ -51,7 +51,7 @@ squished. Surfaces with [topological
 handles](https://en.wikipedia.org/wiki/Handle_decomposition) or without [a
 boundary](https://en.wikipedia.org/wiki/Surface_(topology)#Closed_surfaces) 
 
-## Mass-spring methods
+### Mass-spring methods
 
 If we view our triangle mesh surface as a simple
 [graph](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)) then the
@@ -175,7 +175,7 @@ w_{ij} & \text{ if $i≠j$ and $∃ \{ij\} ∈ \E$, }\\
 > $\Q$ and take advantage of it for solving with $\U_1$ and $\U_2$ and we might
 > even solve [in parallel](https://en.wikipedia.org/wiki/SIMD).
 
-### Dirichlet energy
+#### Dirichlet energy
 
 We should immediately recognize this sparsity structure from the discrete
 Laplacians considered in the previous assignments. If $w_{ij} = 1$, then $\L$
@@ -223,7 +223,7 @@ optimization. There's no reason to expect that they will be able to minimize
 _area distortation_ and _angle distortion_ directly. For that we will need to
 consider $u$ and $v$ simultaneously.
 
-## Least Squares Conformal Mappings
+### Least Squares Conformal Mappings
 
 We can reason about distortion in terms of differential quantities of the
 mapping from $\S$ to $\R²$. Now, ultimately we are trying to parametrize $\S$
@@ -234,7 +234,7 @@ coordinates $x$ and $y$). This way we can write about small changes in the
 mapping function $u$ with respect to moving a small amount on the surface of
 $\S$ (small changes in $x$ and $y$).
 
-### Area distortion
+#### Area distortion
 
 We would like that regions on $\S$ have a proportionally similarly sized region
 under the $u$, $v$ mapping to $\R²$. On an infinitesimal scale, a small change
@@ -267,7 +267,7 @@ be non-trivial. We will reinvestigate this in _later assignments_ when we look
 into surface deformation energies. But for now, let us put aside area
 distortion and focus instead on angle or aspect-ratio distortion.
 
-### Angle distortion
+#### Angle distortion
 
 We would also like that local regions on $\S$ are parameterized without
 [shearing](https://en.wikipedia.org/wiki/Shear_mapping). This ensures that two
@@ -433,7 +433,7 @@ where $\L ∈ \R^{n × n}$ is the Dirichlet energy quadratic form (a.k.a.
 cotangent Laplacian) and $\Q ∈ \R^{2n × 2n}$ is the resulting (sparse)
 quadratic form.
 
-### Free boundary
+#### Free boundary
 
 Similar to the mass-spring methods above, without constraints the least squares
 conformal mapping energy will also have a trivial solution: set $\U$ to a
@@ -490,7 +490,7 @@ news](https://en.wikipedia.org/wiki/The_Bad_News_Bears), but this type of
 constraint results in a well-studied [generalized Eigen value
 problem](https://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix#Generalized_eigenvalue_problem).
 
-> #### Generalized Eigenvalue problem 
+> ##### Generalized Eigenvalue problem 
 >
 > Consider a discrete quadratic minimization problem in $\v ∈ \R^n$:
 >
@@ -537,7 +537,7 @@ parameterization" [Mullen et al. 2008].
 > This eigenvector is sometimes called the [Fiedler
 > vector](https://en.wikipedia.org/wiki/Algebraic_connectivity#Fiedler_vector).
 
-### Canonical rotation
+#### Canonical rotation
 
 The least squares conformal mapping energy is _invariant_ to translation and
 rotation. The eigen decomposition process described above will naturally take
@@ -559,7 +559,7 @@ the "$x$"-axis of the parametric domain.
 conditions produces a more smooth, less distorted and canonically aligned
 parameterization than the Tutte embedding above.](images/keenan-ogre-lscm.jpg)
 
-#### Why is everything squished up in the interior?
+##### Why is everything squished up in the interior?
 
 ![The entire camel head is parameterized _inside_ the neck boundary. The area
 distortion for the face is extreme: in the parametric domain the face is tiny;

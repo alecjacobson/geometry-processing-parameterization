@@ -119,7 +119,7 @@ squished. Surfaces with <a href="https://en.wikipedia.org/wiki/Handle_decomposit
 handles</a> or without <a href="https://en.wikipedia.org/wiki/Surface_(topology)#Closed_surfaces">a
 boundary</a> </p>
 
-<h2 id="mass-springmethods">Mass-spring methods</h2>
+<h3 id="mass-springmethods">Mass-spring methods</h3>
 
 <p>If we view our triangle mesh surface as a simple
 <a href="https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)">graph</a> then the
@@ -258,7 +258,7 @@ facotorization</a>) on
 even solve <a href="https://en.wikipedia.org/wiki/SIMD">in parallel</a>.</p>
 </blockquote>
 
-<h3 id="dirichletenergy">Dirichlet energy</h3>
+<h4 id="dirichletenergy">Dirichlet energy</h4>
 
 <p>We should immediately recognize this sparsity structure from the discrete
 Laplacians considered in the previous assignments. If <span class="math">\(w_{ij} = 1\)</span>, then <span class="math">\(\L\)</span>
@@ -308,7 +308,7 @@ optimization. There&#8217;s no reason to expect that they will be able to minimi
 <em>area distortation</em> and <em>angle distortion</em> directly. For that we will need to
 consider <span class="math">\(u\)</span> and <span class="math">\(v\)</span> simultaneously.</p>
 
-<h2 id="leastsquaresconformalmappings">Least Squares Conformal Mappings</h2>
+<h3 id="leastsquaresconformalmappings">Least Squares Conformal Mappings</h3>
 
 <p>We can reason about distortion in terms of differential quantities of the
 mapping from <span class="math">\(\S\)</span> to <span class="math">\(\R²\)</span>. Now, ultimately we are trying to parametrize <span class="math">\(\S\)</span>
@@ -319,7 +319,7 @@ coordinates <span class="math">\(x\)</span> and <span class="math">\(y\)</span>)
 mapping function <span class="math">\(u\)</span> with respect to moving a small amount on the surface of
 <span class="math">\(\S\)</span> (small changes in <span class="math">\(x\)</span> and <span class="math">\(y\)</span>).</p>
 
-<h3 id="areadistortion">Area distortion</h3>
+<h4 id="areadistortion">Area distortion</h4>
 
 <p>We would like that regions on <span class="math">\(\S\)</span> have a proportionally similarly sized region
 under the <span class="math">\(u\)</span>, <span class="math">\(v\)</span> mapping to <span class="math">\(\R²\)</span>. On an infinitesimal scale, a small change
@@ -354,7 +354,7 @@ be non-trivial. We will reinvestigate this in <em>later assignments</em> when we
 into surface deformation energies. But for now, let us put aside area
 distortion and focus instead on angle or aspect-ratio distortion.</p>
 
-<h3 id="angledistortion">Angle distortion</h3>
+<h4 id="angledistortion">Angle distortion</h4>
 
 <p>We would also like that local regions on <span class="math">\(\S\)</span> are parameterized without
 <a href="https://en.wikipedia.org/wiki/Shear_mapping">shearing</a>. This ensures that two
@@ -519,7 +519,7 @@ where <span class="math">\(\L ∈ \R^{n × n}\)</span> is the Dirichlet energy q
 cotangent Laplacian) and <span class="math">\(\Q ∈ \R^{2n × 2n}\)</span> is the resulting (sparse)
 quadratic form.</p>
 
-<h3 id="freeboundary">Free boundary</h3>
+<h4 id="freeboundary">Free boundary</h4>
 
 <p>Similar to the mass-spring methods above, without constraints the least squares
 conformal mapping energy will also have a trivial solution: set <span class="math">\(\U\)</span> to a
@@ -579,7 +579,7 @@ constraint results in a well-studied <a href="https://en.wikipedia.org/wiki/Eige
 problem</a>.</p>
 
 <blockquote>
-<h4 id="generalizedeigenvalueproblem">Generalized Eigenvalue problem</h4>
+<h5 id="generalizedeigenvalueproblem">Generalized Eigenvalue problem</h5>
 
 <p>Consider a discrete quadratic minimization problem in <span class="math">\(\v ∈ \R^n\)</span>:</p>
 
@@ -629,7 +629,7 @@ parameterization&#8221; [Mullen et al. 2008].</p>
 vector</a>.</p>
 </blockquote>
 
-<h3 id="canonicalrotation">Canonical rotation</h3>
+<h4 id="canonicalrotation">Canonical rotation</h4>
 
 <p>The least squares conformal mapping energy is <em>invariant</em> to translation and
 rotation. The eigen decomposition process described above will naturally take
@@ -656,7 +656,7 @@ conditions produces a more smooth, less distorted and canonically aligned
 parameterization than the Tutte embedding above.</figcaption>
 </figure>
 
-<h4 id="whyiseverythingsquishedupintheinterior">Why is everything squished up in the interior?</h4>
+<h5 id="whyiseverythingsquishedupintheinterior">Why is everything squished up in the interior?</h5>
 
 <figure>
 <img src="images/camel-head-lscm.jpg" alt="The entire camel head is parameterized inside the neck boundary. The area
