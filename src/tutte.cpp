@@ -4,6 +4,7 @@
 #include "edges.h"
 #include <Eigen/SparseQR>
 #include <Eigen/OrderingMethods>
+#include <Eigen/IterativeLinearSolvers>
 #include <iostream>
 
 using namespace Eigen;
@@ -83,10 +84,14 @@ void tutte(
 
 	std::cout << "Matrix constructed" << std::endl;
 	
-	SparseQR<SparseMatrix<double>, COLAMDOrdering<int>> solver(A);
-	std::cout << "QR decomposition completed" << std::endl;
+	// SparseQR is insanely slow, even in a Release build and using CMAKE_BUILD_TYPE=Release
+	//SparseQR<SparseMatrix<double>, COLAMDOrdering<int>> solver(A);
+	//SimplicialLDLT<SparseMatrix<double>> solver(A.transpose()*A);
+	ConjugateGradient < SparseMatrix<double>> solver(A.transpose()*A);
+	std::cout << "Decomposition completed" << std::endl;
 	
-	VectorXd U_in = solver.solve(B);
+	//VectorXd U_in = solver.solve(B);
+	VectorXd U_in = solver.solve(A.transpose()*B);
 	std::cout << "Linear system solved" << std::endl;
 
 	U.resize(n, 2);
