@@ -3,8 +3,9 @@
 #include "igl/cotmatrix.h"
 #include "igl/massmatrix.h"
 #include "igl/repdiag.h"
-#include "igl/min_quad_with_fixed.h"
 #include "igl/eigs.h"
+#include <Eigen/SVD>
+#include "igl/vector_area_matrix.h"
 
 using namespace Eigen;
 
@@ -17,6 +18,7 @@ void lscm(
 
 	SparseMatrix<double> A;
 	vector_area_matrix(F, A);
+	//igl::vector_area_matrix(F, A);
 
 	SparseMatrix<double> Q(2 * n, 2 * n), L(n, n);
 
@@ -24,9 +26,9 @@ void lscm(
 
 	igl::repdiag(L, 2, Q);
 	// Acc to assignment writeup
-	//Q -= A;
+	Q -= 2*A;
 	// Acc to Michael's comment
-	Q += A;
+	//Q += 2*A;
 
 	SparseMatrix<double> M(n, n), B(2 * n, 2 * n);
 
@@ -44,4 +46,14 @@ void lscm(
 	U.resize(n, 2);
 	U.col(0) = v.head(n);
 	U.col(1) = v.tail(n);
+
+	JacobiSVD <MatrixXd> svd(U, ComputeFullV);
+
+	Matrix2d W = svd.matrixV();
+	//Matrix2d R;
+	//R(0, 0) = R(1, 1) = W(0, 0);
+	//R(1, 0) = W(0, 1);
+	//R(0, 1) = -W(0, 1);
+
+	U = U * W;
 }

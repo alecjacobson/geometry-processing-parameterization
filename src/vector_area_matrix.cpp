@@ -27,6 +27,7 @@ void vector_area_matrix(
 	for each (auto b in boundaries)
 	{
 		int v1 = b[0], v2;
+
 		for (int i = 1; i < b.size(); ++i)
 		{
 			v2 = b[i];
@@ -38,11 +39,21 @@ void vector_area_matrix(
 
 			v1 = v2;
 		}
-		v2 = b[b.size() - 1];
+
+		//This is correct
+		v2 = b[0];
+		//This is wrong
+		//v2 = b[b.size() - 1];
+
+		A_val.push_back({ v1, n + v2, 0.5 });
+		A_val.push_back({ v2, n + v1, -0.5 });
+		A_val.push_back({ n + v2, v1, 0.5 });
+		A_val.push_back({ n + v1, v2, -0.5 });
 	}
 
 	A.resize(2 * n, 2 * n);
 	A.setZero();
 	A.setFromTriplets(A_val.begin(), A_val.end());
+	A *= 0.5;
 }
 
