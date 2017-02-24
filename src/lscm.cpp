@@ -4,7 +4,8 @@
 #include <igl/cotmatrix.h>
 #include <igl/eigs.h>
 #include "vector_area_matrix.h"
-
+#include <igl/vector_area_matrix.h>
+#include <igl/repdiag.h>
 void lscm(
 	const Eigen::MatrixXd & V,
 	const Eigen::MatrixXi & F,
@@ -14,42 +15,27 @@ void lscm(
 	U = V.leftCols(2);
 	int n = V.rows();
 
-	Eigen::SparseMatrix<double> Q(2 * n, 2 * n);
-	{
-		Eigen::SparseMatrix<double> L;
-		igl::cotmatrix(V, F, L);
+	Eigen::SparseMatrix<double> L;
+	igl::cotmatrix(V, F, L);
 
-		std::vector<Eigen::Triplet<double>> Q_entries;
-		for (int k = 0; k < L.outerSize(); ++k) {
-			for (Eigen::SparseMatrix<double>::InnerIterator it(L, k); it; ++it) {
-				Q_entries.emplace_back(it.row(), it.col(), it.value());
-				Q_entries.emplace_back(it.row() + n, it.col() + n, it.value());
-			}
-		}
-		Q.setFromTriplets(Q_entries.begin(), Q_entries.end());
-	}
+	auto LD = igl::repdiag(L, 2);
+
 	Eigen::SparseMatrix<double> A;
 	vector_area_matrix(F, A);
-	Q += A;
+	//igl::vector_area_matrix(F, A);
+
+	Eigen::SparseMatrix<double> Q = LD + 2*A;
 
 	Eigen::SparseMatrix<double> M;
 	igl::massmatrix(V, F, igl::MASSMATRIX_TYPE_DEFAULT, M);
 
 	Eigen::SparseMatrix<double> B(2 * n, 2 * n);
 	
-	std::vector<Eigen::Triplet<double>> B_entries;
-	B_entries.reserve(2*M.nonZeros());
-	B.reserve(Eigen::VectorXi::Constant(2 * n, 1));
-	for (int i = 0; i < n;i++) {
-		B.insert(i, i) = M.diagonal()(i);
-		B.insert(i + n, i + n) = M.diagonal()(i);
-	}
-	B.makeCompressed();
-
+	B = igl::repdiag(M, 2);
 
 	Eigen::VectorXd eigenvals;
 	Eigen::MatrixXd eigenvecs;
-	int k = 3;//2*n;
+	int k = 3;
 
 
 	igl::eigs(Q, B, k, igl::EIGS_TYPE_SM, eigenvecs, eigenvals);
@@ -64,4 +50,17 @@ void lscm(
 	}
 
 	//Finally, find the canonical rotation.
+	//NOTE: Should center U first. 
+
+	Eigen::RowVector2d mean = U.colwise().mean();
+	U.rowwise() -= mean;
+
+	Eigen::Matrix2d covariance = U.transpose()*U;
+	Eigen::JacobiSVD<Eigen::Matrix2d> jacobi;
+	jacobi.compute(covariance, Eigen::ComputeFullV);
+	auto pca = jacobi.matrixV();
+	//The columns of pca are the axes of the ideal 
+	for (int i = 0; i < U.rows(); ++i) {
+		U.row(i) = (pca*U.row(i).transpose()).transpose().eval();
+	}
 }

@@ -19,10 +19,10 @@ void vector_area_matrix(
 			int i = loop[vert];
 			int j = loop[(vert + 1) % loop_length];
 
-			entries.emplace_back(i, j + v, 1);
-			entries.emplace_back(j + v, i, 1);
-			entries.emplace_back(i + v, j, -1);
-			entries.emplace_back(j, i + v, -1);
+			entries.emplace_back(i, j + v, 0.25);
+			entries.emplace_back(j + v, i, 0.25);
+			entries.emplace_back(i + v, j, -0.25);
+			entries.emplace_back(j, i + v, -0.25);
 		}
 	}
 
