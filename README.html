@@ -119,7 +119,7 @@ squished. Surfaces with <a href="https://en.wikipedia.org/wiki/Handle_decomposit
 handles</a> or without <a href="https://en.wikipedia.org/wiki/Surface_(topology)#Closed_surfaces">a
 boundary</a> </p>
 
-<h2 id="mass-springmethods">Mass-spring methods</h2>
+<h3 id="mass-springmethods">Mass-spring methods</h3>
 
 <p>If we view our triangle mesh surface as a simple
 <a href="https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)">graph</a> then the
@@ -218,7 +218,47 @@ w_{ij} & \text{ if $i≠j$ and $∃ \{ij\} ∈ \E$, }\\
 \end{cases}.
 \]</span></p>
 
-<h3 id="dirichletenergy">Dirichlet energy</h3>
+<blockquote>
+<h4 id="whatsupwiththetrintheenergy">What&#8217;s up with the <span class="math">\(\tr{}\)</span> in the energy?</h4>
+
+<p>The degrees of freedom in our optimization are a collected in the <em>matrix</em>
+<span class="math">\(\U ∈ \R^{n×2}\)</span> with two columns. The energy is written as the
+<a href="https://en.wikipedia.org/wiki/Trace_(linear_algebra)">trace</a> of the
+quadratic form (a.k.a. matrix) <span class="math">\(\Q ∈ \R^{n×n}\)</span> applied to <span class="math">\(\U\)</span>. In effect,
+this is really applying <span class="math">\(\Q\)</span> to each column of <span class="math">\(\U\)</span> independently and summing
+the result:</p>
+
+<p><span class="math">\[
+\begin{align}
+\tr{\U^\transpose \Q \U} &= \\
+                         &= \tr{\U^\transpose \Q \U} \\
+                         &= \tr{
+                                 \left[\begin{array}{c}
+                                 \U_1^\transpose\\
+                                 \U_2^\transpose 
+                                 \end{array}\right] \Q [\U_1 \U_2] } \\
+                         &= \tr{\left[\begin{array}{c}
+                                 \U_1^\transpose \Q \U_1 & 
+                                 \U_1^\transpose \Q \U_2 \\
+                                 \U_2^\transpose \Q \U_1 & 
+                                 \U_2^\transpose \Q \U_2 \end{array}\right]}
+                                 \\
+                        &= \U_1^\transpose \Q \U_1 + \U_2^\transpose \Q \U_2.
+\end{align}
+\]</span></p>
+
+<p>The upshots of energies written as the trace of a quadratic form applied to a
+matrix are that: 1) each column can be optimized <em>independently</em> (assuming
+constraints are also separable by column), and this is often the case when
+columns correspond to coordinates (u, v, etc.); and 2) the quadratic form for
+each columns is the same (the same <span class="math">\(\Q\)</span>). For quadratic energy minimization,
+this means that we can precompute work (e.g., <a href="https://en.wikipedia.org/wiki/Cholesky_decomposition">Cholesky
+facotorization</a>) on
+<span class="math">\(\Q\)</span> and take advantage of it for solving with <span class="math">\(\U_1\)</span> and <span class="math">\(\U_2\)</span> and we might
+even solve <a href="https://en.wikipedia.org/wiki/SIMD">in parallel</a>.</p>
+</blockquote>
+
+<h4 id="dirichletenergy">Dirichlet energy</h4>
 
 <p>We should immediately recognize this sparsity structure from the discrete
 Laplacians considered in the previous assignments. If <span class="math">\(w_{ij} = 1\)</span>, then <span class="math">\(\L\)</span>
@@ -268,7 +308,7 @@ optimization. There&#8217;s no reason to expect that they will be able to minimi
 <em>area distortation</em> and <em>angle distortion</em> directly. For that we will need to
 consider <span class="math">\(u\)</span> and <span class="math">\(v\)</span> simultaneously.</p>
 
-<h2 id="leastsquaresconformalmappings">Least Squares Conformal Mappings</h2>
+<h3 id="leastsquaresconformalmappings">Least Squares Conformal Mappings</h3>
 
 <p>We can reason about distortion in terms of differential quantities of the
 mapping from <span class="math">\(\S\)</span> to <span class="math">\(\R²\)</span>. Now, ultimately we are trying to parametrize <span class="math">\(\S\)</span>
@@ -279,7 +319,7 @@ coordinates <span class="math">\(x\)</span> and <span class="math">\(y\)</span>)
 mapping function <span class="math">\(u\)</span> with respect to moving a small amount on the surface of
 <span class="math">\(\S\)</span> (small changes in <span class="math">\(x\)</span> and <span class="math">\(y\)</span>).</p>
 
-<h3 id="areadistortion">Area distortion</h3>
+<h4 id="areadistortion">Area distortion</h4>
 
 <p>We would like that regions on <span class="math">\(\S\)</span> have a proportionally similarly sized region
 under the <span class="math">\(u\)</span>, <span class="math">\(v\)</span> mapping to <span class="math">\(\R²\)</span>. On an infinitesimal scale, a small change
@@ -295,8 +335,9 @@ mapping should be one:</p>
 \frac{∂v}{∂x} & \frac{∂v}{∂y} 
 \end{array}
 \right|
-= 1.
-\]</span></p>
+= 1,
+\]</span>
+where <span class="math">\(| \X | = \det{\X}\)</span> for a square matrix <span class="math">\(\X\)</span>.</p>
 
 <blockquote>
 <p>The determinant of the Jacobian of a mapping corresponds to the scale factor
@@ -313,7 +354,7 @@ be non-trivial. We will reinvestigate this in <em>later assignments</em> when we
 into surface deformation energies. But for now, let us put aside area
 distortion and focus instead on angle or aspect-ratio distortion.</p>
 
-<h3 id="angledistortion">Angle distortion</h3>
+<h4 id="angledistortion">Angle distortion</h4>
 
 <p>We would also like that local regions on <span class="math">\(\S\)</span> are parameterized without
 <a href="https://en.wikipedia.org/wiki/Shear_mapping">shearing</a>. This ensures that two
@@ -420,9 +461,9 @@ edge&#8217;s unit normal vector:</p>
 <p><span class="math">\[
 ∮_{∂(\u(\S))} \u(s)⋅\n(s) \ ds = \\
   ∑\limits_{\{i,j\} ∈ ∂\S} ∫_0^1 
-    (\u_i + t(\u_j - \u_i))⋅\frac{(\u_j-\u_i)^⊥}{‖\u_j - \u_i‖} \ dt = \\
-  ∑\limits_{\{i,j\} ∈ ∂\S} (\u_j-\u_i)⋅(\u_j-\u_i)^⊥ = \\
-  ∑\limits_{\{i,j\} ∈ ∂\S} | \u_i\  \u_j |,
+    ½ (\u_i + t(\u_j - \u_i))⋅\frac{(\u_j-\u_i)^⊥}{‖\u_j - \u_i‖} \ dt = \\
+  ½ ∑\limits_{\{i,j\} ∈ ∂\S} (\u_j-\u_i)⋅(\u_j-\u_i)^⊥ = \\
+  ½ ∑\limits_{\{i,j\} ∈ ∂\S} | \u_i\  \u_j |,
 \]</span>
 where finally we have a simply quadratic expression: sum over all boundary
 edges the determinant of the matrix with vertex positions as columns. This
@@ -430,6 +471,30 @@ quadratic form can be written as <span class="math">\(\U^\transpose \A \U\)</spa
 <span class="math">\(u\)</span>- and <span class="math">\(v\)</span>-coordinates of the mapping in <span class="math">\(\U ∈ \R^{2n}\)</span> and <span class="math">\(\A ∈ \R^{2n ×
 2n}\)</span> a sparse matrix involving only values for vertices on the boundary of
 <span class="math">\(\S\)</span>. </p>
+
+<p><strong><em>Achtung!</em></strong> A naive implementation of <span class="math">\(½ ∑\limits_{\{i,j\} ∈ ∂\S} | \u_i\
+\u_j |\)</span> into matrix form <span class="math">\(\U^\transpose \A \U\)</span> will likely produce an
+<em>asymmetric</em> matrix <span class="math">\(\A\)</span>. From a theoretical point of view, this is fine.
+<span class="math">\(\A\)</span> just needs to compute the signed area of the flattened mesh. However, from
+a numerical methods point of view we will almost always need out quadratic
+coefficients matrix to be
+<a href="https://en.wikipedia.org/wiki/Symmetric_matrix"><em>symmetric</em></a>. Fortunately,
+when a matrix is acting as a <a href="https://en.wikipedia.org/wiki/Quadratic_form">quadratic
+form</a> it is trivial to
+<em>symmetrize</em>. Consider we have some asymmetric matrix <span class="math">\(\bar{\A}\)</span> defining a
+quadratic form: <span class="math">\(\x^\transpose \bar{\A} \x\)</span>. The output of a quadratic form is
+just a scalar, so it&#8217;s equal to its transpose:
+<span class="math">\[
+\x^\transpose \bar{\A} \x = \x^\transpose \bar{\A}^\transpose \x.
+\]</span>
+These are also equal to their average:
+<span class="math">\[
+\x^\transpose \bar{\A} \x = 
+\x^\transpose 
+\underbrace{½ (\bar{\A} + \bar{\A}^\transpose)}_{\A}
+\x = 
+\x^\transpose \A \x
+\]</span></p>
 
 <p>Putting this together with the Dirichlet energy terms, we can write the
 discrete <em>least squares conformal mappings</em> minimization problem as:</p>
@@ -445,7 +510,7 @@ discrete <em>least squares conformal mappings</em> minimization problem as:</p>
     0 & \L
   \end{array}
   \right)
-  + \A
+  - \A
   \right)
   }_{\Q}
   \U,
@@ -454,7 +519,7 @@ where <span class="math">\(\L ∈ \R^{n × n}\)</span> is the Dirichlet energy q
 cotangent Laplacian) and <span class="math">\(\Q ∈ \R^{2n × 2n}\)</span> is the resulting (sparse)
 quadratic form.</p>
 
-<h3 id="freeboundary">Free boundary</h3>
+<h4 id="freeboundary">Free boundary</h4>
 
 <p>Similar to the mass-spring methods above, without constraints the least squares
 conformal mapping energy will also have a trivial solution: set <span class="math">\(\U\)</span> to a
@@ -514,7 +579,7 @@ constraint results in a well-studied <a href="https://en.wikipedia.org/wiki/Eige
 problem</a>.</p>
 
 <blockquote>
-<h4 id="generalizedeigenvalueproblem">Generalized Eigenvalue problem</h4>
+<h5 id="generalizedeigenvalueproblem">Generalized Eigenvalue problem</h5>
 
 <p>Consider a discrete quadratic minimization problem in <span class="math">\(\v ∈ \R^n\)</span>:</p>
 
@@ -564,7 +629,7 @@ parameterization&#8221; [Mullen et al. 2008].</p>
 vector</a>.</p>
 </blockquote>
 
-<h3 id="canonicalrotation">Canonical rotation</h3>
+<h4 id="canonicalrotation">Canonical rotation</h4>
 
 <p>The least squares conformal mapping energy is <em>invariant</em> to translation and
 rotation. The eigen decomposition process described above will naturally take
@@ -591,7 +656,7 @@ conditions produces a more smooth, less distorted and canonically aligned
 parameterization than the Tutte embedding above.</figcaption>
 </figure>
 
-<h4 id="whyiseverythingsquishedupintheinterior">Why is everything squished up in the interior?</h4>
+<h5 id="whyiseverythingsquishedupintheinterior">Why is everything squished up in the interior?</h5>
 
 <figure>
 <img src="images/camel-head-lscm.jpg" alt="The entire camel head is parameterized inside the neck boundary. The area
@@ -643,6 +708,8 @@ distortion.</figcaption>
 <li><code>igl::eigs</code> (Use the <code>igl::EIGS_TYPE_SM</code> type)</li>
 <li><code>igl::map_vertices_to_circle</code></li>
 <li><code>igl::massmatrix</code> (or your previous implementation)</li>
+<li><code>igl::min_quad_with_fixed</code> (for minimizing a quadratic energy subject to
+ fixed value constraints)</li>
 <li><code>igl::repdiag</code></li>
 </ul>
 

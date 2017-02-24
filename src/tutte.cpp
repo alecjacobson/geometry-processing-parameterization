@@ -23,7 +23,7 @@ void tutte(
 
 	MatrixXi E = edges(F);
 
-	int n = V.rows(), f = F.rows(), m = E.rows(), nb = b.rows();
+	int n = V.rows(), m = E.rows(), nb = b.rows();
 
 	std::vector<bool> isBoundary(n, false);
 	std::map<int, int> vToB;
