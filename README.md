@@ -51,7 +51,7 @@ squished. Surfaces with [topological
 handles](https://en.wikipedia.org/wiki/Handle_decomposition) or without [a
 boundary](https://en.wikipedia.org/wiki/Surface_(topology)#Closed_surfaces) 
 
-## Mass-spring methods
+### Mass-spring methods
 
 If we view our triangle mesh surface as a simple
 [graph](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)) then the
@@ -137,7 +137,45 @@ w_{ij} & \text{ if $i≠j$ and $∃ \{ij\} ∈ \E$, }\\
 \end{cases}.
 \\]
 
-### Dirichlet energy
+> #### What's up with the $\tr{}$ in the energy?
+>
+> The degrees of freedom in our optimization are a collected in the _matrix_
+> $\U ∈ \R^{n×2}$ with two columns. The energy is written as the
+> [trace](https://en.wikipedia.org/wiki/Trace_(linear_algebra)) of the
+> quadratic form (a.k.a. matrix) $\Q ∈ \R^{n×n}$ applied to $\U$. In effect,
+> this is really applying $\Q$ to each column of $\U$ independently and summing
+> the result:
+>
+> \\[
+> \begin{align}
+> \tr{\U^\transpose \Q \U} &= \\
+>                          &= \tr{\U^\transpose \Q \U} \\
+>                          &= \tr{
+>                                  \left[\begin{array}{c}
+>                                  \U_1^\transpose\\
+>                                  \U_2^\transpose 
+>                                  \end{array}\right] \Q [\U_1 \U_2] } \\
+>                          &= \tr{\left[\begin{array}{c}
+>                                  \U_1^\transpose \Q \U_1 & 
+>                                  \U_1^\transpose \Q \U_2 \\
+>                                  \U_2^\transpose \Q \U_1 & 
+>                                  \U_2^\transpose \Q \U_2 \end{array}\right]}
+>                                  \\
+>                         &= \U_1^\transpose \Q \U_1 + \U_2^\transpose \Q \U_2.
+> \end{align}
+> \\]
+>
+> The upshots of energies written as the trace of a quadratic form applied to a
+> matrix are that: 1) each column can be optimized _independently_ (assuming
+> constraints are also separable by column), and this is often the case when
+> columns correspond to coordinates (u, v, etc.); and 2) the quadratic form for
+> each columns is the same (the same $\Q$). For quadratic energy minimization,
+> this means that we can precompute work (e.g., [Cholesky
+> facotorization](https://en.wikipedia.org/wiki/Cholesky_decomposition)) on
+> $\Q$ and take advantage of it for solving with $\U_1$ and $\U_2$ and we might
+> even solve [in parallel](https://en.wikipedia.org/wiki/SIMD).
+
+#### Dirichlet energy
 
 We should immediately recognize this sparsity structure from the discrete
 Laplacians considered in the previous assignments. If $w_{ij} = 1$, then $\L$
@@ -185,7 +223,7 @@ optimization. There's no reason to expect that they will be able to minimize
 _area distortation_ and _angle distortion_ directly. For that we will need to
 consider $u$ and $v$ simultaneously.
 
-## Least Squares Conformal Mappings
+### Least Squares Conformal Mappings
 
 We can reason about distortion in terms of differential quantities of the
 mapping from $\S$ to $\R²$. Now, ultimately we are trying to parametrize $\S$
@@ -196,7 +234,7 @@ coordinates $x$ and $y$). This way we can write about small changes in the
 mapping function $u$ with respect to moving a small amount on the surface of
 $\S$ (small changes in $x$ and $y$).
 
-### Area distortion
+#### Area distortion
 
 We would like that regions on $\S$ have a proportionally similarly sized region
 under the $u$, $v$ mapping to $\R²$. On an infinitesimal scale, a small change
@@ -212,8 +250,9 @@ mapping should be one:
 \frac{∂v}{∂x} & \frac{∂v}{∂y} 
 \end{array}
 \right|
-= 1.
+= 1,
 \\]
+where $| \X | = \det{\X}$ for a square matrix $\X$.
 
 > The determinant of the Jacobian of a mapping corresponds to the scale factor
 > by which local area expands or shrinks. This quantity also appears during
@@ -228,7 +267,7 @@ be non-trivial. We will reinvestigate this in _later assignments_ when we look
 into surface deformation energies. But for now, let us put aside area
 distortion and focus instead on angle or aspect-ratio distortion.
 
-### Angle distortion
+#### Angle distortion
 
 We would also like that local regions on $\S$ are parameterized without
 [shearing](https://en.wikipedia.org/wiki/Shear_mapping). This ensures that two
@@ -335,9 +374,9 @@ edge's unit normal vector:
 \\[
 ∮_{∂(\u(\S))} \u(s)⋅\n(s) \ ds = \\
   ∑\limits_{\{i,j\} ∈ ∂\S} ∫_0^1 
-    (\u_i + t(\u_j - \u_i))⋅\frac{(\u_j-\u_i)^⊥}{‖\u_j - \u_i‖} \ dt = \\
-  ∑\limits_{\{i,j\} ∈ ∂\S} (\u_j-\u_i)⋅(\u_j-\u_i)^⊥ = \\
-  ∑\limits_{\{i,j\} ∈ ∂\S} | \u_i\  \u_j |,
+    ½ (\u_i + t(\u_j - \u_i))⋅\frac{(\u_j-\u_i)^⊥}{‖\u_j - \u_i‖} \ dt = \\
+  ½ ∑\limits_{\{i,j\} ∈ ∂\S} (\u_j-\u_i)⋅(\u_j-\u_i)^⊥ = \\
+  ½ ∑\limits_{\{i,j\} ∈ ∂\S} | \u_i\  \u_j |,
 \\]
 where finally we have a simply quadratic expression: sum over all boundary
 edges the determinant of the matrix with vertex positions as columns. This
@@ -345,6 +384,31 @@ quadratic form can be written as $\U^\transpose \A \U$ with the _vectorized_
 $u$- and $v$-coordinates of the mapping in $\U ∈ \R^{2n}$ and $\A ∈ \R^{2n ×
 2n}$ a sparse matrix involving only values for vertices on the boundary of
 $\S$. 
+
+
+**_Achtung!_** A naive implementation of $½ ∑\limits_{\{i,j\} ∈ ∂\S} | \u_i\
+\u_j |$ into matrix form $\U^\transpose \A \U$ will likely produce an
+_asymmetric_ matrix $\A$. From a theoretical point of view, this is fine.
+$\A$ just needs to compute the signed area of the flattened mesh. However, from
+a numerical methods point of view we will almost always need out quadratic
+coefficients matrix to be
+[_symmetric_](https://en.wikipedia.org/wiki/Symmetric_matrix). Fortunately,
+when a matrix is acting as a [quadratic
+form](https://en.wikipedia.org/wiki/Quadratic_form) it is trivial to
+_symmetrize_. Consider we have some asymmetric matrix $\bar{\A}$ defining a
+quadratic form: $\x^\transpose \bar{\A} \x$. The output of a quadratic form is
+just a scalar, so it's equal to its transpose: 
+\\[
+\x^\transpose \bar{\A} \x = \x^\transpose \bar{\A}^\transpose \x.
+\\]
+These are also equal to their average:
+\\[
+\x^\transpose \bar{\A} \x = 
+\x^\transpose 
+\underbrace{½ (\bar{\A} + \bar{\A}^\transpose)}_{\A}
+\x = 
+\x^\transpose \A \x
+\\]
 
 Putting this together with the Dirichlet energy terms, we can write the
 discrete _least squares conformal mappings_ minimization problem as:
@@ -360,7 +424,7 @@ discrete _least squares conformal mappings_ minimization problem as:
     0 & \L
   \end{array}
   \right)
-  + \A
+  - \A
   \right)
   }_{\Q}
   \U,
@@ -369,7 +433,7 @@ where $\L ∈ \R^{n × n}$ is the Dirichlet energy quadratic form (a.k.a.
 cotangent Laplacian) and $\Q ∈ \R^{2n × 2n}$ is the resulting (sparse)
 quadratic form.
 
-### Free boundary
+#### Free boundary
 
 Similar to the mass-spring methods above, without constraints the least squares
 conformal mapping energy will also have a trivial solution: set $\U$ to a
@@ -426,7 +490,7 @@ news](https://en.wikipedia.org/wiki/The_Bad_News_Bears), but this type of
 constraint results in a well-studied [generalized Eigen value
 problem](https://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix#Generalized_eigenvalue_problem).
 
-> #### Generalized Eigenvalue problem 
+> ##### Generalized Eigenvalue problem 
 >
 > Consider a discrete quadratic minimization problem in $\v ∈ \R^n$:
 >
@@ -473,7 +537,7 @@ parameterization" [Mullen et al. 2008].
 > This eigenvector is sometimes called the [Fiedler
 > vector](https://en.wikipedia.org/wiki/Algebraic_connectivity#Fiedler_vector).
 
-### Canonical rotation
+#### Canonical rotation
 
 The least squares conformal mapping energy is _invariant_ to translation and
 rotation. The eigen decomposition process described above will naturally take
@@ -495,7 +559,7 @@ the "$x$"-axis of the parametric domain.
 conditions produces a more smooth, less distorted and canonically aligned
 parameterization than the Tutte embedding above.](images/keenan-ogre-lscm.jpg)
 
-#### Why is everything squished up in the interior?
+##### Why is everything squished up in the interior?
 
 ![The entire camel head is parameterized _inside_ the neck boundary. The area
 distortion for the face is extreme: in the parametric domain the face is tiny;
@@ -534,6 +598,8 @@ distortion.](images/animal-lscm.jpg)
  - `igl::eigs` (Use the `igl::EIGS_TYPE_SM` type)
  - `igl::map_vertices_to_circle`
  - `igl::massmatrix` (or your previous implementation)
+ - `igl::min_quad_with_fixed` (for minimizing a quadratic energy subject to
+     fixed value constraints)
  - `igl::repdiag`
 
 ### `src/tutte.cpp`
