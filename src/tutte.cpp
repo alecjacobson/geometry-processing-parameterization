@@ -2,7 +2,7 @@
 #include "igl/boundary_loop.h"
 #include "igl/map_vertices_to_circle.h"
 #include "edges.h"
-#include <Eigen/SparseQR>
+#include <Eigen/SparseLU>
 #include <Eigen/OrderingMethods>
 #include <Eigen/IterativeLinearSolvers>
 #include <iostream>
@@ -87,7 +87,7 @@ void tutte(
 	// SparseQR is insanely slow, even in a Release build and using CMAKE_BUILD_TYPE=Release
 	//SparseQR<SparseMatrix<double>, COLAMDOrdering<int>> solver(A);
 	//SimplicialLDLT<SparseMatrix<double>> solver(A.transpose()*A);
-	ConjugateGradient < SparseMatrix<double>> solver(A.transpose()*A);
+	BiCGSTAB < SparseMatrix<double>> solver(A.transpose()*A);
 	std::cout << "Decomposition completed" << std::endl;
 	
 	//VectorXd U_in = solver.solve(B);
