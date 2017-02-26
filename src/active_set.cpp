@@ -26,7 +26,6 @@ void ActiveSet::updateActive() {
     auto&& diri = getIndices<ActiveSet::VariableType::Dirichlet>();
     std::copy(diri.begin(),diri.end(),std::inserter(constrained,constrained.end()));
     int prev = 0;
-    m_reduced_size = m_total_size - constrained.size();
 
 
 

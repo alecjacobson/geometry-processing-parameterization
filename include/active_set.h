@@ -20,8 +20,10 @@ class ActiveSet {
         };
 
 
-        size_t active_size() const { return m_reduced_size; }
+        size_t active_size() const { return m_active_pair.size(); }
         size_t reduced_size() const { return active_size(); }
+        template <VariableType VarType>
+            size_t var_size() const { return getIndexPair<VarType>().size();}
 
         void updateActive();
 
@@ -58,7 +60,6 @@ class ActiveSet {
             Eigen::SparseMatrix<T> reduceMatrix(const Eigen::SparseMatrix<T>& A) const;
     private:
         Index m_total_size;
-        Index m_reduced_size;
         IndexPair m_active_pair;
         IndexPair m_dirichlet_pair;
 };
@@ -87,8 +88,8 @@ template <ActiveSet::VariableType VarType, typename Derived, typename RetType>
 RetType ActiveSet::expand(const Eigen::MatrixBase<Derived>& M) const {
     RetType R = RetType::Zero(m_total_size,M.cols());
 
-    assert(M.rows() == m_reduced_size);
     auto&& pair = getIndexPair<VarType>();
+    assert(M.rows() == pair.size() );
     for(int i = 0; i < pair.size(); ++i) {
 
         R.row(pair.indices[i]) = M.row(i);
