@@ -3,23 +3,8 @@
 #include <igl/map_vertices_to_circle.h>
 #include <igl/boundary_loop.h>
 #include <igl/min_quad_with_fixed.h>
-#include <Eigen/SparseCholesky>
-#include <unordered_map>
-#include <unordered_set>
 #include <vector>
 
-
-
-// hash function for Eigen::RowVector2i. Used by unordered_set
-namespace std {
-	template <> class hash<Eigen::RowVector2i> {
-	public:
-		size_t operator()(const Eigen::RowVector2i &e) const
-		{
-			return e(0)* 0x9E3779B9 + e(1); // Fibonacci hash
-		}
-	};
-};
 
 void tutte(
   const Eigen::MatrixXd & V,
