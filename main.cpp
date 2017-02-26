@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
   Eigen::MatrixXd V,U_lscm,U_tutte,U;
   Eigen::MatrixXi F;
   igl::read_triangle_mesh(
-    (argc>1?argv[1]:"../shared/data/beetle.obj"),V,F);
+    (argc>1?argv[1]:"../shared/data/keenan-ogre.obj"),V,F);
   // Load data into MatrixXd rather than VectorXd for simpler `smooth` API
   // Just use y-coordinates as data to be smoothed
   // Create a libigl Viewer object to toggle between point cloud and mesh
@@ -24,7 +24,7 @@ C,c      Toggle checkerboard
 t        Switch parameterization to Tutte embedding
 l        Switch parameterization to Least squares conformal mapping
 )";
-  //tutte(V,F,U_tutte);
+  tutte(V,F,U_tutte);
   lscm(V,F,U_lscm);
   // Fit parameterization in unit sphere
   const auto normalize = [](Eigen::MatrixXd &U)
@@ -34,7 +34,7 @@ l        Switch parameterization to Least squares conformal mapping
       (U.colwise().maxCoeff() - U.colwise().minCoeff()).maxCoeff()/2.0;
   };
   normalize(V);
-  //normalize(U_tutte);
+  normalize(U_tutte);
   normalize(U_lscm);
 
   bool plot_parameterization = false;
@@ -78,7 +78,7 @@ l        Switch parameterization to Least squares conformal mapping
     return true;
   };
 
-  U = U_lscm;
+  U = U_tutte;
   viewer.data.set_mesh(V,F);
   Eigen::MatrixXd N;
   igl::per_vertex_normals(V,F,N);

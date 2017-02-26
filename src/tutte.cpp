@@ -55,9 +55,5 @@ void tutte(
 
 	// Concatinate parametric coordinates
 	U << U1, U2;
-	int x = 2;
-
-	//Eigen::SimplicialLDLT<Eigen::SparseMatrix<double>> solver;
-	//solver.compute(L);
 }
 
