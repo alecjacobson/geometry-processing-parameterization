@@ -14,7 +14,7 @@ void vector_area_matrix(
 
 	auto reservation = [&boundaries]()->size_t {
 		size_t res = 0;
-		for each(auto b in boundaries)
+		for(auto b : boundaries)
 			res += b.size();
 
 		return 4 * res;
@@ -24,7 +24,7 @@ void vector_area_matrix(
 
 	int n = F.maxCoeff() + 1;
 
-	for each (auto b in boundaries)
+	for (auto b : boundaries)
 	{
 		int v1 = b[0], v2;
 
