@@ -75,8 +75,8 @@ void lscm(
   igl::eigs(Q, B, 3, igl::EIGS_TYPE_SM, EVec, EVal);
   
   Eigen::VectorXd UV = EVec.col(2);
-  igl::slice(U.col(0), Eigen::VectorXi::LinSpaced(n,0,n-1), UV);
-  igl::slice(U.col(1), Eigen::VectorXi::LinSpaced(n,n,2*n-1), UV);
+  U.col(0) = UV.topRows(n);
+  U.col(1) = UV.bottomRows(n);
 
   // get the canonical rotation:
   // models with high reflective symmetry will have prominent direction associated. Line them up using SVD?
