@@ -38,20 +38,30 @@ void lscm(
 
 	// Solving Generalized Eigenvalue problem
 
-	int k = 4;
+	int k = 3;
 	MatrixXd sU;
-	VectorXd sS;
+	VectorXd sS;	
 	eigs(Q, B, k, igl::EIGS_TYPE_SM, sU, sS);
 
 	// Find non zero eigen value
 
 	double nonZeroValue;
+	VectorXd nonZeroVector;
 	for (int i = sS.size() - 1; i >= 0; --i)
 	{
 		if (sS[i] > 0) 
 		{
 			nonZeroValue = sS[i];
+			nonZeroVector = sU.col(i);
 		}
 	}
+
+	U.resize(nvert, 2);
+	U.col(0) = nonZeroVector.head(nvert);
+	U.col(1) = nonZeroVector.tail(nvert);
 	
+	MatrixXd Cov = U.transpose()*U;
+	JacobiSVD<Eigen::Matrix2d> svd;
+	svd.compute(Cov, Eigen::ComputeFullV);
+	U = U*svd.matrixV();
 }
