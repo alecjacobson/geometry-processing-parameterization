@@ -75,6 +75,7 @@ void lscm(
   igl::eigs(Q, B, 3, igl::EIGS_TYPE_SM, EVec, EVal);
   
   Eigen::VectorXd UV = EVec.col(2);
+
   U.col(0) = UV.topRows(n);
   U.col(1) = UV.bottomRows(n);
 
