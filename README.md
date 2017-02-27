@@ -195,7 +195,7 @@ the variation in the $u$- and $v$-coordinate functions over the surface $\S$:
 \min_{u,v} ∫_\S ‖∇u‖² + ‖∇v‖² \ dA.
 \\] 
 This familiar energy is called the
-[Dirichelt energy](https://en.wikipedia.org/wiki/Dirichlet's_energy).
+[Dirichlet energy](https://en.wikipedia.org/wiki/Dirichlet's_energy).
 
 We may discretize this problem immediately using [piecewise linear
 functions](https://en.wikipedia.org/wiki/Piecewise_linear_function) spanned by
@@ -334,7 +334,7 @@ and dot product:
 ∫_\S \left( \begin{array}{r}
 \frac{∂u}{∂x} \\
 \frac{∂u}{∂y} \\
-\end{array}\right)
+\end{array}\right)⋅
 \left( \begin{array}{r}
  \frac{∂v}{∂y} \\
 -\frac{∂v}{∂x} \\
