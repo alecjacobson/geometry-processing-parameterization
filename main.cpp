@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
   Eigen::MatrixXd V,U_lscm,U_tutte,U;
   Eigen::MatrixXi F;
   igl::read_triangle_mesh(
-    (argc>1?argv[1]:"../shared/data/beetle.obj"),V,F);
+    (argc>1?argv[1]:"../shared/data/max-face-low-res.obj"),V,F);
   // Load data into MatrixXd rather than VectorXd for simpler `smooth` API
   // Just use y-coordinates as data to be smoothed
   // Create a libigl Viewer object to toggle between point cloud and mesh
