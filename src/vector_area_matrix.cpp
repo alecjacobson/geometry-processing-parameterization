@@ -42,7 +42,7 @@ void vector_area_matrix(
    */
 
   // get the largest boundary loop (the ∂S)
-  std::vector<int32_t> boundaries;
+  std::vector<std::vector<int32_t>> boundaries;
   igl::boundary_loop(F, boundaries);
 
   std::vector<tri> triplets;
@@ -50,19 +50,23 @@ void vector_area_matrix(
 
   // get the number of vertices:
   int32_t n = F.maxCoeff() + 1;
-  
-  for(int32_t i = 0; i < boundaries.size(); i++)
+
+  for(int32_t j = 0; j < boundaries.size(); j++)
   {
-    int32_t iOne = boundaries[i];
-    int32_t iTwo = boundaries[(i + 1) % boundaries.size()];
+    std::vector<int32_t>boundary = boundaries[j];
+    for(int32_t i = 0; i < boundary.size(); i++)
+    {
+      int32_t iOne = boundary[i];
+      int32_t iTwo = boundary[(i + 1) % boundary.size()];
 
-    // Construct the A matrix: (and scale by one half)
-    triplets.push_back(tri(iOne, n + iTwo,  0.25));
-    triplets.push_back(tri(n + iOne, iTwo, -0.25));
+      // Construct the A matrix: (and scale by one half)
+      triplets.push_back(tri(iOne, n + iTwo,  0.25));
+      triplets.push_back(tri(n + iOne, iTwo, -0.25));
 
-    // Construct the Aᵀ matrix: (and scale by one half)
-    triplets.push_back(tri(n + iTwo, iOne,  0.25));
-    triplets.push_back(tri(iTwo, n + iOne, -0.25));    
+      // Construct the Aᵀ matrix: (and scale by one half)
+      triplets.push_back(tri(n + iTwo, iOne,  0.25));
+      triplets.push_back(tri(iTwo, n + iOne, -0.25));    
+    }
   }
 
   // fully construct the A matrix:

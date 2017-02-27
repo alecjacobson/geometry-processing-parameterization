@@ -60,7 +60,7 @@ void lscm(
 
   Eigen::SparseMatrix<double> Q;
   igl::repdiag(L, 2, Q);
-  Q = Q - A;
+  Q = Q + 2*A;
 
   // construct the constraint matrix:
   Eigen::SparseMatrix<double> M;

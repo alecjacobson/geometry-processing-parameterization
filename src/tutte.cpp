@@ -42,15 +42,20 @@ void tutte(
   // min_quad_with_fixed(A, B, known, Y, Aeq, Beq, pd, Z)
   // tries to minimize WRT Z:  ½ ZᵀAZ + BZ + C
   // with constraints: Aeq*Z = Beq
-  Eigen::SparseMatrix<double> Aeq;
-  Eigen::VectorXd Beq;
-  Eigen::VectorXd B = Eigen::VectorXd::Zero(V.rows());
+  Eigen::SparseMatrix<double> Aeq = Eigen::SparseMatrix<double>(0,0);
+  Eigen::MatrixXd Beq = Eigen::MatrixXd::Zero(0,0);
+  Eigen::VectorXd B = Eigen::VectorXd::Zero(L.rows());
   Eigen::VectorXd Uu, Uv;
   Eigen::VectorXd YOne = boundaryPositions.col(0);
   Eigen::VectorXd YTwo = boundaryPositions.col(1);
-  igl::min_quad_with_fixed(L, B, boundaryEdges, YOne, Aeq, Beq, false, Uu);
-  igl::min_quad_with_fixed(L, B, boundaryEdges, YTwo, Aeq, Beq, false, Uv);
-
-  U << Uu, Uv;
+  // igl::min_quad_with_fixed(L, B, boundaryEdges, YOne, Aeq, Beq, false, Uu);
+  // igl::min_quad_with_fixed(L, B, boundaryEdges, YTwo, Aeq, Beq, false, Uv);
+  igl::min_quad_with_fixed_data<double> mqwf;
+  igl::min_quad_with_fixed_precompute(L, boundaryEdges, Aeq, false, mqwf);
+  igl::min_quad_with_fixed_solve(mqwf, B, YOne, Beq, Uu);
+  igl::min_quad_with_fixed_solve(mqwf, B, YTwo, Beq, Uv);
+  
+  U.col(0) = Uu;
+  U.col(1) = Uv;
 }
 
