@@ -26,7 +26,7 @@ void lscm(
   // Calculate Q
   Eigen::SparseMatrix<double> Q(2*V.rows(), 2*V.rows());
   igl::repdiag(L, 2, Q);
-  Q = -Q + 2.*A;
+  Q = -Q + A;
   
   // Calculate B
   Eigen::SparseMatrix<double> B(2*V.rows(), 2*V.rows());
@@ -39,4 +39,9 @@ void lscm(
   U.resize(V.rows(), 2);
   U.col(0) = sU.col(2).head(V.rows());
   U.col(1) = sU.col(2).tail(V.rows());
+  
+  // Canonical Rotation
+  Eigen::MatrixXd cov = U.transpose() * U;
+  Eigen::JacobiSVD<Eigen::MatrixXd> svd(cov, Eigen::ComputeThinU | Eigen::ComputeThinV);
+  U = U * svd.matrixV().transpose();
 }

@@ -37,5 +37,4 @@ void vector_area_matrix(
   }
 
   A.setFromTriplets(tripletList.begin(), tripletList.end());
-  A = A * 0.5;
 }
