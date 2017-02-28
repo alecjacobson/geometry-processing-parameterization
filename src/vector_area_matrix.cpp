@@ -47,6 +47,9 @@ void vector_area_matrix(
     A = mtx * 0.5;
 }
 
+//
+// 
+// Try and generate our A in a symmetric fashion...
 // Our determinant for a pair of vertices on a boundary edge has a
 // quartenary quadratic form.  If our 2 vertices are:
 // U_1u, U_1v and  U_2u, U_2v
