@@ -1,4 +1,5 @@
 #include "lscm.h"
+#include "vector_area_matrix.h"
 
 #include <iostream>
 
@@ -9,9 +10,6 @@
 #include <igl/repdiag.h>
 #include <igl/cotmatrix.h>
 #include <igl/eigs.h>
-// Verboten!  Just for testing! - TODO - Remove!
-#include <igl/vector_area_matrix.h>
-#include <igl/lscm.h>
 
 #include <assert.h>
 
@@ -41,7 +39,7 @@ void lscm(
     igl::cotmatrix( V, F, L );
 
     Eigen::SparseMatrix< double > A( 2*n, 2*n );
-    igl::vector_area_matrix( F, A );
+    vector_area_matrix( F, A );
 
     
     Eigen::SparseMatrix< double > Q( 2*n, 2*n );
@@ -57,37 +55,11 @@ void lscm(
     igl::eigs( Q, B, 3, igl::EigsType::EIGS_TYPE_SM, sU, sS );
 
     U.resize( n, 2 );
-    std::cout<<"n is: "<<n<<std::endl;
-    std::cout<<"sU.col(2) size is: "<<sU.col(2).rows()<<"x"<<sU.col(2).cols()<<std::endl;
-    std::cout<<"small block.... 0, 0, 5, 1: "<<sU.col(2).block( 0, 0, 5, 1 )<<std::endl;
     U.col( 0 ) = sU.col(2).block( 0, 0, n, 1 );
     U.col( 1 ) = sU.col(2).block( n, 0, n, 1 );
 
-    // // from our closest_rotation in registration....
+    // from our closest_rotation in registration....
     Eigen::JacobiSVD< Eigen::MatrixXd > svd( U, Eigen::ComputeThinU | Eigen::ComputeThinV );
 
     U = U * svd.matrixV();
-
-    // test -- remove!
-    //U = V.leftCols(2);
 }
-
-
-    // std::cout<<"Svd done!"<<std::endl;
-    // Eigen::MatrixXd Sigma = svd.singularValues();
-    // std::cout<<"Computed sigma"<<std::endl;
-    // Eigen::MatrixXd svdU = svd.matrixU();                                                         
-    // Eigen::MatrixXd svdV = svd.matrixV(); // svd.matrixV().transpose() ????                       
-    // std::cout<<"stored U and V for the svd"<<std::endl;
-    // Eigen::MatrixXd Omega = Eigen::MatrixXd::Identity( 3, 3 );
-    // std::cout<<"Created Omega"<<std::endl;
-    // std::cout<<"svdU size: "<<svdU.rows()<<"x"<<svdU.cols()<<std::endl;
-    // std::cout<<"svdV size: "<<svdV.rows()<<"x"<<svdV.cols()<<std::endl;
-    // Omega(2,2) = ( svdU*svdV.transpose() ).determinant();                                            
-    // std::cout << "Omega:"<<std::endl<<Omega<<std::endl;
-    // Eigen::Matrix3d R;
-    // R = ( svdU * Omega * svdV.transpose() ).transpose();
-    // std::cout<<"Final R:"<<std::endl<<R<<std::endl;
-
-    
-    // U = U * R;

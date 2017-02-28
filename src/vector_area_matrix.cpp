@@ -31,14 +31,14 @@ void vector_area_matrix(
         int first  = E( e, 0 );
         int second = E( e, 1 );
 
-        // 0  0  0  1
-        // 0  0 -1  0
-        // 0 -1  0  0
-        // 1  0  0  0
-        trips.push_back( Eigen::Triplet<double>( first,      second + n,  1.0 ) );
-        trips.push_back( Eigen::Triplet<double>( first + n,  second,     -1.0 ) );
-        trips.push_back( Eigen::Triplet<double>( second,     first + n,  -1.0 ) );
-        trips.push_back( Eigen::Triplet<double>( second + n, first,       1.0 ) );
+        //  0   0   0  .5
+        //  0   0 -.5   0
+        //  0 -.5   0   0
+        // .5   0   0   0
+        trips.push_back( Eigen::Triplet<double>( first,      second + n,  .5 ) );
+        trips.push_back( Eigen::Triplet<double>( first + n,  second,     -.5 ) );
+        trips.push_back( Eigen::Triplet<double>( second,     first + n,  -.5 ) );
+        trips.push_back( Eigen::Triplet<double>( second + n, first,       .5 ) );
     }
 
     Eigen::SparseMatrix< double > mtx( 2*n, 2*n );
@@ -75,24 +75,24 @@ void vector_area_matrix(
 // or -> gxw - hyz
 //
 // so in our matrix we need g=1, h=-1
-// so A in this case becomes:
+// so A in this case becomes (with 1's across the diag instead of 2):
 //
-// 0  0  0  1
-// 0  0 -1  0
-// 0 -1  0  0
-// 1  0  0  0
+//  0   0   0  .5
+//  0   0 -.5   0
+//  0 -.5   0   0
+// .5   0   0   0
 //
 // which we need to apply to each set of boundary edges.
 // So we need to put this matrix into A for each set of  edges.
 //
 // In a way, this looks like two 90 degree vector rotations
-//  0  1
-// -1  0
+//   0  .5
+// -.5  0
 //
 //  and
 //                             
-// 0 -1
-// 1  0
+//  0 -.5
+// .5  0
 //
 // So we do the first rotation, then the second for the boundary points.
 //   
