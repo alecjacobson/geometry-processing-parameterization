@@ -1,5 +1,5 @@
 #include "lscm.h"
-#include <igl/vector_area_matrix.h>
+#include "vector_area_matrix.h"
 #include <igl/eigs.h>
 #include <igl/cotmatrix.h>
 #include <igl/massmatrix.h>
@@ -21,7 +21,7 @@ void lscm(
   
   // Get vector area matrix A
   Eigen::SparseMatrix<double> A(2*V.rows(), 2*V.rows());
-  igl::vector_area_matrix(F, A);
+  vector_area_matrix(F, A);
   
   // Calculate Q
   Eigen::SparseMatrix<double> Q(2*V.rows(), 2*V.rows());
@@ -39,7 +39,4 @@ void lscm(
   U.resize(V.rows(), 2);
   U.col(0) = sU.col(2).head(V.rows());
   U.col(1) = sU.col(2).tail(V.rows());
-  
-  Eigen::JacobiSVD<Eigen::MatrixXd> svd(U.transpose() * U, Eigen::ComputeThinU|Eigen::ComputeThinV);
-  //U = U * svd.matrixU() * svd.matrixV().transpose(); 
 }

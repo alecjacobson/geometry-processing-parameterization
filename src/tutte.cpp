@@ -4,7 +4,6 @@
 #include <igl/cotmatrix.h>
 #include <igl/min_quad_with_fixed.h>
 #include <vector>
-#include <iostream>
 
 void tutte(
   const Eigen::MatrixXd & V,
