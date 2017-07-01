@@ -17,7 +17,7 @@ on a given mesh:
 
     ./parameterization [path to mesh with boundary.obj]
 
-![When you're app is implemented correctly you'll be able to cycle through
+![When your app is implemented correctly you'll be able to cycle through
 viewing the mesh, viewing the parameterization, toggling the checkerboard
 pattern and switching between parameterization
 methods.](images/beetle-cycle-screenshots.gif)
