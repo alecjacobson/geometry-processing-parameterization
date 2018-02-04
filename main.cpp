@@ -14,9 +14,6 @@ int main(int argc, char *argv[])
   Eigen::MatrixXi F;
   igl::read_triangle_mesh(
     (argc>1?argv[1]:"../shared/data/beetle.obj"),V,F);
-  // Load data into MatrixXd rather than VectorXd for simpler `smooth` API
-  // Just use y-coordinates as data to be smoothed
-  // Create a libigl Viewer object to toggle between point cloud and mesh
   igl::viewer::Viewer viewer;
   std::cout<<R"(
 [space]  Toggle whether displaying 3D surface or 2D parameterization
