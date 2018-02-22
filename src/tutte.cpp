@@ -16,20 +16,20 @@ void tutte(
   Eigen::SparseMatrix<double> L(V.rows(), V.rows());
   for (int i = 0; i < F.rows(); i++) {
   	//[1,2],[2,0],[0,1]
-  	L.coeffRef(F(i, 0), F(i, 1)) += l(i, 2);
-  	L.coeffRef(F(i, 1), F(i, 2)) += l(i, 0);
-  	L.coeffRef(F(i, 2), F(i, 0)) += l(i, 1);
+  	L.coeffRef(F(i, 0), F(i, 1)) += 1 / l(i, 2);
+  	L.coeffRef(F(i, 1), F(i, 2)) += 1 / l(i, 0);
+  	L.coeffRef(F(i, 2), F(i, 0)) += 1 / l(i, 1);
 
     L.coeffRef(F(i, 1), F(i, 0)) = L.coeffRef(F(i, 0), F(i, 1));
     L.coeffRef(F(i, 2), F(i, 1)) = L.coeffRef(F(i, 1), F(i, 2));
     L.coeffRef(F(i, 0), F(i, 2)) = L.coeffRef(F(i, 2), F(i, 0));
 
-    L.coeffRef(F(i, 0), F(i, 0)) -= l(i, 2);
-    L.coeffRef(F(i, 1), F(i, 1)) -= l(i, 2);
-    L.coeffRef(F(i, 1), F(i, 1)) -= l(i, 0);
-    L.coeffRef(F(i, 2), F(i, 2)) -= l(i, 0);
-    L.coeffRef(F(i, 2), F(i, 2)) -= l(i, 1);
-    L.coeffRef(F(i, 0), F(i, 0)) -= l(i, 1);
+    L.coeffRef(F(i, 0), F(i, 0)) -= 1 / l(i, 2);
+    L.coeffRef(F(i, 1), F(i, 1)) -= 1 / l(i, 2);
+    L.coeffRef(F(i, 1), F(i, 1)) -= 1 / l(i, 0);
+    L.coeffRef(F(i, 2), F(i, 2)) -= 1 / l(i, 0);
+    L.coeffRef(F(i, 2), F(i, 2)) -= 1 / l(i, 1);
+    L.coeffRef(F(i, 0), F(i, 0)) -= 1 / l(i, 1);
   }
   Eigen::VectorXi knowns;
   igl::boundary_loop(F, knowns);
