@@ -23,6 +23,7 @@ void tutte(
   const Eigen::MatrixXi & F,
   Eigen::MatrixXd & U)
 {
+
   Eigen::VectorXi bnd;
   igl::boundary_loop(F, bnd);
 
@@ -89,15 +90,11 @@ void tutte(
 
   std::cout << "size of U " << U.rows() << std::endl;
 
-  Eigen::MatrixXd B(int_verts_size, int_verts_size);
-  B = laplacian.block(bnd_size, 0, int_verts_size - 1, int_verts_size - 1);
-  std::cout << "size of B " << B.rows() << std::endl;
-
   Eigen::MatrixXd int_laplacian = laplacian.block(bnd_size, bnd_size, int_verts_size-1, int_verts_size-1);
   std::cout << "size of  interior laplacian " << int_laplacian.rows() << std::endl;
 
 
-  Eigen::MatrixXd int_mapping = -int_laplacian.inverse() * laplacian.block(bnd_size, 0, int_verts_size - 1, int_verts_size - 1) * bnd_mapping;
+  Eigen::MatrixXd int_mapping = -int_laplacian.inverse() * laplacian.block(bnd_size, 0, int_verts_size, int_verts_size) * bnd_mapping;
 
 
   U.block(bnd_mapping.rows(), bnd_mapping.rows(), int_mapping.rows(), 2) = int_mapping;
