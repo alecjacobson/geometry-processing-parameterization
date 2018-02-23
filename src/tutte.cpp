@@ -26,14 +26,14 @@ void tutte(
   U.resize(nV, 2);
 
   //Extract indices of the boundary
-  Eigen::VectorXi BndV;
+  Eigen::VectorXi BndV; BndV.setZero();
   igl::boundary_loop(F, BndV);
   
   //UV coordinate around the circle
   //Add an offset term to align the texture
   int nBndV = BndV.rows();
   double offset = 22*M_PI/180;
-  Eigen::MatrixXd UV;
+  Eigen::MatrixXd UV; UV.setZero();
   UV.resize(nBndV, 2);
   for (int i = 0; i < nBndV; i++)
   {
@@ -44,7 +44,7 @@ void tutte(
   //Compute L matrix
   int nF = F.rows();
   Eigen::SparseMatrix<double> L;
-  L.resize(nV, nV);
+  L.resize(nV, nV); L.setZero();
   std::vector<tuple> tuple_list;
   for (int i = 0; i < nF; i++)
   {
@@ -65,7 +65,7 @@ void tutte(
 
   Eigen::SparseMatrix<double> A = -L;
   Eigen::VectorXd B = Eigen::VectorXd::Zero(nV, 1);
-  Eigen::SparseMatrix<double> Aeq;
-  Eigen::MatrixXd Beq; 
-  igl::min_quad_with_fixed(A, B, BndV, UV, Aeq, Beq, true, U);
+  Eigen::SparseMatrix<double> Aeq; Aeq.setZero();
+  Eigen::MatrixXd Beq; Beq.setZero();
+  igl::min_quad_with_fixed(A, B, BndV, UV, Aeq, Beq, false, U);
 }
