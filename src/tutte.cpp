@@ -2,6 +2,8 @@
 #include <igl/map_vertices_to_circle.h>
 #include <igl/boundary_loop.h>
 #include <igl/cotmatrix.h>
+#include <Eigen/src/IterativeLinearSolvers/ConjugateGradient.h>
+#include <Eigen\src\Jacobi\Jacobi.h>
 
 #include <iostream>
 
@@ -85,20 +87,32 @@ void tutte(
 
   std::cout << "size of boundary mapping " << bnd_mapping.rows() << std::endl;
 
+  Eigen::MatrixXd mapping(V.rows(), 2);
   U.resize(V.rows(), 2);
-  U.block(0, 0, bnd_mapping.rows(), 2) = bnd_mapping;
+  mapping.block(0, 0, bnd_mapping.rows(), 2) = bnd_mapping;
 
-  std::cout << "size of U " << U.rows() << std::endl;
+  std::cout << "size of U " << mapping.rows() << std::endl;
 
-  Eigen::MatrixXd int_laplacian = laplacian.block(bnd_size, bnd_size, int_verts_size-1, int_verts_size-1);
+  Eigen::MatrixXd int_laplacian = laplacian.block(bnd_size, bnd_size, int_verts_size, int_verts_size);
   std::cout << "size of  interior laplacian " << int_laplacian.rows() << std::endl;
 
+  Eigen::MatrixXd A = laplacian.block(bnd_size, 0, int_verts_size, int_verts_size) * bnd_mapping;
+  std::cout << bnd_size + int_verts_size << std::endl;
+  Eigen::MatrixXd int_mapping;// = -int_laplacian.inverse() * laplacian.block(bnd_size, 0, int_verts_size, int_verts_size) * bnd_mapping;
+  std::cout << "Ax=b "  << std::endl;
 
-  Eigen::MatrixXd int_mapping = -int_laplacian.inverse() * laplacian.block(bnd_size, 0, int_verts_size, int_verts_size) * bnd_mapping;
+  Eigen::JacobiSVD<Eigen::MatrixXd> svd(A, Eigen::ComputeFullU | Eigen::ComputeFullV);
+  //cg.compute(A);
+  int_mapping = svd.solve(int_laplacian);
+  std::cout << "did it work? " << std::endl;
 
 
   U.block(bnd_mapping.rows(), bnd_mapping.rows(), int_mapping.rows(), 2) = int_mapping;
   
+  for (int i = 0; i < U.rows(); i++)
+  {
+	  U.row(i) = mapping.row(map(i));
+  }
   
 }
 
