@@ -30,6 +30,6 @@ void lscm(
     U.col(0) = Vectors.col(2).head(n);
     U.col(1) = Vectors.col(2).tail(n);
     
-    Eigen::JacobiSVD<Eigen::MatrixXd> svd(U, Eigen::ComputeThinU | Eigen::ComputeThinV);
-    U = svd.matrixU() * svd.singularValues().asDiagonal();
+    Eigen::JacobiSVD<Eigen::MatrixXd> svd(U.transpose()*U, Eigen::ComputeThinU | Eigen::ComputeThinV);
+    U = U * svd.matrixU();
 }
