@@ -1,6 +1,11 @@
 #ifndef LSCM_H
 #define LSCM_H
 #include <Eigen/Core>
+#include "vector_area_matrix.h"
+#include "igl/cotmatrix.h"
+#include "igl/repdiag.h"
+#include "igl/massmatrix.h"
+#include "igl/eigs.h"
 // Given a 3D mesh (`V`,`F`) with boundary compute a 2D parameterization that
 // minimizes the "least squares conformal" energy:
 //
