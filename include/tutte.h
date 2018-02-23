@@ -1,6 +1,12 @@
 #ifndef TUTTE_H
 #define TUTTE_H
 #include <Eigen/Core>
+#include "igl/boundary_loop.h"
+#include "igl/map_vertices_to_circle.h"
+#include "igl/min_quad_with_fixed.h"
+#include "igl/cotmatrix.h"
+#include "igl/edges.h"
+#include <iostream>
 // Given a 3D mesh (`V`,`F`) with a disk topology (i.e., a manifold with single
 // boundary), compute a 2D parameterization according to Tutte's mapping inside
 // the unit disk. All boundary vertices should be mapped to the unit circle and

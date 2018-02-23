@@ -23,6 +23,7 @@ l        Switch parameterization to Least squares conformal mapping
 )";
   tutte(V,F,U_tutte);
   lscm(V,F,U_lscm);
+    
   // Fit parameterization in unit sphere
   const auto normalize = [](Eigen::MatrixXd &U)
   {

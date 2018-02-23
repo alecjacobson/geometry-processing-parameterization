@@ -2,6 +2,8 @@
 #define VECTOR_AREA_MATRIX_H
 #include <Eigen/Dense>
 #include <Eigen/Sparse>
+#include "igl/boundary_loop.h"
+#include <iostream>
 // Constructs the symmetric area matrix A, s.t.  [V.col(0)' V.col(1)'] * A *
 // [V.col(0); V.col(1)] is the **vector area** of the mesh (V,F).
 //
