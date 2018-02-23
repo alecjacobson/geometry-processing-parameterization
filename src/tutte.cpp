@@ -46,6 +46,7 @@ void tutte(
   Eigen::SparseMatrix<double> L;
   L.resize(nV, nV); L.setZero();
   std::vector<tuple> tuple_list;
+  tuple_list.reserve(3 * nF + nV);
   for (int i = 0; i < nF; i++)
   {
     int iV0 = F(i, 0);
@@ -58,10 +59,12 @@ void tutte(
     tuple_list.push_back(tuple(F(i, 1), F(i, 2), w1));
     tuple_list.push_back(tuple(F(i, 2), F(i, 0), w2));
   }
-  
+  //Build off-diagonal elements
   L.setFromTriplets(tuple_list.begin(), tuple_list.end());
   for (int i = 0; i < nV; i++)
-    L.insert(i, i) = -L.row(i).sum();
+    tuple_list.push_back(tuple(i,i, -L.row(i).sum()));
+  //Build diagonal elements
+  L.setFromTriplets(tuple_list.begin(), tuple_list.end());
 
   Eigen::SparseMatrix<double> A = -L;
   Eigen::VectorXd B = Eigen::VectorXd::Zero(nV, 1);
