@@ -24,12 +24,12 @@ void lscm(
 
   Eigen::MatrixXd eig_vecs;
   Eigen::VectorXd eig_vals;
-  igl::eigs(Q, B, 5, igl::EIGS_TYPE_SM, eig_vecs, eig_vals);
+  igl::eigs(Q, B, 3, igl::EIGS_TYPE_SM, eig_vecs, eig_vals);
 
-  U = Eigen::Map<Eigen::MatrixXd>(eig_vecs.col(1).data(), V.rows(), 2);
+  U = Eigen::Map<Eigen::MatrixXd>(eig_vecs.col(2).data(), V.rows(), 2);
 
   // Canonical rotation
   Eigen::MatrixXd UTU = U.transpose() * U;
   Eigen::JacobiSVD<Eigen::MatrixXd> svd(UTU, Eigen::ComputeFullU | Eigen::ComputeFullV);
-  U = U * svd.matrixU().transpose();
+  U = U * svd.matrixU();
 }
