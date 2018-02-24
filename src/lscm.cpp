@@ -5,6 +5,7 @@
 #include <igl/repdiag.h>
 #include <igl/massmatrix.h>
 #include <igl/eigs.h>
+#include <Eigen/SVD>
 
 void lscm(
   const Eigen::MatrixXd & V,
@@ -35,6 +36,13 @@ void lscm(
   Eigen::MatrixXd sU = Eigen::MatrixXd::Zero(n, 2);
   Eigen::VectorXd sS = Eigen::VectorXd::Zero(2);
 
-  igl::eigs(Q, M2, 2, igl::EIGS_TYPE_LM, sU, sS);
-  U = sU;
+  igl::eigs(Q, M2, 3, igl::EIGS_TYPE_SM, sU, sS);
+  U = Eigen::MatrixXd::Zero(V.rows(), 2);
+  U.col(0) = sU.block(0, 2, n, 1);
+  U.col(1) = sU.block(n, 2, n, 1);
+
+  Eigen::MatrixXd UT = U.transpose();
+  Eigen::MatrixXd UTU = UT * U;
+  Eigen::JacobiSVD<Eigen::MatrixXd> svd(UTU, Eigen::ComputeThinU | Eigen::ComputeThinV);
+  U = U * svd.matrixU();
 }
