@@ -13,7 +13,7 @@ void tutte(
     Eigen::MatrixXd Y,Beq, B;
     Eigen::SparseMatrix<double> A, Aeq;
     
-  //Need to parametrize the loop
+    
     igl::boundary_loop(F, boundary);
     
     
