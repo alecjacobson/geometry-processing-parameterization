@@ -3,7 +3,6 @@
 #include "igl/min_quad_with_fixed.h"
 #include "igl/map_vertices_to_circle.h"
 #include "igl/boundary_loop.h"
-#include "iostream"
 
 void tutte(
   const Eigen::MatrixXd & V,
