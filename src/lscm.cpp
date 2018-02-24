@@ -35,7 +35,6 @@ void lscm(
   Eigen::VectorXd eig_vals;
   igl::eigs(Q, B, 3, igl::EIGS_TYPE_SM, eig_vecs, eig_vals);
 
-  std::cout << eig_vecs.rows() << " " << eig_vecs.cols() << std::endl;
   U.resize(n, 2);
   U.col(0) = eig_vecs.block(0, 2, n, 1);
   U.col(1) = eig_vecs.block(n, 2, n, 1);
