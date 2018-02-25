@@ -25,7 +25,7 @@ void lscm(
 
   igl::repdiag(M, 2, B);
   igl::repdiag(L, 2, Q);
-  Q = Q - A;
+  Q = Q - 2 * A;
   Eigen::MatrixXd sU;
   Eigen::VectorXd sS;
   //general eig solve
