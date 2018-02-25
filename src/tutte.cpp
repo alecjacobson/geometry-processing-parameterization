@@ -15,16 +15,18 @@ void tutte(
     Eigen::VectorXi Lb;
     igl::boundary_loop(F, Lb);
     Eigen::MatrixXd boundaryUV; 
+    //map the longest boundary to unit circle
     igl::map_vertices_to_circle(V, Lb ,boundaryUV);
 
     Eigen::SparseMatrix<double> L;
     igl::cotmatrix(V, F, L);
-
+    //minnimize energy
     igl::min_quad_with_fixed_data<double> data;
-    Eigen::SparseMatrix<double> dummy(0,0);
+    Eigen::SparseMatrix<double> dummy(0,0);//dummy for placeholding
     igl::min_quad_with_fixed_precompute(L, Lb, dummy, false, data);
     Eigen::MatrixXd Z;
-    Eigen::MatrixXd dummy2(0,0); 
+
+    Eigen::MatrixXd dummy2(0,0); //dummy for placeholding
     igl::min_quad_with_fixed_solve(data, Eigen::MatrixXd::Zero(V.rows(), 2),boundaryUV, dummy2, Z);
     U = Z;
 }
