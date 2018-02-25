@@ -51,6 +51,5 @@ void tutte(
 	Eigen::SparseMatrix<double> Aeq;
 	Eigen::VectorXd Beq;
 	Eigen::VectorXd B = Eigen::VectorXd::Zero(L.rows());
-	igl::min_quad_with_fixed(L, B, bndV, UV, Aeq, Beq, false, U);  
-					// Set to false since L is negative semi-definite not positive definite
+	igl::min_quad_with_fixed(L, B, bndV, UV, Aeq, Beq, false, U); // Set to false since L is negative semi-definite not positive definite
 }

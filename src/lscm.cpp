@@ -45,7 +45,6 @@ void lscm(
 	U.col(1) = eigenvector.col(2).tail(n);
 
 	// Find canonical rotation using singular value decomposition
-	Eigen::JacobiSVD<Eigen::MatrixXd> svd(U.transpose()*U, 
-								Eigen::ComputeThinU | Eigen::ComputeThinV);
+	Eigen::JacobiSVD<Eigen::MatrixXd> svd(U.transpose()*U, Eigen::ComputeThinU | Eigen::ComputeThinV);
 	U = U * svd.matrixU();
 }
