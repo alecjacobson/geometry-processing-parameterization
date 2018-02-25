@@ -6,7 +6,6 @@ void vector_area_matrix(
   Eigen::SparseMatrix<double>& A)
 {
   int V = F.maxCoeff()+1;
-  Eigen::SparseMatrix<double> A_bar; // unsymmetrized
   A.resize(2*V,2*V);
 
   // get ordered vertices of boundary
@@ -25,7 +24,7 @@ void vector_area_matrix(
     tripletList.push_back(Eigen::Triplet<double>(i_idx + V,j_idx, -0.5));
   }
   A.setFromTriplets(tripletList.begin(), tripletList.end());
-  // Symmetrize A
+  // Symmetrize A - take average of unsymmetrize A
   A = Eigen::SparseMatrix<double>(A.transpose()) + A;
   A *= 0.5;
 }

@@ -4,6 +4,7 @@
 #include <igl/cotmatrix.h>
 #include <igl/eigs.h>
 #include <igl/repdiag.h>
+#include <Eigen/SVD>
 
 void lscm(
   const Eigen::MatrixXd & V,
@@ -19,34 +20,36 @@ void lscm(
   // Get Laplacian
   Eigen::SparseMatrix<double> L;
   igl::cotmatrix(V,F,L);
-  std::cout << L.row(0) << std::endl;
-
   // Create Q;
-  Eigen::MatrixXd Q(V_size *2, V_size * 2);
-  Q.block(0,0,V_size, V_size) = Eigen::MatrixXd(L);
-  std::cout << "block one" << std::endl;
-  Q.block(V_size,V_size, V_size, V_size) = L;
-  std::cout << "block two" << std::endl;
-  Eigen::SparseMatrix<double> Q_sparse = Q.sparseView() - A;
-  std::cout << "block operations" << std::endl;
+  Eigen::SparseMatrix<double> Q;
+  igl::repdiag(L, 2, Q);
+  Q = Q - A;
 
   // Get M - mass matrix
-  std::cout << "creating M..." << std::endl;
   Eigen::SparseMatrix<double> M;
   igl::massmatrix(V,F,igl::MASSMATRIX_TYPE_DEFAULT,M);
-
   // Create B
-  std::cout << "creating B..." << std::endl;
-  Eigen::MatrixXd B(2*V_size,2*V_size);
-  B.setZero();
-  B.block(0,0,V_size, V_size) = M;
-  B.block(V_size,V_size, V_size, V_size) = M;
-  Eigen::SparseMatrix<double> B_sparse = B.sparseView();
+  Eigen::SparseMatrix<double> B;
+  igl::repdiag(M, 2, B);
 
   // get second-smallest eigen-value
+  // minv½v𝖳Qv subject to v𝖳Bv=1
+  // v is 1D with 2*V_size entries, eigenvectors also have this size
   Eigen::MatrixXd sU;
   Eigen::VectorXd sS;
-  std::cout << "gets here" << std::endl;
-  igl::eigs(Q_sparse,B_sparse,2,igl::EIGS_TYPE_SM,sU,sS);
-  std::cout << sS << std::endl;
+  int k = 4; // eigs works in decreasing order, k = 4 works well for beetle
+  igl::eigs(Q,B,k,igl::EIGS_TYPE_SM,sU,sS);
+
+  // Set U from the eigenvector corresponding to smallest eigenvalue
+  U.resize(V_size, 2);
+  U.col(0) = sU.col(k-1).head(V_size); // x coordinates in first half
+  U.col(1) = sU.col(k-1).tail(V_size); // y coordinates in second half
+
+  //Canonical Rotation
+  Eigen::MatrixXd covariance(2,2);
+  covariance = U.transpose() * U;
+  Eigen::JacobiSVD<Eigen::MatrixXd> svd( covariance, Eigen::ComputeThinU | Eigen::ComputeThinV);
+  // matrixU and matrixV.transpose() are the same..
+  // pick one and rotate U by it to align with x-axis
+  U *= svd.matrixU();
 }
