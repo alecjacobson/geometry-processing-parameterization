@@ -5,6 +5,7 @@ void vector_area_matrix(
   Eigen::SparseMatrix<double>& A)
 {
   // Replace with your code
-  A.resize(F.maxCoeff()+1,F.maxCoeff()+1);
+  int V_size = F.maxCoeff()+1;
+  A.resize(V_size*2,V_size*2);
 }
 
