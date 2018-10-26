@@ -1,0 +1,3 @@
+[submodule "geometry-processing-shared"]
+	path = geometry-processing-shared
+	url = https://github.com/alecjacobson/geometry-processing-shared.git
