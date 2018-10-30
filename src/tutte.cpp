@@ -14,7 +14,7 @@ void tutte(
   std::vector<T> tripletList;
   tripletList.reserve(edges.rows()*4);
 
-  // construst weighted graph laplacian
+  // construct weighted graph laplacian
   Eigen::SparseMatrix<double> L;
   for (int i = 0; i < edges.rows(); i++){
     // loop over edges
