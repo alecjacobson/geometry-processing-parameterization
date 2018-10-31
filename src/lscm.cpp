@@ -109,15 +109,18 @@ void lscm(
   U_bef_rota.block(0, 1, V.rows(), 1) = U_vec_best.block(V.rows(), 0, V.rows(), 1);
 
 
-  // rotation and translation
+  // rotation 
   Eigen::MatrixXd R(2,2);
-  Eigen::MatrixXd T(2,2);
 
+  // dummy matrices for input to polar_svd
+  Eigen::MatrixXd R_dummy, T_dummy, S_dummy, V_dummy;
 
   Eigen::MatrixXd U_corr = U_bef_rota.transpose()*U_bef_rota;
 
-  // get the canonical rotation 
-  igl::polar_svd(U_corr, R, T);
+  // get the canonical rotation as the U in SVD i.e. SVD(A'A) = UDU'
+  igl::polar_svd(U_corr, R_dummy, T_dummy, R, S_dummy, V_dummy);
+
+  //std::cout<<R<<std::endl<<U_corr<<std::endl;
 
   U.resize(V.rows(), 2);
 
