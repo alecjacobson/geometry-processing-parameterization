@@ -18,7 +18,7 @@ void lscm(
     Q = igl::repdiag(L, 2) - A;
     B = igl::repdiag(M, 2);
 
-    Eigen::MatrixXd sU, unrotated;
+    Eigen::MatrixXd sU;
     Eigen::VectorXd sS;
     igl::eigs(Q, B, 3, igl::EIGS_TYPE_SM, sU, sS);
 

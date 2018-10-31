@@ -28,11 +28,11 @@ void vector_area_matrix(
             int v1 = b[j];
             int v2 = b[(j + 1) % b.size()];
 
-            triplets.push_back(T(V_size + v2, v1, 0.25));
-            triplets.push_back(T(v2, V_size + v1, -0.25));
+            triplets.push_back(T(V_size + v2, v1, 0.5));
+            triplets.push_back(T(v2, V_size + v1, -0.5));
 
-            triplets.push_back(T(v1, V_size + v2, 0.25));
-            triplets.push_back(T(V_size + v1, v2, -0.25));
+            triplets.push_back(T(v1, V_size + v2, 0.5));
+            triplets.push_back(T(V_size + v1, v2, -0.5));
         }
     }
 
