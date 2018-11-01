@@ -2,7 +2,7 @@
 #include "lscm.h"
 #include <igl/read_triangle_mesh.h>
 #include <igl/per_vertex_normals.h>
-#include <igl/viewer/Viewer.h>
+#include <igl/opengl/glfw/Viewer.h>
 #include <Eigen/Core>
 #include <string>
 #include <iostream>
@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
   Eigen::MatrixXi F;
   igl::read_triangle_mesh(
     (argc>1?argv[1]:"../shared/data/beetle.obj"),V,F);
-  igl::viewer::Viewer viewer;
+  igl::opengl::glfw::Viewer viewer;
   std::cout<<R"(
 [space]  Toggle whether displaying 3D surface or 2D parameterization
 C,c      Toggle checkerboard
@@ -40,18 +40,18 @@ l        Switch parameterization to Least squares conformal mapping
     if(plot_parameterization)
     {
       // Viewer wants 3D coordinates, so pad UVs with column of zeros
-      viewer.data.set_vertices(
+      viewer.data().set_vertices(
         (Eigen::MatrixXd(V.rows(),3)<<
          U.col(0),Eigen::VectorXd::Zero(V.rows()),U.col(1)).finished());
     }else
     {
-      viewer.data.set_vertices(V);
+      viewer.data().set_vertices(V);
     }
-    viewer.data.compute_normals();
-    viewer.data.set_uv(U*10);
+    viewer.data().compute_normals();
+    viewer.data().set_uv(U*10);
   };
   viewer.callback_key_pressed = 
-    [&](igl::viewer::Viewer &, unsigned int key, int)
+    [&](igl::opengl::glfw::Viewer &, unsigned int key, int)
   {
     switch(key)
     {
@@ -66,7 +66,7 @@ l        Switch parameterization to Least squares conformal mapping
         break;
       case 'C':
       case 'c':
-        viewer.core.show_texture ^= 1;
+        viewer.data().show_texture ^= 1;
         break;
       default:
         return false;
@@ -76,13 +76,13 @@ l        Switch parameterization to Least squares conformal mapping
   };
 
   U = U_tutte;
-  viewer.data.set_mesh(V,F);
+  viewer.data().set_mesh(V,F);
   Eigen::MatrixXd N;
   igl::per_vertex_normals(V,F,N);
-  viewer.data.set_colors(N.array()*0.5+0.5);
+  viewer.data().set_colors(N.array()*0.5+0.5);
   update();
-  viewer.core.show_texture = true;
-  viewer.core.show_lines = false;
+  viewer.data().show_texture = true;
+  viewer.data().show_lines = false;
   viewer.launch();
 
   return EXIT_SUCCESS;
