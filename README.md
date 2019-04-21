@@ -374,7 +374,8 @@ edge's unit normal vector:
 \\[
 ∮_{∂(\u(\S))} \u(s)⋅\n(s) \ ds = \\
   ∑\limits_{\{i,j\} ∈ ∂\S} ∫_0^1 
-    ½ (\u_i + t(\u_j - \u_i))⋅\frac{(\u_j-\u_i)^⊥}{‖\u_j - \u_i‖} \ dt = \\
+    ½ (\u_i + t(\u_j - \u_i))⋅\frac{(\u_j-\u_i)^⊥}{‖\u_j - \u_i‖} \
+    \frac{ds}{dt}\  dt = \\
   ½ ∑\limits_{\{i,j\} ∈ ∂\S} (\u_j-\u_i)⋅(\u_j-\u_i)^⊥ = \\
   ½ ∑\limits_{\{i,j\} ∈ ∂\S} | \u_i\  \u_j |,
 \\]
