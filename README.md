@@ -360,7 +360,7 @@ convert this area integral into a boundary integral:
 
 \\[
 ∫_{\left(\begin{array}{c}u(\S) \\ v(\S) \end{array}\right)} 1 \ dA
-= ∮_{∂\left(\begin{array}{c}u(\S) \\ v(\S) \end{array}\right)} \u(s)⋅\n(s) \ ds,
+= ½ ∮_{∂\left(\begin{array}{c}u(\S) \\ v(\S) \end{array}\right)} \u(s)⋅\n(s) \ ds,
 \\]
 where $\n$ is the unit vector pointing in the outward direction along the
 boundary of the image of the mapping.
@@ -372,11 +372,14 @@ boundary edges of the integral of the position vector $\u$ dotted with that
 edge's unit normal vector:
 
 \\[
-∮_{∂(\u(\S))} \u(s)⋅\n(s) \ ds = \\
-  ∑\limits_{\{i,j\} ∈ ∂\S} ∫_0^1 
-    ½ (\u_i + t(\u_j - \u_i))⋅\frac{(\u_j-\u_i)^⊥}{‖\u_j - \u_i‖} \
+½ ∮_{∂(\u(\S))} \u(s)⋅\n(s) \ ds = \\
+  ½ ∑\limits_{\{i,j\} ∈ ∂\S} ∫_0^1 
+     (\u_i + t(\u_j - \u_i))⋅\frac{(\u_j-\u_i)^⊥}{‖\u_j - \u_i‖} \
     \frac{ds}{dt}\  dt = \\
-  ½ ∑\limits_{\{i,j\} ∈ ∂\S} (\u_j-\u_i)⋅(\u_j-\u_i)^⊥ = \\
+  ½ ∑\limits_{\{i,j\} ∈ ∂\S} ∫_0^1 
+     (\u_i + t(\u_j - \u_i))⋅\frac{(\u_j-\u_i)^⊥}{‖\u_j - \u_i‖} \
+    ‖\u_j - \u_i‖ \  dt = \\
+  ½ ∑\limits_{\{i,j\} ∈ ∂\S} ∫_0^1  \u_i⋅(\u_j-\u_i)^⊥  dt = \\
   ½ ∑\limits_{\{i,j\} ∈ ∂\S} | \u_i\  \u_j |,
 \\]
 where finally we have a simply quadratic expression: sum over all boundary
