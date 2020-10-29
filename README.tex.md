@@ -189,7 +189,7 @@ Laplacian](https://en.wikipedia.org/wiki/Laplacian_matrix)). If $w_{ij}$ is
 based on edge-lengths, then $\mathbf{L}$ corresponds to a physical static equilibrium
 problem for a linear spring system. 
 
-But we have more information then edges: we know that our graph is really a
+But we have more information than edges: we know that our graph is really a
 discrete representation of a two-dimensional surface. Wobbliness distortions in
 the parameterization correspond to high _variation_ in the $u$ and $v$
 functions over the surface.

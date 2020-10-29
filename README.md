@@ -162,7 +162,7 @@ Laplacian](https://en.wikipedia.org/wiki/Laplacian_matrix)). If <img src="./tex/
 based on edge-lengths, then <img src="./tex/80637df1ca7533740cc7b3fdd1ab540b.svg?invert_in_darkmode" align=middle width=11.36979854999999pt height=22.55708729999998pt/> corresponds to a physical static equilibrium
 problem for a linear spring system. 
 
-But we have more information then edges: we know that our graph is really a
+But we have more information than edges: we know that our graph is really a
 discrete representation of a two-dimensional surface. Wobbliness distortions in
 the parameterization correspond to high _variation_ in the <img src="./tex/6dbb78540bd76da3f1625782d42d6d16.svg?invert_in_darkmode" align=middle width=9.41027339999999pt height=14.15524440000002pt/> and <img src="./tex/6c4adbc36120d62b98deef2a20d5d303.svg?invert_in_darkmode" align=middle width=8.55786029999999pt height=14.15524440000002pt/>
 functions over the surface.
