@@ -49,7 +49,8 @@ In general, a 3D surface cannot be flattened onto the plane without
 _**distortion**_. Some parts of the surface will have to be stretched and other
 squished. Surfaces with [topological
 handles](https://en.wikipedia.org/wiki/Handle_decomposition) or without [a
-boundary](https://en.wikipedia.org/wiki/Surface_(topology)#Closed_surfaces) 
+boundary](https://en.wikipedia.org/wiki/Surface_(topology)#Closed_surfaces) must be
+cut. 
 
 ### Mass-spring methods
 
@@ -115,8 +116,8 @@ stiffness  <img src="./tex/64e70e84545b2941bed8aa7fe2211cde.svg?invert_in_darkmo
 
 
 For example, we could weigh the distortion of shorter edges (on the 3D mesh)
-more than longer ones: <img src="./tex/98cfd14aaed04f2386a2169b68c44d6c.svg?invert_in_darkmode" align=middle width=130.58488244999998pt height=24.65753399999998pt/>. See "Parametrization and
-smooth approximation of surface triangulations" [Floater 1996]. This will at
+more than longer ones: <img src="./tex/98cfd14aaed04f2386a2169b68c44d6c.svg?invert_in_darkmode" align=middle width=130.58488244999998pt height=24.65753399999998pt/>. See ["Parametrization and
+smooth approximation of surface triangulations" [Floater 1996]](papers/Floater97.pdf). This will at
 best help tame _**length distortion**_. The "shapes" (i.e., aspect ratios) of
 triangles will only be indirectly preserved. We need a way to discourage _area
 distortion_ and _angle distortion_.
@@ -188,7 +189,7 @@ Laplacian_ as <img src="./tex/80637df1ca7533740cc7b3fdd1ab540b.svg?invert_in_dar
 > _sufficient_ condition for injectivity, but this [does not
 > imply](https://en.wikipedia.org/wiki/Denying_the_antecedent) that having a
 > few negative weights will necessarily cause a fold-over. Even so, Floater
-> proposes an alternative discrete Laplacian in "Mean value coordinates" in
+> proposes an alternative discrete Laplacian in ["Mean value coordinates"](papers/Floater03.pdf) in
 > 2003 that retains some nice shape-preserving properties without negative
 > weights.
 
@@ -269,9 +270,9 @@ energy that minimizes deviation from satisfying this equation over the surface
 
 
 This energy was employed for surface parameterization of triangle meshes as
-early as "Intrinsic parameterizations of surface meshes" [Desbrun et al. 2002]
-and "Least squares conformal maps for automatic texture atlas generation" [Lévy
-et al. 2002]. Written in this form, it's perhaps not obvious how we can discretize
+early as ["Intrinsic parameterizations of surface meshes" [Desbrun et al. 2002]](papers/desbrun02.pdf)
+and ["Least squares conformal maps for automatic texture atlas generation" [Lévy
+et al. 2002]](papers/Levy02.pdf). Written in this form, it's perhaps not obvious how we can discretize
 this over a triangle mesh. Let us massage the equations a bit, starting by
 expanding the squared term:
 
@@ -425,8 +426,8 @@ solutions. There are _two_ trivial solutions. They correspond to mapping all
 [_vice-versa_](https://en.wikipedia.org/wiki/List_of_Latin_phrases_(V)#vice_versa).
 These solutions will have _zero_ energy and thus their corresponding
 eigenvalues <img src="./tex/1b109d8b4484cf614f27126d788c510e.svg?invert_in_darkmode" align=middle width=9.58908224999999pt height=22.831056599999986pt/> will be zero. The _next_ eigenmode (with next smallest
-eigenvalue) will satisfy all of our criteria. See "Spectral conformal
-parameterization" [Mullen et al. 2008].
+eigenvalue) will satisfy all of our criteria. See ["Spectral conformal
+parameterization" [Mullen et al. 2008]](papers/Mullen08.pdf).
 
 > This eigenvector is sometimes called the [Fiedler
 > vector](https://en.wikipedia.org/wiki/Algebraic_connectivity#Fiedler_vector).
