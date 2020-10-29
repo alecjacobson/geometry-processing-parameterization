@@ -1,6 +1,7 @@
 #ifndef TUTTE_H
 #define TUTTE_H
 #include <Eigen/Core>
+#include <Eigen/Sparse>
 // Given a 3D mesh (`V`,`F`) with a disk topology (i.e., a manifold with single
 // boundary), compute a 2D parameterization according to Tutte's mapping inside
 // the unit disk. All boundary vertices should be mapped to the unit circle and
