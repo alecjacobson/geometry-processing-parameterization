@@ -535,13 +535,13 @@ $$
 >
 > This occurs when $\partial \mathcal{L}/\partial \mathbf{v} = 0$ and $\partial \mathcal{L}/\partial {\lambda} = 0$:
 >
-> \begin{align*}
+> \begin{align\*}
 
 \mathbf{A} \mathbf{v} - {\lambda} \mathbf{B} \mathbf{v}  = 0 & \Rightarrow \mathbf{A} \mathbf{v} = {\lambda} \mathbf{B} \mathbf{v},\\\\
 
 1 - \mathbf{v}^{\mathsf T} \mathbf{B} \mathbf{v} = 0 &\Rightarrow \mathbf{v}^{\mathsf T} \mathbf{B} \mathbf{v} = 1. \\\\
 
-\end{align*}
+\end{align\*}
 >
 > This is the canonical form of the 
 > [generalized Eigen value
