@@ -546,9 +546,9 @@ $$
 $$
 \begin{align*}
 
-\mathbf{A} \mathbf{v} - {\lambda} \mathbf{B} \mathbf{v}  = 0 & \Rightarrow \mathbf{A} \mathbf{v} = {\lambda} \mathbf{B} \mathbf{v},\\\\
+\mathbf{A} \mathbf{v} - {\lambda} \mathbf{B} \mathbf{v}  = 0 & \Rightarrow \mathbf{A} \mathbf{v} = {\lambda} \mathbf{B} \mathbf{v},\\
 
-1 - \mathbf{v}^{\mathsf T} \mathbf{B} \mathbf{v} = 0 &\Rightarrow \mathbf{v}^{\mathsf T} \mathbf{B} \mathbf{v} = 1. \\\\
+1 - \mathbf{v}^{\mathsf{T}} \mathbf{B} \mathbf{v} = 0 &\Rightarrow \mathbf{v}^{\mathsf{T}} \mathbf{B} \mathbf{v} = 1. \\
 
 \end{align*}
 $$
