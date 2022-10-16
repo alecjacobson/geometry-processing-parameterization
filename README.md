@@ -114,6 +114,7 @@ stretching.](images/keenan-ogre-tutte.jpg)
 
 We can try to remedy this by introducing a non-uniform weight or spring
 stiffness  $w_{ij}$ for each edge $\{i,j\}$:
+
 $$
 \mathop{\text{min}}_\mathbf{U}  \sum\limits_{\{i,j\} \in  \mathbf{E}} w_{ij} \| \mathbf{u}_i - \mathbf{u}_j\|^{2}.
 $$
