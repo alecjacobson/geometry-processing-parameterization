@@ -398,8 +398,7 @@ edge's unit normal vector:
 where finally we have a simply quadratic expression: sum over all boundary
 edges the determinant of the matrix with vertex positions as columns. This
 quadratic form can be written as $\mathbf{U}^{\mathsf T} \mathbf{A} \mathbf{U}$ with the _vectorized_
-$u$- and $v$-coordinates of the mapping in $\mathbf{U} \in  \mathbb{R}^{2n}$ and $ \mathbf{A} \in  \mathbb{R}^{2n \times 
-2n} $ a sparse matrix involving only values for vertices on the boundary of
+$u$- and $v$-coordinates of the mapping in $\mathbf{U} \in  \mathbb{R}^{2n}$ and $\mathbf{A} \in  \mathbb{R}^{2n}$ a sparse matrix involving only values for vertices on the boundary of
 $\mathbf{S}$. 
 
 
