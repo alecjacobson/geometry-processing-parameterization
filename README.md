@@ -130,7 +130,7 @@ distortion_ and _angle distortion_.
 To do this, let's write the energy minimization problem above in matrix form:
 
 $$
-\mathop{\text{min}}_\mathbf{U} \frac12  \mathop\text{tr}{\left(\mathbf{U}^{\mathsf T} \mathbf{L} \mathbf{U}\right)},
+\mathop{\text{min}}_\mathbf{U} \frac12  \mathop{\text{tr}}{\left(\mathbf{U}^{\mathsf T} \mathbf{L} \mathbf{U}\right)},
 $$
 
 where $\mathbf{L} \in  \mathbb{R}^{n \times  n}$ is a sparse matrix with:
