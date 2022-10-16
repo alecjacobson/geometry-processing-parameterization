@@ -536,8 +536,11 @@ $$
 > This occurs when $\partial \mathcal{L}/\partial \mathbf{v} = 0$ and $\partial \mathcal{L}/\partial {\lambda} = 0$:
 >
 > \begin{align*}
-\mathbf{A} \mathbf{v} - {\lambda} \mathbf{B} \mathbf{v}  = 0 & \Rightarrow  \mathbf{A} \mathbf{v} = {\lambda} \mathbf{B} \mathbf{v},\\
-1 - \mathbf{v}^{\mathsf T} \mathbf{B} \mathbf{v} = 0 &\Rightarrow   \mathbf{v}^{\mathsf T} \mathbf{B} \mathbf{v} = 1.
+
+\mathbf{A} \mathbf{v} - {\lambda} \mathbf{B} \mathbf{v}  = 0 & \Rightarrow \mathbf{A} \mathbf{v} = {\lambda} \mathbf{B} \mathbf{v},\\
+
+1 - \mathbf{v}^{\mathsf T} \mathbf{B} \mathbf{v} = 0 &\Rightarrow \mathbf{v}^{\mathsf T} \mathbf{B} \mathbf{v} = 1. \\
+
 \end{align*}
 >
 > This is the canonical form of the 
@@ -571,9 +574,7 @@ coordinates in the first column and $v$ coordinates in the second column).
 
 For mappings with strong reflectional symmetry then singular value
 decomposition on the [covariance
-matrix](https://en.wikipedia.org/wiki/Covariance) $\mathbf{U}^{\mathsf T} \mathbf{U} \in  \mathbb{R}^{2 \times 2}$ will produce a rotation that aligns the principle direction of $\mathbf{U}$ with the "
-$x$
-"-axis of the parametric domain.
+matrix](https://en.wikipedia.org/wiki/Covariance) $\mathbf{U}^{\mathsf T} \mathbf{U} \in  \mathbb{R}^{2 \times 2}$ will produce a rotation that aligns the principle direction of $\mathbf{U}$ with the " $x$ "-axis of the parametric domain.
 
 ![The least squares conformal mapping of the 3D Ogre mesh with natural boundary
 conditions produces a more smooth, less distorted and canonically aligned
