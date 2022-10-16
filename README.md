@@ -535,7 +535,9 @@ $$
 >
 > This occurs when $\partial \mathcal{L}/\partial \mathbf{v} = 0$ and $\partial \mathcal{L}/\partial {\lambda} = 0$:
 >
-> $$
+>
+
+$$
 \begin{align*}
 
 \mathbf{A} \mathbf{v} - {\lambda} \mathbf{B} \mathbf{v}  = 0 & \Rightarrow \mathbf{A} \mathbf{v} = {\lambda} \mathbf{B} \mathbf{v},\\\\
@@ -544,6 +546,7 @@ $$
 
 \end{align*}
 $$
+
 >
 > This is the canonical form of the 
 > [generalized Eigen value
