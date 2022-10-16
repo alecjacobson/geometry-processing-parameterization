@@ -383,6 +383,7 @@ of the mapping will also be piecewise linear and the boundary integral for the
 boundary edges of the integral of the position vector $\mathbf{u}$ dotted with that
 edge's unit normal vector:
 
+$$
 \begin{align*}
 \frac12  \oint_{\partial (\mathbf{u}(\mathbf{S}))} \mathbf{u}(s)\cdot \mathbf{n}(s) \ ds 
   &= \frac12  \sum\limits_{\{i,j\} \in  \partial \mathbf{S}} \int_0^1 
@@ -394,6 +395,7 @@ edge's unit normal vector:
   &= \frac12  \sum\limits_{\{i,j\} \in  \partial \mathbf{S}} \int_0^1  \mathbf{u}_i\cdot (\mathbf{u}_j-\mathbf{u}_i)^\perp  dt \\
   &= \frac12  \sum\limits_{\{i,j\} \in  \partial \mathbf{S}} | \mathbf{u}_i\  \mathbf{u}_j |,
 \end{align*}
+$$
 
 where finally we have a simply quadratic expression: sum over all boundary
 edges the determinant of the matrix with vertex positions as columns. This
@@ -535,18 +537,13 @@ $$
 >
 > This occurs when $\partial \mathcal{L}/\partial \mathbf{v} = 0$ and $\partial \mathcal{L}/\partial {\lambda} = 0$:
 >
->
+> \begin{align*}
 
-$$
-\begin{align*}
+\mathbf{A} \mathbf{v} - {\lambda} \mathbf{B} \mathbf{v}  = 0 & \Rightarrow \mathbf{A} \mathbf{v} = {\lambda} \mathbf{B} \mathbf{v},\\\\
 
-\mathbf{A} \mathbf{v} - {\lambda} \mathbf{B} \mathbf{v}  = 0 & \Rightarrow \mathbf{A} \mathbf{v} = {\lambda} \mathbf{B} \mathbf{v},\\
-
-1 - \mathbf{v}^{\mathsf T} \mathbf{B} \mathbf{v} = 0 &\Rightarrow \mathbf{v}^{\mathsf T} \mathbf{B} \mathbf{v} = 1. \\
+1 - \mathbf{v}^{\mathsf T} \mathbf{B} \mathbf{v} = 0 &\Rightarrow \mathbf{v}^{\mathsf T} \mathbf{B} \mathbf{v} = 1. \\\\
 
 \end{align*}
-$$
-
 >
 > This is the canonical form of the 
 > [generalized Eigen value
