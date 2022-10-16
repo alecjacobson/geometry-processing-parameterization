@@ -413,11 +413,13 @@ form](https://en.wikipedia.org/wiki/Quadratic_form) it is trivial to
 _symmetrize_. Consider we have some asymmetric matrix $\tilde{\mathbf{A}}$ defining a
 quadratic form: $\mathbf{x}^{\mathsf T} \tilde{\mathbf{A}} \mathbf{x}$. The output of a quadratic form is
 just a scalar, so it's equal to its transpose: 
+
 $$
 \mathbf{x}^{\mathsf T} \tilde{\mathbf{A}} \mathbf{x} = \mathbf{x}^{\mathsf T} \tilde{\mathbf{A}}^{\mathsf T} \mathbf{x}.
 $$
 
 These are also equal to their average:
+
 $$
 \mathbf{x}^{\mathsf T} \tilde{\mathbf{A}} \mathbf{x} = 
 \mathbf{x}^{\mathsf T} 
