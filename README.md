@@ -289,6 +289,7 @@ directions on the parameteric plane $\mathbb{R}^{2}$. We can capture this by req
 that a small change in the $x$ and $y$ directions on $\mathbf{S}$ corresponds to equal
 magnitude, small changes in $u$ and $v$ in perpendicular directions:
 
+$$
 \begin{align*}
 {\nabla}u &= {\nabla}v^\perp \\
 &\downarrow \\
@@ -302,6 +303,7 @@ magnitude, small changes in $u$ and $v$ in perpendicular directions:
 -\frac{\partial v}{\partial x} \\
 \end{bmatrix}
 \end{align*}
+$$
 
 where $\mathbf{x}^\perp$ indicates the vector $\mathbf{x}$ rotated by $90^\circ$.
 
@@ -342,6 +344,7 @@ energies](https://en.wikipedia.org/wiki/Dirichlet's_energy) of $u$ and $v$.  The
 at first glance not familiar. Let's massage it a bit by expanding the gradient
 and dot product:
 
+$$
 \begin{align*}
 \int_\mathbf{S}  {\nabla}u \cdot  {\nabla}v^\perp \ dA &= \\
 \int_\mathbf{S} \left( \begin{array}{r}
@@ -360,6 +363,7 @@ and dot product:
 \right| \ dA &= 
 \int_{\left(\begin{array}{c}u(\mathbf{S}) \\ v(\mathbf{S}) \end{array}\right)} 1 \ dA,
 \end{align*}
+$$
 
 where we end up with the integrated [determinant of the
 Jacobian](https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant) of the
@@ -538,13 +542,17 @@ $$
 >
 > This occurs when $\partial \mathcal{L}/\partial \mathbf{v} = 0$ and $\partial \mathcal{L}/\partial {\lambda} = 0$:
 >
-> \begin{align*}
+
+$$
+\begin{align*}
 
 \mathbf{A} \mathbf{v} - {\lambda} \mathbf{B} \mathbf{v}  = 0 & \Rightarrow \mathbf{A} \mathbf{v} = {\lambda} \mathbf{B} \mathbf{v},\\\\
 
 1 - \mathbf{v}^{\mathsf T} \mathbf{B} \mathbf{v} = 0 &\Rightarrow \mathbf{v}^{\mathsf T} \mathbf{B} \mathbf{v} = 1. \\\\
 
 \end{align*}
+$$
+
 >
 > This is the canonical form of the 
 > [generalized Eigen value
