@@ -150,10 +150,10 @@ $$
 > $\mathbf{U} \in  \mathbb{R}^{n\times 2}$ with two columns. The energy is written as the
 > [trace](https://en.wikipedia.org/wiki/Trace_(linear_algebra)) of the
 > quadratic form (a.k.a. matrix) $\mathbf{Q} \in  \mathbb{R}^{n\times n}$ applied to $\mathbf{U}$. In effect,
-> this is really applying $\mathbf{Q}$ to each column of $\mathbf{U}$ independently and summing
-> the result:
+> this is really applying $\mathbf{Q}$ to each column of $\mathbf{U}$ independently and summing the result:
 >
 
+$$
 \begin{align*}
 \mathop\text{tr}{\left(\mathbf{U}^{\mathsf T} \mathbf{Q} \mathbf{U}\right)} &= \\
                          &= \mathop\text{tr}{\left(\mathbf{U}^{\mathsf T} \mathbf{Q} \mathbf{U}\right)} \\
@@ -170,6 +170,7 @@ $$
                                  \\
                         &= \mathbf{U}_1^{\mathsf T} \mathbf{Q} \mathbf{U}_1 + \mathbf{U}_2^{\mathsf T} \mathbf{Q} \mathbf{U}_2.
 \end{align*}
+$$
 
 >
 > The benefits of energies written as the trace of a quadratic form applied to a
