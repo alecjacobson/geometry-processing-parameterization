@@ -144,7 +144,7 @@ w_{ij} & \text{ if $i\ne j$ and $\exists  \{ij\} \in  \mathbf{E}$, }\\
 $$
 
 
-> #### What's up with the $\mathop\text{tr}{\left(\right)}$ in the energy?
+> #### What's up with the $\mathop{\text{tr}}{\left(\right)}$ in the energy?
 >
 > The degrees of freedom in our optimization are a collected in the _matrix_
 > $\mathbf{U} \in  \mathbb{R}^{n\times 2}$ with two columns. The energy is written as the
