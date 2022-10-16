@@ -529,7 +529,7 @@ $$
 > scalar Lagrange multiplier ${\lambda}$ and looking for the saddle-point of the
 > _Lagrangian_:
 > 
-$$
+> $$
 \mathcal{L}(\mathbf{v},{\lambda}) = \frac12  \mathbf{v}^{\mathsf T} \mathbf{A} \mathbf{v} + {\lambda} (1 - \mathbf{v}^{\mathsf T} \mathbf{B} \mathbf{v} ).
 $$
 >
