@@ -402,7 +402,7 @@ $u$- and $v$-coordinates of the mapping in $\mathbf{U} \in  \mathbb{R}^{2n}$ and
 $\mathbf{S}$. 
 
 
-**_Achtung!_** A naive implementation of $\frac12$ into matrix form $\mathbf{U}^{\mathsf T} \mathbf{A} \mathbf{U}$ will likely produce an
+**_Achtung!_** A naive implementation of $\frac12  \sum \limits_{\{i,j\} \in  \partial \mathbf{S}} | \mathbf{u}_i \mathbf{u}_j |$ into matrix form $\mathbf{U}^{\mathsf T} \mathbf{A} \mathbf{U}$ will likely produce an
 _asymmetric_ matrix $\mathbf{A}$. From a theoretical point of view, this is fine.
 $\mathbf{A}$ just needs to compute the signed area of the flattened mesh. However, from
 a numerical methods point of view we will almost always need our quadratic
