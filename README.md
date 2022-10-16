@@ -155,8 +155,8 @@ $$
 
 $$
 \begin{align*}
-\mathop\text{tr}{\left(\mathbf{U}^{\mathsf T} \mathbf{Q} \mathbf{U}\right)} &= \\
-                         &= \mathop\text{tr}{\left(\mathbf{U}^{\mathsf T} \mathbf{Q} \mathbf{U}\right)} \\
+\mathop{\text{tr}}{\left(\mathbf{U}^{\mathsf T} \mathbf{Q} \mathbf{U}\right)} &= \\
+                         &= \mathop{\text{tr}}{\left(\mathbf{U}^{\mathsf T} \mathbf{Q} \mathbf{U}\right)} \\
                          &= \newcommand{\tr}[1]{\mathop{\text{tr}}\left(#1\right)}\tr{
                                  \left[\begin{array}{c}
                                  \mathbf{U}_1^{\mathsf T}\\
