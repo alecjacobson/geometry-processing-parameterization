@@ -440,7 +440,7 @@ Putting this together with the Dirichlet energy terms, we can write the
 discrete _least squares conformal mappings_ minimization problem as:
 
 $$
-\mathop{\text{min}}_{\mathbf{U} \in  \mathbb{R}^{2n}} 
+\mathop{\text{min}}\_{\mathbf{U} \in  \mathbb{R}^{2n}} 
   \mathbf{U}^{\mathsf T} 
   \underbrace{
   \left(
@@ -450,9 +450,9 @@ $$
     0 & \mathbf{L}
   \end{array}
   \right)
-  - \mathbf{A}
+  \- \mathbf{A}
   \right)
-  }_{\mathbf{Q}}
+  }\_{\mathbf{Q}}
   \mathbf{U},
 $$
 
