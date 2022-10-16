@@ -134,6 +134,7 @@ $$
 $$
 
 where $\mathbf{L} \in  \mathbb{R}^{n \times  n}$ is a sparse matrix with:
+
 $$
 L_{ij} = \begin{cases}
 w_{ij} & \text{ if $i\ne j$ and $\exists  \{ij\} \in  \mathbf{E}$, }\\
