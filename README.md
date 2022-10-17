@@ -156,19 +156,19 @@ $$
 $$
 \begin{align*}
 \mathop{\text{tr}}{\left(\mathbf{U}^{\mathsf T} \mathbf{Q} \mathbf{U}\right)} &= \\
-                         &= \mathop{\text{tr}}{\left(\mathbf{U}^{\mathsf T} \mathbf{Q} \mathbf{U}\right)} \\
-                         &= \newcommand{\tr}[1]{\mathop{\text{tr}}\left(\#1\right)}\tr{
-                                 \left[\begin{array}{c}
-                                 \mathbf{U}_1^{\mathsf T}\\
-                                 \mathbf{U}_2^{\mathsf T}
-                                 \end{array}\right] \mathbf{Q} [\mathbf{U}_1 \mathbf{U}_2] } \\
-                         &= \newcommand{\tr}[1]{\mathop{\text{tr}}\left(\#1\right)}\tr{\begin{bmatrix}
-                                 \mathbf{U}_1^{\mathsf T} \mathbf{Q} \mathbf{U}_1 &
-                                 \mathbf{U}_1^{\mathsf T} \mathbf{Q} \mathbf{U}_2 \\
-                                 \mathbf{U}_2^{\mathsf T} \mathbf{Q} \mathbf{U}_1 &
-                                 \mathbf{U}_2^{\mathsf T} \mathbf{Q} \mathbf{U}_2 \end{bmatrix}}
-                                 \\
-                        &= \mathbf{U}_1^{\mathsf T} \mathbf{Q} \mathbf{U}_1 + \mathbf{U}_2^{\mathsf T} \mathbf{Q} \mathbf{U}_2.
+&= \mathop{\text{tr}}{\left(\mathbf{U}^{\mathsf T} \mathbf{Q} \mathbf{U}\right)} \\
+&= {\mathop{\text{tr}}\left( {
+\left[\begin{array}{c}
+\mathbf{U}_1^{\mathsf T}\\
+\mathbf{U}_2^{\mathsf T}
+\end{array}\right] \mathbf{Q} [\mathbf{U}_1 \mathbf{U}_2] } \right)} \\
+&= {\mathop{\text{tr}}\left( \begin{bmatrix}
+\mathbf{U}_1^{\mathsf T} \mathbf{Q} \mathbf{U}_1 &
+\mathbf{U}_1^{\mathsf T} \mathbf{Q} \mathbf{U}_2 \\
+\mathbf{U}_2^{\mathsf T} \mathbf{Q} \mathbf{U}_1 &
+\mathbf{U}_2^{\mathsf T} \mathbf{Q} \mathbf{U}_2 \end{bmatrix} \right)}
+\\
+&= \mathbf{U}_1^{\mathsf T} \mathbf{Q} \mathbf{U}_1 + \mathbf{U}_2^{\mathsf T} \mathbf{Q} \mathbf{U}_2.
 \end{align*}
 $$
 
