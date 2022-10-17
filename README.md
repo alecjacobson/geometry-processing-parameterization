@@ -34,11 +34,13 @@ This process is often referred to as
 because the two-dimensional coordinate system of the flattened mesh can now be
 interpreted as a parameterization of the 3D surface.
 
-![A triangle mesh of a VW
-Beetle (https://en.wikipedia.org/wiki/Volkswagen_Beetle) is parameterized by
-flattening the mesh to the $uv$ plane. There the $u$ and $v$ coordinates
+![](images/beetle-uv-parameterization-low-res.png)
+
+A triangle mesh of a [VW
+Beetle](https://en.wikipedia.org/wiki/Volkswagen_Beetle) is _parameterized_ by
+flattening the mesh to the $uv$ -plane. There the $u$- and $v$- coordinates
 (orange and white lines) can be directly interpreted as a parameterization of
-the surface. ](images/beetle-uv-parameterization-low-res.png)
+the surface.
 
 In this assignment, we are given a representation of the surface in 3D as a
 [triangle mesh](https://en.wikipedia.org/wiki/Triangle_mesh) with a list of
