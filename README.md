@@ -170,7 +170,6 @@ $$
 &= \mathbf{U}_1^{\mathsf T} \mathbf{Q} \mathbf{U}_1 + \mathbf{U}_2^{\mathsf T} \mathbf{Q} \mathbf{U}_2.
 \end{align*}
 $$
-
 >
 > The benefits of energies written as the trace of a quadratic form applied to a
 > matrix include: 1) each column can be optimized _independently_ (assuming
