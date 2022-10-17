@@ -152,8 +152,7 @@ $$
 > quadratic form (a.k.a. matrix) $\mathbf{Q} \in  \mathbb{R}^{n\times n}$ applied to $\mathbf{U}$. In effect,
 > this is really applying $\mathbf{Q}$ to each column of $\mathbf{U}$ independently and summing the result:
 >
-
-$$
+> $$
 \begin{align*}
 \mathop{\text{tr}}{\left(\mathbf{U}^{\mathsf T} \mathbf{Q} \mathbf{U}\right)} &= \\
 &= \mathop{\text{tr}}{\left(\mathbf{U}^{\mathsf T} \mathbf{Q} \mathbf{U}\right)} \\
