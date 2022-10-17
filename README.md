@@ -514,16 +514,6 @@ $$
 where $\mathbf{M} \in  \mathbb{R}^{n \times  n}$ is the _mass matrix_ for a piecewise-linear triangle
 mesh and $\mathbf{B} \in  \mathbb{R}^{2n \times  2n}$ is the sparse, square constraint matrix
 
-$$
-\begin{align*}
-
-\mathbf{A} \mathbf{v} - {\lambda} \mathbf{B} \mathbf{v}  = 0 & \Rightarrow \mathbf{A} \mathbf{v} = {\lambda} \mathbf{B} \mathbf{v},\\\\
-
-1 - \mathbf{v}^{\mathsf T} \mathbf{B} \mathbf{v} = 0 &\Rightarrow \mathbf{v}^{\mathsf T} \mathbf{B} \mathbf{v} = 1. \\\\
-
-\end{align*}
-$$
-
 This is a _quadratic constraint_. Normally that would be [bad
 news](https://en.wikipedia.org/wiki/The_Bad_News_Bears), but this type of
 constraint results in a well-studied [generalized Eigen value
@@ -552,17 +542,13 @@ $$
 >
 > This occurs when $\partial \mathcal{L}/\partial \mathbf{v} = 0$ and $\partial \mathcal{L}/\partial {\lambda} = 0$:
 >
-
+> $$
+\mathbf{A} \mathbf{v} - {\lambda} \mathbf{B} \mathbf{v} = 0 \Rightarrow \mathbf{A} \mathbf{v} = {\lambda} \mathbf{B} \mathbf{v}
 $$
-\begin{align*}
-
-\mathbf{A} \mathbf{v} - {\lambda} \mathbf{B} \mathbf{v}  = 0 & \Rightarrow \mathbf{A} \mathbf{v} = {\lambda} \mathbf{B} \mathbf{v},\\\\
-
-1 - \mathbf{v}^{\mathsf T} \mathbf{B} \mathbf{v} = 0 &\Rightarrow \mathbf{v}^{\mathsf T} \mathbf{B} \mathbf{v} = 1. \\\\
-
-\end{align*}
+>
+> $$
+1 - \mathbf{v}^{\mathsf T} \mathbf{B} \mathbf{v} = 0 \Rightarrow \mathbf{v}^{\mathsf T} \mathbf{B} \mathbf{v} = 1. \\
 $$
-
 >
 > This is the canonical form of the 
 > [generalized Eigen value
