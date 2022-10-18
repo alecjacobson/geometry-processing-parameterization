@@ -201,7 +201,7 @@ We can model the problem of parametrization as an energy minimization of
 the variation in the $u$- and $v$-coordinate functions over the surface $\mathbf{S}$:
 
 $$
-\mathop{\text{min}}\_{u,v} \int_\mathbf{S} \|\| {\nabla}u\|^{2} + \|\| {\nabla}v\|^{2} \ dA.
+\mathop{\text{min}}\_{u,v} \int_\mathbf{S} \|\| {\nabla}u\|\|^{2} + \|\| {\nabla}v\|\|^{2} \ dA.
 $$
  
 This familiar energy is called the
