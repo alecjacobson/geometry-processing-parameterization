@@ -67,10 +67,10 @@ We can pose the graph drawing problem as an optimization over node locations so
 that the lengths between neighboring vertices are minimized:
 
 $$
-\mathop{\text{min}}\_\mathbf{U}  \sum\limits_{\{i,j\} \in  \mathbf{E}} \| \mathbf{u}_i - \mathbf{u}_j\|^{2},
+\mathop{\text{min}}\_\mathbf{U}  \sum\limits_{\\{i,j\\} \in  \mathbf{E}} \|\| \mathbf{u}_i - \mathbf{u}_j\|\|^{2},
 $$
 
-where $\mathbf{E}\in \{1,\ldots ,n\}^{k \times  2}$ holds a list of edge indices into $\mathbf{V}$. This
+where $\mathbf{E}\in \\{1,\ldots ,n\\}^{k \times  2}$ holds a list of edge indices into $\mathbf{V}$. This
 energy has a physical interpretation as the [potential
 energy](https://en.wikipedia.org/wiki/Potential_energy) of
 [mass-spring](https://en.wikipedia.org/wiki/Simple_harmonic_motion#Mass_on_a_spring)
@@ -115,15 +115,15 @@ surface shows the wobbliness of the non-smooth mapping and
 stretching.](images/keenan-ogre-tutte.jpg)
 
 We can try to remedy this by introducing a non-uniform weight or spring
-stiffness  $w_{ij}$ for each edge $\{i,j\}$:
+stiffness  $w_{ij}$ for each edge $\\{i,j\\}$:
 
 $$
-\mathop{\text{min}}\_\mathbf{U}  \sum\limits_{\{i,j\} \in  \mathbf{E}} w_{ij} \| \mathbf{u}_i - \mathbf{u}_j\|^{2}.
+\mathop{\text{min}}\_\mathbf{U}  \sum\limits_{\\{i,j\\} \in  \mathbf{E}} w_{ij} \|\| \mathbf{u}_i - \mathbf{u}_j\|\|^{2}.
 $$
 
 
 For example, we could weigh the distortion of shorter edges (on the 3D mesh)
-more than longer ones: $w_{ij} = 1/\| \mathbf{v}_i - \mathbf{v}_j\| $. See ["Parametrization and
+more than longer ones: $w_{ij} = 1/\|\| \mathbf{v}_i - \mathbf{v}_j\|\| $. See ["Parametrization and
 smooth approximation of surface triangulations" [Floater 1996]](papers/Floater97.pdf). This will at
 best help tame _**length distortion**_. The "shapes" (i.e., aspect ratios) of
 triangles will only be indirectly preserved. We need a way to discourage _area
@@ -139,7 +139,7 @@ where $\mathbf{L} \in  \mathbb{R}^{n \times  n}$ is a sparse matrix with:
 
 $$
 L_{ij} = \begin{cases}
-w_{ij} & \text{ if $i\ne j$ and $\exists  \{ij\} \in  \mathbf{E}$, }\\
+w_{ij} & \text{ if $i\ne j$ and $\exists  \\{ij\\} \in  \mathbf{E}$, }\\
 -\sum\limits_{\ell\ne i} L_{i\ell} & \text{ if $i = j$, or } \\
 0 & \text{ otherwise}
 \end{cases}.
@@ -201,7 +201,7 @@ We can model the problem of parametrization as an energy minimization of
 the variation in the $u$- and $v$-coordinate functions over the surface $\mathbf{S}$:
 
 $$
-\mathop{\text{min}}\_{u,v} \int_\mathbf{S} \| {\nabla}u\|^{2} + \| {\nabla}v\|^{2} \ dA.
+\mathop{\text{min}}\_{u,v} \int_\mathbf{S} \|\| {\nabla}u\|^{2} + \|\| {\nabla}v\|^{2} \ dA.
 $$
  
 This familiar energy is called the
@@ -322,7 +322,7 @@ energy that minimizes deviation from satisfying this equation over the surface
 $\mathbf{S}$ in a [least squares sense](https://en.wikipedia.org/wiki/Least_squares):
 
 $$
-\mathop{\text{min}}\_{u,v} \frac12  \int_\mathbf{S} \| {\nabla}u - {\nabla}v^\perp\|^{2} \ dA.
+\mathop{\text{min}}\_{u,v} \frac12  \int_\mathbf{S} \|\| {\nabla}u - {\nabla}v^\perp\|\|^{2} \ dA.
 $$
 
 
@@ -335,7 +335,7 @@ expanding the squared term:
 
 
 $$
-\int_\mathbf{S} \left(\frac12  \| {\nabla}u\|^{2} + \frac12  \| {\nabla}v\|^{2} - {\nabla}u \cdot  {\nabla}v^\perp \right)\ dA.
+\int_\mathbf{S} \left(\frac12  \|\| {\nabla}u\|^{2} + \frac12  \|\| {\nabla}v\|^{2} - {\nabla}u \cdot  {\nabla}v^\perp \right)\ dA.
 $$
 
 
@@ -361,7 +361,7 @@ $$
 \frac{\partial v}{\partial x} & \frac{\partial v}{\partial y} 
 \end{array}
 \right| \ dA &= 
-\int_{\left(\begin{array}{c}u(\mathbf{S}) \\ v(\mathbf{S}) \end{array}\right)} 1 \ dA,
+\int_{\left(\begin{array}{c}u(\mathbf{S}) \\\\ v(\mathbf{S}) \end{array}\right)} 1 \ dA,
 \end{align*}
 $$
 
@@ -375,8 +375,8 @@ mapping, i.e., the **_signed_** area of the flattened surface. If we apply
 convert this area integral into a boundary integral:
 
 $$
-\int_{\left(\begin{array}{c}u(\mathbf{S}) \\ v(\mathbf{S}) \end{array}\right)} 1 \ dA
-= \frac12  \oint_{\partial \left(\begin{array}{c}u(\mathbf{S}) \\ v(\mathbf{S}) \end{array}\right)} \mathbf{u}(s)\cdot \mathbf{n}(s) \ ds,
+\int_{\left(\begin{array}{c}u(\mathbf{S}) \\\\ v(\mathbf{S}) \end{array}\right)} 1 \ dA
+= \frac12  \oint_{\partial \left(\begin{array}{c}u(\mathbf{S}) \\\\ v(\mathbf{S}) \end{array}\right)} \mathbf{u}(s)\cdot \mathbf{n}(s) \ ds,
 $$
 
 where $\mathbf{n}$ is the unit vector pointing in the outward direction along the
@@ -392,13 +392,13 @@ $$
 \begin{align*}
 \frac12  \oint_{\partial (\mathbf{u}(\mathbf{S}))} \mathbf{u}(s)\cdot \mathbf{n}(s) \ ds 
   &= \frac12  \sum\limits_{\{i,j\} \in  \partial \mathbf{S}} \int_0^1 
-     (\mathbf{u}_i + t(\mathbf{u}_j - \mathbf{u}_i))\cdot \frac{(\mathbf{u}_j-\mathbf{u}_i)^\perp}{\| \mathbf{u}_j - \mathbf{u}_i\| } \
+     (\mathbf{u}_i + t(\mathbf{u}_j - \mathbf{u}_i))\cdot \frac{(\mathbf{u}_j-\mathbf{u}_i)^\perp}{\|\| \mathbf{u}_j - \mathbf{u}_i\|\| } \
     \frac{ds}{dt}\  dt \\
   &= \frac12  \sum\limits_{\{i,j\} \in  \partial \mathbf{S}} \int_0^1 
-     (\mathbf{u}_i + t(\mathbf{u}_j - \mathbf{u}_i))\cdot \frac{(\mathbf{u}_j-\mathbf{u}_i)^\perp}{\| \mathbf{u}_j - \mathbf{u}_i\| } \
-    \| \mathbf{u}_j - \mathbf{u}_i\|  \  dt \\
+     (\mathbf{u}_i + t(\mathbf{u}_j - \mathbf{u}_i))\cdot \frac{(\mathbf{u}_j-\mathbf{u}_i)^\perp}{\|\| \mathbf{u}_j - \mathbf{u}_i\|\| } \
+    \|\| \mathbf{u}_j - \mathbf{u}_i\|\|  \  dt \\
   &= \frac12  \sum\limits_{\{i,j\} \in  \partial \mathbf{S}} \int_0^1  \mathbf{u}_i\cdot (\mathbf{u}_j-\mathbf{u}_i)^\perp  dt \\
-  &= \frac12  \sum\limits_{\{i,j\} \in  \partial \mathbf{S}} | \mathbf{u}_i\  \mathbf{u}_j |,
+  &= \frac12  \sum\limits_{\{i,j\} \in  \partial \mathbf{S}} \|\| \mathbf{u}_i\  \mathbf{u}_j \|\|,
 \end{align*}
 $$
 
@@ -409,7 +409,7 @@ $u$- and $v$-coordinates of the mapping in $\mathbf{U} \in  \mathbb{R}^{2n}$ and
 $\mathbf{S}$. 
 
 
-**_Achtung!_** A naive implementation of $\frac12  \sum \limits_{\{i,j\} \in  \partial \mathbf{S}} | \mathbf{u}_i \mathbf{u}_j |$ into matrix form $\mathbf{U}^{\mathsf T} \mathbf{A} \mathbf{U}$ will likely produce an
+**_Achtung!_** A naive implementation of $\frac12  \sum \limits_{\{i,j\} \in  \partial \mathbf{S}} \|\| \mathbf{u}_i \mathbf{u}_j \|\|$ into matrix form $\mathbf{U}^{\mathsf T} \mathbf{A} \mathbf{U}$ will likely produce an
 _asymmetric_ matrix $\mathbf{A}$. From a theoretical point of view, this is fine.
 $\mathbf{A}$ just needs to compute the signed area of the flattened mesh. However, from
 a numerical methods point of view we will almost always need our quadratic
@@ -507,7 +507,7 @@ In our discrete case this corresponds to:
 
 $$
 \mathbf{U}^{\mathsf T} 
-  \underbrace{\left(\begin{array}{cc}\mathbf{M} & 0 \\ 0 & \mathbf{M} \end{array}\right)}_{\mathbf{B}} 
+  \underbrace{\left(\begin{array}{cc}\mathbf{M} & 0 \\\\ 0 & \mathbf{M} \end{array}\right)}_{\mathbf{B}} 
   \mathbf{U} = 1,
 $$
 
@@ -649,7 +649,7 @@ Given a 3D mesh (`V`,`F`) with boundary compute a 2D parameterization that
 minimizes the "least squares conformal" energy:
 
 $$
-\int_\mathbf{S} \|  {\nabla}v - ({\nabla}u)^\perp \|^{2} \ dA,
+\int_\mathbf{S} \|\|  {\nabla}v - ({\nabla}u)^\perp \|\|^{2} \ dA,
 $$
 
 
