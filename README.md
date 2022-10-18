@@ -67,7 +67,7 @@ We can pose the graph drawing problem as an optimization over node locations so
 that the lengths between neighboring vertices are minimized:
 
 $$
-\mathop{\text{min}}_\mathbf{U}  \sum\limits_{\{i,j\} \in  \mathbf{E}} \| \mathbf{u}_i - \mathbf{u}_j\|^{2},
+\mathop{\text{min}}\_\mathbf{U}  \sum\limits_{\{i,j\} \in  \mathbf{E}} \| \mathbf{u}_i - \mathbf{u}_j\|^{2},
 $$
 
 where $\mathbf{E}\in \{1,\ldots ,n\}^{k \times  2}$ holds a list of edge indices into $\mathbf{V}$. This
@@ -118,7 +118,7 @@ We can try to remedy this by introducing a non-uniform weight or spring
 stiffness  $w_{ij}$ for each edge $\{i,j\}$:
 
 $$
-\mathop{\text{min}}_\mathbf{U}  \sum\limits_{\{i,j\} \in  \mathbf{E}} w_{ij} \| \mathbf{u}_i - \mathbf{u}_j\|^{2}.
+\mathop{\text{min}}\_\mathbf{U}  \sum\limits_{\{i,j\} \in  \mathbf{E}} w_{ij} \| \mathbf{u}_i - \mathbf{u}_j\|^{2}.
 $$
 
 
@@ -201,7 +201,7 @@ We can model the problem of parametrization as an energy minimization of
 the variation in the $u$- and $v$-coordinate functions over the surface $\mathbf{S}$:
 
 $$
-\mathop{\text{min}}_{u,v} \int_\mathbf{S} \| {\nabla}u\|^{2} + \| {\nabla}v\|^{2} \ dA.
+\mathop{\text{min}}\_{u,v} \int_\mathbf{S} \| {\nabla}u\|^{2} + \| {\nabla}v\|^{2} \ dA.
 $$
  
 This familiar energy is called the
@@ -322,7 +322,7 @@ energy that minimizes deviation from satisfying this equation over the surface
 $\mathbf{S}$ in a [least squares sense](https://en.wikipedia.org/wiki/Least_squares):
 
 $$
-\mathop{\text{min}}_{u,v} \frac12  \int_\mathbf{S} \| {\nabla}u - {\nabla}v^\perp\|^{2} \ dA.
+\mathop{\text{min}}\_{u,v} \frac12  \int_\mathbf{S} \| {\nabla}u - {\nabla}v^\perp\|^{2} \ dA.
 $$
 
 
