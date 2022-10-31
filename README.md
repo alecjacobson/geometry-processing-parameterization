@@ -371,7 +371,7 @@ $u$ and $v$ mapping over $\mathbf{S}$. By the rules of [integration by
 substitution](https://en.wikipedia.org/wiki/Integration_by_substitution), this
 is equivalent to integrating the unit density function over the image of the
 mapping, i.e., the **_signed_** area of the flattened surface. If we apply
-[Stoke's theorem](https://en.wikipedia.org/wiki/Stokes%27_theorem) we can
+[divergence theorem](https://en.wikipedia.org/wiki/Divergence_theorem) we can
 convert this area integral into a boundary integral:
 
 $$
